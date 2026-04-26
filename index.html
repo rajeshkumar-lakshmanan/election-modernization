@@ -1,385 +1,409 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="author" content="Rajeshkumar Lakshmanan">
 <meta name="copyright" content="© 2026 Rajeshkumar Lakshmanan. All Rights Reserved.">
-<meta property="og:title" content="TN SecureVote — Hybrid Election Architecture">
-<meta property="og:description" content="Zero-Compromise, 100% Secure Hybrid Election System for Tamil Nadu by Rajeshkumar Lakshmanan">
-<meta property="og:type" content="website">
-<title>TN SecureVote — Hybrid Election Architecture | By Rajeshkumar Lakshmanan</title>
+<meta property="og:title" content="SecureVote India — Electoral Modernization Project">
+<meta property="og:description" content="Zero-Compromise, 100% Secure Hybrid Election System for India by Rajeshkumar Lakshmanan, Vellore">
+<title>SecureVote India | Electoral Modernization Project by Rajeshkumar Lakshmanan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Space+Mono:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&family=EB+Garamond:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--sf:#FF9933;--sfdk:#e07800;--sflt:#fff4e8;--gr:#138808;--grdk:#0a5c04;--grlt:#e8f5e9;--nv:#000080;--gld:#c9a84c;--glt:#fdf6e3;--ink:#0a0a14;--sv:#6b7280;--bd:#e2d5c0;--pp:#fdfaf4;--rd:#c0392b;--wh:#ffffff;}
+:root{--sf:#FF9933;--sfdk:#c96f00;--sflt:#fff4e8;--gr:#138808;--grdk:#0a5c04;--grlt:#e8f5e9;--nv:#000080;--gld:#c9a84c;--glt:#fdf6e3;--ink:#0a0a14;--sv:#6b7280;--bd:#e2d5c0;--pp:#fdfaf4;--rd:#c0392b;--wh:#fff;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;font-size:16px;}
+html{scroll-behavior:smooth;font-size:15px;}
 body{background:var(--pp);color:var(--ink);font-family:'Space Mono',monospace;line-height:1.6;overflow-x:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 
-/* LANGUAGE OVERLAY */
-#langOverlay{position:fixed;inset:0;z-index:9999;background:var(--ink);display:flex;align-items:center;justify-content:center;padding:20px;}
-#langOverlay::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(60deg,transparent,transparent 80px,rgba(255,153,51,.04) 80px,rgba(255,153,51,.04) 81px);}
-.lang-card{position:relative;z-index:2;max-width:520px;width:100%;text-align:center;}
-.lang-chakra{width:80px;height:80px;margin:0 auto 24px;opacity:.7;animation:spin 12s linear infinite;}
+/* ── OVERLAYS ── */
+.overlay-base{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(6px);}
+#langOverlay{background:rgba(10,10,20,.97);z-index:9500;}
+#langOverlay::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(60deg,transparent,transparent 80px,rgba(255,153,51,.03) 80px,rgba(255,153,51,.03) 81px);}
+.lang-card{position:relative;z-index:2;max-width:480px;width:100%;text-align:center;}
+.lang-chakra{width:70px;height:70px;margin:0 auto 20px;animation:spin 12s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.lang-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,4vw,2.2rem);color:#fff;margin-bottom:8px;}
-.lang-sub{font-size:12px;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:36px;}
-.lang-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.lang-btn{flex:1;min-width:120px;max-width:150px;padding:18px 12px;border-radius:6px;cursor:pointer;border:2px solid;font-family:'Space Mono',monospace;font-weight:700;font-size:13px;letter-spacing:1px;transition:all .25s;display:flex;flex-direction:column;align-items:center;gap:8px;background:transparent;}
-.lang-btn:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.4);}
+.lang-card h1{font-family:'Cinzel',serif;font-size:clamp(1.3rem,4vw,2rem);color:#fff;margin-bottom:8px;}
+.lang-card p{font-size:11px;color:#888;letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;}
+.lang-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.lang-btn{flex:1;min-width:110px;max-width:140px;padding:16px 8px;border-radius:6px;cursor:pointer;border:2px solid;font-family:'Space Mono',monospace;font-weight:700;font-size:12px;transition:all .25s;display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;}
+.lang-btn:hover{transform:translateY(-3px);}
 .lb-en{border-color:var(--sf);color:var(--sf);}
-.lb-en:hover,.lb-en.active{background:var(--sf);color:#fff;}
-.lb-ta{border-color:var(--gr);color:#4caf50;}
-.lb-ta:hover,.lb-ta.active{background:var(--gr);color:#fff;}
+.lb-en:hover,.lb-en.sel{background:var(--sf);color:#fff;}
+.lb-ta{border-color:#4caf50;color:#4caf50;}
+.lb-ta:hover,.lb-ta.sel{background:var(--gr);color:#fff;}
 .lb-hi{border-color:var(--gld);color:var(--gld);}
-.lb-hi:hover,.lb-hi.active{background:var(--gld);color:#fff;}
-.lang-flag{font-size:2rem;}
-.lang-name{font-size:11px;opacity:.8;}
-.lang-tribar{display:flex;height:4px;width:100%;margin-top:32px;border-radius:2px;overflow:hidden;}
+.lb-hi:hover,.lb-hi.sel{background:var(--gld);color:#fff;}
+.lang-flag{font-size:1.8rem;}
+.lang-tribar{display:flex;height:3px;margin-top:24px;border-radius:2px;overflow:hidden;}
 .lang-tribar span{flex:1;}
 .lang-tribar span:nth-child(1){background:var(--sf);}
-.lang-tribar span:nth-child(2){background:#fff;opacity:.3;}
+.lang-tribar span:nth-child(2){background:#333;}
 .lang-tribar span:nth-child(3){background:var(--gr);}
 
-/* EXIT MODAL */
-#exitModal{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+/* ── EMAIL MODAL ── */
+#emailModal{background:rgba(0,0,0,.88);display:none;}
+#emailModal.show{display:flex;}
+.email-card{background:var(--ink);border:2px solid var(--sf);border-radius:8px;padding:32px 28px;max-width:440px;width:100%;text-align:center;animation:slideUp .3s ease;}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.email-icon{font-size:2.2rem;margin-bottom:12px;}
+.email-title{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--sf);margin-bottom:8px;}
+.email-sub{font-size:11px;color:#888;margin-bottom:20px;line-height:1.6;}
+.email-input{width:100%;padding:12px 16px;background:#111;border:1.5px solid #333;border-radius:4px;color:#fff;font-family:'Space Mono',monospace;font-size:12px;outline:none;transition:border-color .2s;margin-bottom:12px;}
+.email-input:focus{border-color:var(--sf);}
+.email-submit{width:100%;padding:14px;background:var(--sf);color:#fff;border:none;border-radius:4px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:background .2s;margin-bottom:10px;}
+.email-submit:hover{background:var(--sfdk);}
+.email-submit:disabled{background:#444;cursor:not-allowed;}
+.email-cancel{background:transparent;border:none;color:#555;font-family:'Space Mono',monospace;font-size:10px;cursor:pointer;text-decoration:underline;letter-spacing:1px;}
+.email-cancel:hover{color:#aaa;}
+.email-error{font-size:11px;color:#ff6b6b;margin-bottom:10px;min-height:16px;}
+.email-privacy{font-size:9px;color:#444;letter-spacing:1px;margin-top:10px;line-height:1.6;}
+
+/* ── EXIT MODAL ── */
+#exitModal{background:rgba(0,0,0,.88);display:none;}
 #exitModal.show{display:flex;}
-.exit-card{background:var(--ink);border:2px solid var(--sf);border-radius:8px;padding:36px 32px;max-width:480px;width:100%;text-align:center;position:relative;animation:slideUp .3s ease;}
-@keyframes slideUp{from{transform:translateY(40px);opacity:0;}to{transform:translateY(0);opacity:1;}}
-.exit-chakra{font-size:2.5rem;margin-bottom:16px;}
-.exit-title{font-family:'Cinzel',serif;font-size:1.5rem;color:var(--sf);margin-bottom:10px;}
-.exit-sub{font-size:12px;color:#aaa;margin-bottom:28px;line-height:1.7;}
-.exit-btn{width:100%;padding:16px;background:var(--sf);color:#fff;border:none;border-radius:4px;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:background .2s;margin-bottom:12px;}
-.exit-btn:hover{background:var(--sfdk);}
-.exit-skip{background:transparent;border:none;color:#666;font-size:11px;cursor:pointer;letter-spacing:1px;text-transform:uppercase;font-family:'Space Mono',monospace;text-decoration:underline;padding:4px;}
+.exit-card{background:var(--ink);border:2px solid var(--sf);border-radius:8px;padding:32px 28px;max-width:420px;width:100%;text-align:center;animation:slideUp .3s ease;}
+.exit-icon{font-size:2.2rem;margin-bottom:12px;}
+.exit-title{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--sf);margin-bottom:8px;}
+.exit-sub{font-size:11px;color:#aaa;margin-bottom:22px;line-height:1.7;}
+.exit-vote-btn{width:100%;padding:14px;background:var(--sf);color:#fff;border:none;border-radius:4px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;margin-bottom:10px;transition:background .2s;}
+.exit-vote-btn:hover{background:var(--sfdk);}
+.exit-skip{background:transparent;border:none;color:#555;font-size:10px;cursor:pointer;font-family:'Space Mono',monospace;text-decoration:underline;letter-spacing:1px;}
 .exit-skip:hover{color:#aaa;}
 
-/* COPY TOAST */
-#copyToast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--rd);color:#fff;padding:12px 24px;border-radius:4px;font-size:12px;letter-spacing:1px;z-index:9997;transition:transform .3s ease;white-space:nowrap;}
+/* ── COPY TOAST ── */
+#copyToast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--rd);color:#fff;padding:10px 22px;border-radius:4px;font-size:11px;letter-spacing:1px;z-index:8500;transition:transform .3s;white-space:nowrap;pointer-events:none;}
 #copyToast.show{transform:translateX(-50%) translateY(0);}
 
-/* SHARE BAR */
-#shareBar{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:900;display:flex;flex-direction:column;gap:0;border-radius:8px 0 0 8px;overflow:hidden;box-shadow:-4px 0 20px rgba(0,0,0,.2);}
-.share-btn{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;font-size:18px;transition:all .2s;position:relative;}
-.share-btn:hover{width:52px;opacity:.9;}
-.share-btn title{display:none;}
-.sb-wa{background:#25D366;}
-.sb-fb{background:#1877F2;}
-.sb-tw{background:#1DA1F2;}
-.sb-tg{background:#0088cc;}
-.sb-li{background:#0A66C2;}
-.sb-cp{background:#555;}
-.share-label{position:absolute;right:52px;background:#333;color:#fff;font-size:10px;padding:4px 8px;border-radius:3px;white-space:nowrap;letter-spacing:1px;opacity:0;pointer-events:none;transition:opacity .2s;}
-.share-btn:hover .share-label{opacity:1;}
-@media(max-width:640px){#shareBar{top:auto;bottom:0;right:0;left:0;transform:none;flex-direction:row;border-radius:8px 8px 0 0;}.share-btn{flex:1;width:auto;border-radius:0;}.share-btn:hover{width:auto;}.share-label{display:none;}}
+/* ── SHARE BAR ── */
+#shareBar{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:800;display:flex;flex-direction:column;gap:0;border-radius:6px 0 0 6px;overflow:hidden;box-shadow:-3px 0 16px rgba(0,0,0,.25);}
+.sh-btn{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;transition:width .2s;position:relative;}
+.sh-btn:hover{width:50px;}
+.sh-lbl{position:absolute;right:48px;background:#222;color:#fff;font-size:9px;padding:3px 8px;border-radius:3px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;letter-spacing:1px;}
+.sh-btn:hover .sh-lbl{opacity:1;}
+.sh-wa{background:#25D366;}.sh-fb{background:#1877F2;}.sh-tw{background:#000;}.sh-tg{background:#0088cc;}.sh-li{background:#0A66C2;}.sh-cp{background:#555;}
+@media(max-width:640px){
+  #shareBar{top:auto;bottom:52px;right:0;left:0;transform:none;flex-direction:row;border-radius:0;max-height:44px;}
+  .sh-btn{flex:1;width:auto;height:44px;border-radius:0;}
+  .sh-btn:hover{width:auto;}
+  .sh-lbl{display:none;}
+}
 
-/* TRIBAR */
-.tribar{display:flex;height:5px;width:100%;}
+/* ── TRIBAR ── */
+.tribar{display:flex;height:5px;width:100%;flex-shrink:0;}
 .tribar span{flex:1;}
 .tribar span:nth-child(1){background:var(--sf);}
-.tribar span:nth-child(2){background:var(--wh);border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
+.tribar span:nth-child(2){background:#ddd;}
 .tribar span:nth-child(3){background:var(--gr);}
 
-/* TICKER */
-.ticker{background:var(--nv);color:#fff;font-size:11px;letter-spacing:2px;padding:8px 0;overflow:hidden;white-space:nowrap;}
+/* ── TICKER ── */
+.ticker{background:var(--nv);color:#fff;font-size:10px;letter-spacing:1.5px;padding:7px 0;overflow:hidden;white-space:nowrap;}
 .ticker-inner{display:inline-block;animation:tick 40s linear infinite;padding-left:100%;}
 @keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
 
-/* STATSBAR */
-.statsbar{position:sticky;top:0;z-index:800;background:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:10px 24px;gap:12px;flex-wrap:wrap;border-bottom:3px solid var(--sf);}
-.sbar-logo{font-family:'Cinzel',serif;font-size:13px;font-weight:900;color:var(--sf);letter-spacing:1px;}
-.sbar-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
-.view-badge{display:flex;align-items:center;gap:8px;background:rgba(255,153,51,.12);border:1px solid rgba(255,153,51,.3);border-radius:4px;padding:5px 14px;}
-.view-label{font-size:9px;letter-spacing:2px;color:#888;text-transform:uppercase;}
-.view-count{font-family:'Cinzel',serif;font-size:20px;font-weight:700;color:var(--sf);line-height:1;}
-.pulse{width:7px;height:7px;border-radius:50%;background:#4caf50;animation:pulse 1.5s infinite;}
+/* ── MAIN NAV ── */
+#mainNav{position:sticky;top:0;z-index:700;background:var(--ink);border-bottom:3px solid var(--sf);}
+.nav-wrap{max-width:1100px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:12px;height:52px;position:relative;}
+.nav-logo{font-family:'Cinzel',serif;font-size:13px;font-weight:900;color:var(--sf);letter-spacing:1px;white-space:nowrap;flex-shrink:0;}
+.nav-menu-ul{display:flex;list-style:none;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;}
+.nav-menu-ul::-webkit-scrollbar{display:none;}
+.nav-menu-ul li a{display:block;padding:6px 10px;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#888;text-decoration:none;border-radius:3px;white-space:nowrap;transition:all .2s;}
+.nav-menu-ul li a:hover,.nav-menu-ul li a.active{color:var(--sf);background:rgba(255,153,51,.1);}
+.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.lang-sw{display:flex;gap:4px;}
+.lang-sw-btn{padding:4px 9px;border-radius:3px;border:1px solid #333;background:transparent;color:#888;font-family:'Space Mono',monospace;font-size:9px;cursor:pointer;transition:all .2s;letter-spacing:1px;}
+.lang-sw-btn:hover,.lang-sw-btn.active{background:var(--sf);color:#fff;border-color:var(--sf);}
+.view-pill{display:flex;align-items:center;gap:6px;background:rgba(255,153,51,.1);border:1px solid rgba(255,153,51,.25);border-radius:3px;padding:4px 10px;}
+.view-lbl{font-size:8px;letter-spacing:2px;color:#777;text-transform:uppercase;}
+.view-n{font-family:'Cinzel',serif;font-size:16px;font-weight:700;color:var(--sf);line-height:1;}
+.pulse{width:6px;height:6px;border-radius:50%;background:#4caf50;animation:pulse 1.5s infinite;flex-shrink:0;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
-.live-lbl{font-size:9px;color:#4caf50;letter-spacing:1px;}
+.nav-sal{font-size:9px;color:#444;letter-spacing:1px;white-space:nowrap;}
+.ham-btn{display:none;background:transparent;border:none;color:var(--sf);font-size:1.4rem;cursor:pointer;padding:4px 8px;}
+@media(max-width:960px){
+  .nav-menu-ul li a{font-size:8px;padding:5px 7px;}
+}
+@media(max-width:700px){
+  .nav-menu-ul{display:none;}
+  .nav-menu-ul.open{display:flex;flex-direction:column;position:absolute;top:52px;left:0;right:0;background:var(--ink);border-top:1px solid #1a1a2e;padding:8px 0;z-index:10;border-bottom:2px solid var(--sf);}
+  .nav-menu-ul.open li a{padding:10px 20px;font-size:10px;}
+  .ham-btn{display:block;}
+  .nav-sal{display:none;}
+  .view-pill{padding:3px 8px;}
+  .view-n{font-size:14px;}
+}
 
-/* HERO */
-.hero{background:var(--ink);color:#fff;padding:64px 32px 56px;position:relative;overflow:hidden;}
-.hero-gs{position:absolute;top:-120px;left:-80px;width:600px;height:600px;background:radial-gradient(circle,rgba(255,153,51,.13) 0%,transparent 70%);pointer-events:none;}
-.hero-gg{position:absolute;bottom:-80px;right:-60px;width:500px;height:500px;background:radial-gradient(circle,rgba(19,136,8,.10) 0%,transparent 70%);pointer-events:none;}
-.chakra-wm{position:absolute;right:48px;top:50%;transform:translateY(-50%);width:320px;height:320px;opacity:.06;pointer-events:none;}
-.wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(255,153,51,.12);border:1px solid rgba(255,153,51,.3);border-radius:4px;padding:6px 14px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--sf);margin-bottom:22px;}
-.hero h1{font-family:'Cinzel',serif;font-size:clamp(2rem,5.5vw,4.5rem);line-height:1.08;font-weight:900;margin-bottom:10px;}
+/* ── HERO ── */
+.hero{background:var(--ink);color:#fff;padding:60px 24px 52px;position:relative;overflow:hidden;}
+.hero-gs{position:absolute;top:-100px;left:-60px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,153,51,.13) 0%,transparent 70%);pointer-events:none;}
+.hero-gg{position:absolute;bottom:-60px;right:-40px;width:400px;height:400px;background:radial-gradient(circle,rgba(19,136,8,.10) 0%,transparent 70%);pointer-events:none;}
+.chakra-wm{position:absolute;right:40px;top:50%;transform:translateY(-50%);width:300px;height:300px;opacity:.055;pointer-events:none;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,153,51,.12);border:1px solid rgba(255,153,51,.3);border-radius:4px;padding:5px 12px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--sf);margin-bottom:20px;flex-wrap:wrap;}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.9rem,5.5vw,4.3rem);line-height:1.08;font-weight:900;margin-bottom:10px;}
 .acc-s{color:var(--sf);}
 .acc-g{color:#56d956;}
-.hero-tagline{font-family:'EB Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(255,255,255,.55);margin-bottom:22px;}
-.hero-sub{font-size:12px;color:rgba(255,255,255,.5);max-width:540px;border-left:3px solid var(--sf);padding-left:16px;line-height:1.8;margin-bottom:32px;}
-.hero-motto{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--gld);text-transform:uppercase;border-top:1px solid rgba(201,168,76,.3);padding-top:14px;display:inline-block;}
-.hero-kpis{display:flex;gap:32px;flex-wrap:wrap;margin-top:36px;}
-.kpi-n{font-family:'Cinzel',serif;font-size:2.4rem;font-weight:900;color:var(--gld);line-height:1;}
+.hero-tagline{font-family:'EB Garamond',serif;font-style:italic;font-size:1.05rem;color:rgba(255,255,255,.55);margin-bottom:20px;}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.5);max-width:520px;border-left:3px solid var(--sf);padding-left:14px;line-height:1.8;margin-bottom:28px;}
+.hero-motto{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--gld);text-transform:uppercase;border-top:1px solid rgba(201,168,76,.3);padding-top:12px;display:inline-block;}
+.hero-kpis{display:flex;gap:24px;flex-wrap:wrap;margin-top:32px;}
+.kpi-n{font-family:'Cinzel',serif;font-size:2.2rem;font-weight:900;color:var(--gld);line-height:1;}
 .kpi-l{font-size:9px;letter-spacing:2px;color:#777;text-transform:uppercase;margin-top:4px;}
 .kpi-div{width:1px;background:rgba(255,255,255,.1);align-self:stretch;}
 
-/* QUOTE BANDS */
-.qband{padding:44px 24px;text-align:center;position:relative;overflow:hidden;}
+/* ── QUOTE BANDS ── */
+.qband{padding:40px 20px;text-align:center;position:relative;overflow:hidden;}
 .qband-s{background:linear-gradient(90deg,var(--sfdk),var(--sf));}
 .qband-g{background:linear-gradient(90deg,var(--grdk),var(--gr));}
-.qband::before{content:'"';position:absolute;left:20px;top:-20px;font-family:'Cinzel',serif;font-size:9rem;color:rgba(255,255,255,.1);line-height:1;}
-.qband blockquote{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(1.05rem,2.5vw,1.65rem);color:#fff;max-width:700px;margin:0 auto 10px;line-height:1.5;}
-.qband cite{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.65);text-transform:uppercase;}
+.qband::before{content:'"';position:absolute;left:16px;top:-18px;font-family:'Cinzel',serif;font-size:8rem;color:rgba(255,255,255,.1);line-height:1;}
+.qband blockquote{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(1rem,2.5vw,1.55rem);color:#fff;max-width:680px;margin:0 auto 8px;line-height:1.5;}
+.qband cite{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.6);text-transform:uppercase;}
 
-/* POLL */
-.poll-section{background:linear-gradient(135deg,var(--nv) 0%,#0a0a2e 100%);padding:68px 0;position:relative;overflow:hidden;}
+/* ── POLL ── */
+.poll-section{background:linear-gradient(135deg,var(--nv) 0%,#07072a 100%);padding:64px 0;position:relative;overflow:hidden;}
 .poll-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(60deg,transparent,transparent 60px,rgba(255,153,51,.03) 60px,rgba(255,153,51,.03) 61px);}
-.poll-chakra-bg{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:360px;height:360px;opacity:.04;pointer-events:none;}
-.poll-inner{position:relative;z-index:2;max-width:680px;margin:0 auto;padding:0 24px;text-align:center;}
-.poll-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,153,51,.15);border:1px solid rgba(255,153,51,.35);border-radius:4px;padding:6px 16px;font-size:10px;letter-spacing:3px;color:var(--sf);text-transform:uppercase;margin-bottom:18px;}
-.poll-title{font-family:'Cinzel',serif;font-size:clamp(1.3rem,3vw,2rem);color:#fff;line-height:1.2;margin-bottom:8px;}
-.poll-sub{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:32px;letter-spacing:1px;}
-.poll-q{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(1rem,2.5vw,1.25rem);color:rgba(255,255,255,.9);margin-bottom:28px;line-height:1.6;}
-.poll-btn-wrap{margin-bottom:24px;}
-.poll-vote-btn{padding:18px 36px;background:transparent;border:2px solid var(--sf);color:var(--sf);font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:4px;cursor:pointer;transition:all .25s;display:inline-flex;flex-direction:column;align-items:center;gap:6px;width:100%;max-width:400px;}
-.poll-vote-btn:hover{background:rgba(255,153,51,.15);transform:translateY(-2px);}
-.poll-vote-btn.voted{background:var(--sf);color:#fff;cursor:default;}
-.poll-vote-emoji{font-size:1.8rem;}
-.poll-vote-sub{font-size:10px;opacity:.7;letter-spacing:1px;}
-.poll-result-box{display:none;text-align:center;}
-.poll-result-box.show{display:block;}
-.poll-result-msg{font-size:13px;color:var(--gld);letter-spacing:1px;margin-bottom:16px;line-height:1.7;}
-.poll-count-display{background:rgba(255,153,51,.12);border:2px solid var(--sf);border-radius:8px;padding:24px 32px;display:inline-block;margin-bottom:20px;}
-.poll-count-n{font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,4rem);font-weight:900;color:var(--sf);line-height:1;}
-.poll-count-l{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-top:6px;}
-.poll-change-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.45);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;padding:6px 14px;border-radius:3px;cursor:pointer;text-transform:uppercase;transition:all .2s;}
-.poll-change-btn:hover{border-color:var(--sf);color:var(--sf);}
+.poll-inner{position:relative;z-index:2;max-width:660px;margin:0 auto;padding:0 20px;text-align:center;}
+.poll-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,153,51,.15);border:1px solid rgba(255,153,51,.35);border-radius:4px;padding:5px 14px;font-size:10px;letter-spacing:3px;color:var(--sf);text-transform:uppercase;margin-bottom:16px;}
+.poll-title{font-family:'Cinzel',serif;font-size:clamp(1.2rem,3vw,1.9rem);color:#fff;line-height:1.2;margin-bottom:8px;}
+.poll-sub{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:28px;letter-spacing:1px;}
+.poll-q{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(.95rem,2.5vw,1.2rem);color:rgba(255,255,255,.9);margin-bottom:24px;line-height:1.6;}
+.poll-support-btn{padding:16px 32px;background:transparent;border:2px solid var(--sf);color:var(--sf);font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:4px;cursor:pointer;transition:all .25s;display:inline-flex;flex-direction:column;align-items:center;gap:5px;width:100%;max-width:380px;}
+.poll-support-btn:hover{background:rgba(255,153,51,.15);transform:translateY(-2px);}
+.poll-support-btn.voted{background:var(--sf);color:#fff;cursor:default;}
+.poll-support-btn:disabled{opacity:.6;cursor:not-allowed;}
+.poll-btn-emoji{font-size:1.6rem;}
+.poll-btn-sub{font-size:9px;opacity:.7;letter-spacing:1px;}
+.poll-result{display:none;text-align:center;}
+.poll-result.show{display:block;}
+.poll-result-msg{font-size:12px;color:rgba(255,255,255,.85);letter-spacing:.5px;margin-bottom:20px;line-height:1.8;}
+.poll-count-box{background:rgba(255,153,51,.1);border:2px solid var(--sf);border-radius:8px;padding:22px 36px;display:inline-block;margin-bottom:18px;}
+.poll-count-n{font-family:'Cinzel',serif;font-size:clamp(2.2rem,6vw,3.8rem);font-weight:900;color:var(--sf);line-height:1;}
+.poll-count-lbl{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.45);text-transform:uppercase;margin-top:6px;}
+.poll-change{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.4);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;padding:5px 12px;border-radius:3px;cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.poll-change:hover{border-color:var(--sf);color:var(--sf);}
+.poll-voted-badge{display:inline-block;background:rgba(255,153,51,.15);border:1px solid var(--sf);border-radius:4px;padding:4px 12px;font-size:10px;color:var(--sf);letter-spacing:1px;margin-bottom:14px;}
 
-/* SECTIONS */
-section{padding:72px 0;}
+/* ── SECTIONS ── */
+section{padding:68px 0;}
 section:nth-of-type(even){background:#fff;}
-.sec-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--sf);margin-bottom:10px;}
-.sec-title{font-family:'Cinzel',serif;font-size:clamp(1.5rem,2.8vw,2.4rem);font-weight:700;margin-bottom:8px;}
-.sec-desc{color:var(--sv);font-size:12px;max-width:560px;margin-bottom:40px;line-height:1.8;}
+.sec-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--sf);margin-bottom:8px;}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,2.8vw,2.3rem);font-weight:700;margin-bottom:8px;}
+.sec-desc{color:var(--sv);font-size:11px;max-width:560px;margin-bottom:36px;line-height:1.8;}
 
-/* PROBLEM CARDS */
-.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
-.pcard{border:1px solid var(--bd);border-radius:2px;padding:22px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s;}
-.pcard::before{content:attr(data-n);position:absolute;top:-14px;right:10px;font-family:'Cinzel',serif;font-size:5rem;font-weight:900;color:var(--ink);opacity:.04;line-height:1;}
+/* ── CARDS / GRID ── */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
+.pcard{border:1px solid var(--bd);border-radius:2px;padding:20px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s;}
+.pcard::before{content:attr(data-n);position:absolute;top:-12px;right:10px;font-family:'Cinzel',serif;font-size:4.5rem;font-weight:900;color:var(--ink);opacity:.04;line-height:1;}
 .pcard:hover{border-color:var(--sf);transform:translateY(-2px);}
-.pcard h3{font-size:12px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;}
+.pcard h3{font-size:11px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;}
 .pcard p{font-size:11px;color:var(--sv);line-height:1.7;}
-.picon{font-size:1.5rem;margin-bottom:10px;}
+.picon{font-size:1.4rem;margin-bottom:10px;}
 
-/* PILLARS */
-.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
-.pillar{padding:36px 28px;border-right:1px solid var(--bd);}
+/* ── PILLARS ── */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+.pillar{padding:32px 24px;border-right:1px solid var(--bd);}
 .pillar:last-child{border-right:none;}
-.pbadge{display:inline-block;padding:4px 12px;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;border-radius:2px;margin-bottom:16px;}
+.pbadge{display:inline-block;padding:3px 10px;font-size:8px;letter-spacing:2px;text-transform:uppercase;font-weight:700;border-radius:2px;margin-bottom:14px;}
 .p1 .pbadge{background:rgba(255,153,51,.1);color:var(--sf);border:1px solid rgba(255,153,51,.25);}
 .p2 .pbadge{background:var(--grlt);color:var(--gr);border:1px solid rgba(19,136,8,.2);}
 .p3 .pbadge{background:var(--glt);color:#9a7a2a;border:1px solid rgba(201,168,76,.3);}
-.pillar h2{font-family:'Cinzel',serif;font-size:1.3rem;margin-bottom:6px;}
-.ptarget{font-size:10px;color:var(--sv);margin-bottom:16px;letter-spacing:1px;}
+.pillar h2{font-family:'Cinzel',serif;font-size:1.25rem;margin-bottom:6px;}
+.ptarget{font-size:10px;color:var(--sv);margin-bottom:14px;letter-spacing:1px;}
 .pillar ul{list-style:none;}
-.pillar ul li{font-size:11px;padding:7px 0;border-bottom:1px solid var(--bd);display:flex;gap:10px;align-items:flex-start;}
+.pillar ul li{font-size:10px;padding:6px 0;border-bottom:1px solid var(--bd);display:flex;gap:8px;align-items:flex-start;}
 .pillar ul li:last-child{border-bottom:none;}
 .pillar ul li::before{content:'→';color:var(--sf);flex-shrink:0;}
 
-/* SECURITY LAYERS */
-.layer{display:grid;grid-template-columns:140px 1fr;margin-bottom:2px;border:1px solid var(--bd);border-radius:2px;overflow:hidden;}
-.layer-id{background:var(--ink);color:#fff;padding:18px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
-.layer-id .ln{font-family:'Cinzel',serif;font-size:1.7rem;color:var(--gld);}
-.layer-id .lt{font-size:8px;letter-spacing:2px;color:#666;text-transform:uppercase;}
-.lbody{padding:16px 24px;background:#fff;}
-.lbody h3{font-size:12px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;}
-.lbody p{font-size:11px;color:var(--sv);line-height:1.7;}
-.ltags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
-.ltag{font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border:1px solid var(--bd);border-radius:2px;color:var(--sv);}
+/* ── SECURITY LAYERS ── */
+.layer{display:grid;grid-template-columns:130px 1fr;margin-bottom:2px;border:1px solid var(--bd);overflow:hidden;}
+.layer-id{background:var(--ink);color:#fff;padding:16px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.ln{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--gld);}
+.lt{font-size:7px;letter-spacing:2px;color:#666;text-transform:uppercase;}
+.lbody{padding:14px 20px;background:#fff;}
+.lbody h3{font-size:11px;font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:1px;}
+.lbody p{font-size:10px;color:var(--sv);line-height:1.7;}
+.ltags{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px;}
+.ltag{font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border:1px solid var(--bd);color:var(--sv);}
 
-/* FLOW */
-.flow-step{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:22px 0;border-bottom:1px dashed var(--bd);}
-.flow-step:last-child{border-bottom:none;}
-.fnum{font-family:'Cinzel',serif;font-size:1.7rem;font-weight:900;color:var(--sf);line-height:1;padding-top:2px;}
-.fcontent h4{font-size:12px;font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:1px;}
-.fcontent p{font-size:11px;color:var(--sv);line-height:1.7;}
-.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
-.chip{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:2px;}
+/* ── FLOW ── */
+.fstep{display:grid;grid-template-columns:40px 1fr;gap:14px;padding:20px 0;border-bottom:1px dashed var(--bd);}
+.fstep:last-child{border-bottom:none;}
+.fnum{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:900;color:var(--sf);line-height:1;padding-top:2px;}
+.fcontent h4{font-size:11px;font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:1px;}
+.fcontent p{font-size:10px;color:var(--sv);line-height:1.7;}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
+.chip{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:2px;}
 .cs{background:#fff0f0;color:var(--rd);border:1px solid #ffcccc;}
 .ct{background:rgba(0,0,128,.06);color:var(--nv);border:1px solid rgba(0,0,128,.15);}
 .cu{background:var(--grlt);color:var(--gr);border:1px solid rgba(19,136,8,.2);}
 
-/* OFFLINE */
-.ogrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
-.ocard{border:1px solid var(--bd);padding:24px;border-radius:2px;border-top:4px solid var(--gr);transition:transform .2s;}
+/* ── OFFLINE CARDS ── */
+.ogrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;}
+.ocard{border:1px solid var(--bd);padding:22px;border-top:4px solid var(--gr);transition:transform .2s;}
 .ocard:hover{transform:translateY(-2px);}
-.ocard h3{font-size:12px;font-weight:700;margin-bottom:8px;text-transform:uppercase;}
-.ocard p{font-size:11px;color:var(--sv);line-height:1.7;margin-bottom:10px;}
+.ocard h3{font-size:12px;font-weight:700;margin-bottom:7px;text-transform:uppercase;}
+.ocard p{font-size:10px;color:var(--sv);line-height:1.7;margin-bottom:8px;}
 .ocard ul{list-style:none;}
-.ocard ul li{font-size:11px;padding:4px 0;padding-left:14px;position:relative;}
-.ocard ul li::before{content:'✓';position:absolute;left:0;color:var(--gr);font-size:10px;top:5px;}
-.notice{background:rgba(255,153,51,.08);border-left:4px solid var(--sf);padding:14px 18px;border-radius:2px;margin:0 0 28px;}
-.notice p{font-size:11px;color:var(--ink);line-height:1.7;}
+.ocard ul li{font-size:10px;padding:3px 0;padding-left:13px;position:relative;}
+.ocard ul li::before{content:'✓';position:absolute;left:0;color:var(--gr);font-size:9px;top:4px;}
+.notice{background:rgba(255,153,51,.07);border-left:4px solid var(--sf);padding:12px 16px;margin:0 0 24px;}
+.notice p{font-size:10px;color:var(--ink);line-height:1.7;}
 
-/* TRUST */
-.trow{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;}
-.tbox{flex:1;min-width:190px;border:1px solid var(--bd);padding:20px;border-radius:2px;}
-.tbox h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
-.tbox p{font-size:11px;color:var(--sv);line-height:1.7;}
+/* ── TRUST ── */
+.trow{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+.tbox{flex:1;min-width:180px;border:1px solid var(--bd);padding:18px;}
+.tbox h4{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;}
+.tbox p{font-size:10px;color:var(--sv);line-height:1.7;}
 .tbox.dk{background:var(--ink);color:#fff;border-color:var(--ink);}
 .tbox.dk p{color:#888;}
 
-/* TABLE */
-.ctable{width:100%;border-collapse:collapse;font-size:11px;}
-.ctable th{background:var(--ink);color:#fff;padding:11px 14px;text-align:left;font-size:9px;letter-spacing:2px;text-transform:uppercase;}
-.ctable td{padding:10px 14px;border-bottom:1px solid var(--bd);vertical-align:top;}
+/* ── TABLE ── */
+.ctable{width:100%;border-collapse:collapse;font-size:10px;}
+.ctable th{background:var(--ink);color:#fff;padding:10px 12px;text-align:left;font-size:8px;letter-spacing:2px;text-transform:uppercase;}
+.ctable td{padding:9px 12px;border-bottom:1px solid var(--bd);vertical-align:top;}
 .ctable tr:hover td{background:var(--sflt);}
 .yes{color:var(--gr);font-weight:700;}
 .no{color:var(--rd);}
 .par{color:var(--sfdk);}
 
-/* TIMELINE */
-.tl{position:relative;padding-left:30px;}
-.tl::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--sf),var(--gr));}
-.tli{position:relative;margin-bottom:32px;}
-.tldot{position:absolute;left:-30px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--sf);border:3px solid var(--pp);box-shadow:0 0 0 2px var(--sf);}
-.tlph{font-size:9px;letter-spacing:3px;color:var(--sf);text-transform:uppercase;margin-bottom:4px;}
-.tli h3{font-size:13px;font-weight:700;margin-bottom:5px;}
-.tli p{font-size:11px;color:var(--sv);line-height:1.7;}
+/* ── TIMELINE ── */
+.tl{position:relative;padding-left:28px;}
+.tl::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:linear-gradient(to bottom,var(--sf),var(--gr));}
+.tli{position:relative;margin-bottom:28px;}
+.tldot{position:absolute;left:-28px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--sf);border:2px solid var(--pp);box-shadow:0 0 0 2px var(--sf);}
+.tlph{font-size:8px;letter-spacing:3px;color:var(--sf);text-transform:uppercase;margin-bottom:3px;}
+.tli h3{font-size:12px;font-weight:700;margin-bottom:4px;}
+.tli p{font-size:10px;color:var(--sv);line-height:1.7;}
 
-/* FOOTER */
-footer{background:var(--ink);color:#fff;padding:56px 24px;text-align:center;position:relative;overflow:hidden;}
-footer::before{content:'भारत';position:absolute;bottom:-40px;right:10px;font-family:'Cinzel',serif;font-size:9rem;font-weight:900;color:rgba(255,255,255,.02);line-height:1;}
-.flogo{font-family:'Cinzel',serif;font-size:1.7rem;font-weight:900;color:var(--sf);margin-bottom:6px;}
-.ftagline{font-family:'EB Garamond',serif;font-style:italic;color:rgba(255,255,255,.45);font-size:1rem;margin-bottom:20px;}
-footer p{color:#555;font-size:11px;max-width:560px;margin:0 auto 6px;line-height:1.7;}
-.fcopy{color:#888 !important;font-size:10px !important;margin-top:16px !important;border-top:1px solid #1a1a2e;padding-top:16px;}
-.femail{color:var(--sf) !important;}
-.ftribar{display:flex;height:4px;max-width:160px;margin:24px auto 0;border-radius:2px;overflow:hidden;}
-.ftribar span{flex:1;}
-.ftribar span:nth-child(1){background:var(--sf);}
-.ftribar span:nth-child(2){background:#333;}
-.ftribar span:nth-child(3){background:var(--gr);}
+/* ── FOOTER ── */
+footer{background:var(--ink);color:#fff;padding:52px 20px;text-align:center;position:relative;overflow:hidden;}
+footer::before{content:'भारत';position:absolute;bottom:-40px;right:10px;font-family:'Cinzel',serif;font-size:8rem;font-weight:900;color:rgba(255,255,255,.02);line-height:1;}
+.f-logo{font-family:'Cinzel',serif;font-size:1.6rem;font-weight:900;color:var(--sf);margin-bottom:6px;}
+.f-tagline{font-family:'EB Garamond',serif;font-style:italic;color:rgba(255,255,255,.45);font-size:.95rem;margin-bottom:18px;}
+footer p{color:#555;font-size:10px;max-width:540px;margin:0 auto 5px;line-height:1.7;}
+.f-copy{color:#666 !important;font-size:9px !important;margin-top:14px !important;border-top:1px solid #1a1a2e;padding-top:14px;}
+.f-email{color:var(--sf) !important;}
+.f-tribar{display:flex;height:3px;max-width:140px;margin:20px auto 0;border-radius:2px;overflow:hidden;}
+.f-tribar span{flex:1;}
+.f-tribar span:nth-child(1){background:var(--sf);}
+.f-tribar span:nth-child(2){background:#333;}
+.f-tribar span:nth-child(3){background:var(--gr);}
 
-/* RESPONSIVE */
-@media(max-width:768px){
-  .hero{padding:48px 16px 40px;}
-  .wrap{padding:0 16px;}
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .hero{padding:44px 14px 36px;}
+  .wrap{padding:0 14px;}
   .layer{grid-template-columns:1fr;}
-  .layer-id{flex-direction:row;gap:12px;padding:12px 16px;}
+  .layer-id{flex-direction:row;gap:10px;padding:10px 14px;}
   .pillars{grid-template-columns:1fr;}
   .pillar{border-right:none;border-bottom:1px solid var(--bd);}
   .pillar:last-child{border-bottom:none;}
   .chakra-wm{display:none;}
-  .hero-kpis{gap:20px;}
-  .statsbar{padding:8px 16px;}
-  section{padding:52px 0;}
-  #shareBar{padding-bottom:env(safe-area-inset-bottom);}
-}
-@media(max-width:480px){
-  .lang-btns{flex-direction:column;align-items:center;}
-  .lang-btn{width:100%;max-width:240px;}
-  .poll-count-n{font-size:2.5rem;}
-  .ctable{font-size:10px;}
-  .ctable th,.ctable td{padding:8px 10px;}
+  .hero-kpis{gap:16px;}
+  section{padding:48px 0;}
+  .ctable{font-size:9px;}
+  .ctable th,.ctable td{padding:7px 8px;}
 }
 </style>
 </head>
 <body>
 
 <!-- ══ LANGUAGE OVERLAY ══ -->
-<div id="langOverlay">
+<div class="overlay-base" id="langOverlay">
   <div class="lang-card">
-    <svg class="lang-chakra" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="46" stroke="#FF9933" stroke-width="3"/>
-      <circle cx="50" cy="50" r="8" fill="#FF9933"/>
-      <g stroke="#FF9933" stroke-width="1.5">
+    <svg class="lang-chakra" viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="46" stroke="#FF9933" stroke-width="2.5"/>
+      <circle cx="50" cy="50" r="7" fill="#FF9933"/>
+      <g stroke="#FF9933" stroke-width="1.2">
         <line x1="50" y1="50" x2="50" y2="6" transform="rotate(0 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(15 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(30 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(45 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(60 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(75 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(90 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(105 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(120 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(135 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(150 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(165 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(180 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(195 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(210 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(225 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(240 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(255 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(270 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(285 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(300 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(315 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(330 50 50)"/><line x1="50" y1="50" x2="50" y2="6" transform="rotate(345 50 50)"/>
       </g>
     </svg>
-    <h1 class="lang-title" id="langPopTitle">Choose Your Language</h1>
-    <p class="lang-sub" id="langPopSub">Select to continue — தேர்வு செய்யவும் — भाषा चुनें</p>
+    <h1 id="lo-title">Choose Your Language</h1>
+    <p id="lo-sub">Select to continue · தேர்வு செய்யவும் · भाषा चुनें</p>
     <div class="lang-btns">
-      <button class="lang-btn lb-en" onclick="selectLang('en')"><span class="lang-flag">🇮🇳</span><span style="font-size:15px;font-weight:900;">English</span><span class="lang-name">Click to continue</span></button>
-      <button class="lang-btn lb-ta" onclick="selectLang('ta')"><span class="lang-flag">🇮🇳</span><span style="font-size:15px;font-weight:900;font-family:'Noto Sans Tamil',sans-serif;">தமிழ்</span><span class="lang-name">தொடர கிளிக் செய்யவும்</span></button>
-      <button class="lang-btn lb-hi" onclick="selectLang('hi')"><span class="lang-flag">🇮🇳</span><span style="font-size:15px;font-weight:900;font-family:'Noto Sans Devanagari',sans-serif;">हिन्दी</span><span class="lang-name">जारी रखने के लिए क्लिक करें</span></button>
+      <button class="lang-btn lb-en" onclick="selectLang('en')"><span class="lang-flag">🇮🇳</span><strong>English</strong></button>
+      <button class="lang-btn lb-ta" onclick="selectLang('ta')"><span class="lang-flag">🇮🇳</span><strong style="font-family:'Noto Sans Tamil',sans-serif">தமிழ்</strong></button>
+      <button class="lang-btn lb-hi" onclick="selectLang('hi')"><span class="lang-flag">🇮🇳</span><strong style="font-family:'Noto Sans Devanagari',sans-serif">हिन्दी</strong></button>
     </div>
     <div class="lang-tribar"><span></span><span></span><span></span></div>
   </div>
 </div>
 
+<!-- ══ EMAIL VOTE MODAL ══ -->
+<div class="overlay-base" id="emailModal">
+  <div class="email-card">
+    <div class="email-icon">🗳️</div>
+    <h2 class="email-title" id="em-title">Register Your Support</h2>
+    <p class="email-sub" id="em-sub">Enter your email to cast your vote. Your email is used only to prevent duplicate votes and is stored securely on your device.</p>
+    <input type="email" class="email-input" id="emailInput" placeholder="your@email.com" autocomplete="email"/>
+    <div class="email-error" id="emailError"></div>
+    <button class="email-submit" id="emailSubmit" onclick="submitVote()">🟠 <span id="em-btn">Submit My Support</span></button><br>
+    <button class="email-cancel" id="emailCancel" onclick="closeEmailModal()">Cancel</button>
+    <p class="email-privacy" id="em-privacy">🔒 Your email is hashed and stored locally on your device only. It is never transmitted to any server.</p>
+  </div>
+</div>
+
 <!-- ══ EXIT MODAL ══ -->
-<div id="exitModal">
+<div class="overlay-base" id="exitModal">
   <div class="exit-card">
-    <div class="exit-chakra">🗳️</div>
-    <h2 class="exit-title" id="exitTitle">Wait! Before You Leave</h2>
-    <p class="exit-sub" id="exitSub">You haven't cast your opinion yet. Will you support election modernisation for Tamil Nadu?</p>
-    <button class="exit-btn" id="exitVoteBtn" onclick="castVote(true)">🟠 Yes, I Support Election Modernisation! 🇮🇳</button><br>
-    <button class="exit-skip" id="exitSkipBtn" onclick="closeExitModal()">Maybe later</button>
+    <div class="exit-icon">🗳️</div>
+    <h2 class="exit-title" id="ex-title">Wait! Before You Leave</h2>
+    <p class="exit-sub" id="ex-sub">You haven't cast your vote yet. Will you support election modernisation for India?</p>
+    <button class="exit-vote-btn" id="ex-btn" onclick="openEmailModal(true)">🟠 Yes, I Support! 🇮🇳</button><br>
+    <button class="exit-skip" id="ex-skip" onclick="closeExitModal()">Maybe later</button>
   </div>
 </div>
 
 <!-- ══ COPY TOAST ══ -->
-<div id="copyToast">🔒 Content is copyright protected. Copying is not permitted.</div>
+<div id="copyToast">🔒 Copyright protected. Copying is not permitted.</div>
 
 <!-- ══ SHARE BAR ══ -->
 <div id="shareBar">
-  <button class="share-btn sb-wa" onclick="shareWA()" title="WhatsApp">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    <span class="share-label">WhatsApp</span>
-  </button>
-  <button class="share-btn sb-fb" onclick="shareFB()" title="Facebook">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-    <span class="share-label">Facebook</span>
-  </button>
-  <button class="share-btn sb-tw" onclick="shareTW()" title="Twitter / X">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-    <span class="share-label">Twitter / X</span>
-  </button>
-  <button class="share-btn sb-tg" onclick="shareTG()" title="Telegram">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-    <span class="share-label">Telegram</span>
-  </button>
-  <button class="share-btn sb-li" onclick="shareLI()" title="LinkedIn">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-    <span class="share-label">LinkedIn</span>
-  </button>
-  <button class="share-btn sb-cp" onclick="copyLink()" title="Copy Link">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M13.828 10.172a4 4 0 0 0-5.656 0l-4 4a4 4 0 1 0 5.656 5.656l1.102-1.101m-.758-4.899a4 4 0 0 0 5.656 0l4-4a4 4 0 0 0-5.656-5.656l-1.1 1.1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span class="share-label" id="copyLinkLabel">Copy Link</span>
-  </button>
+  <button class="sh-btn sh-wa" onclick="shareWA()" title="WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg><span class="sh-lbl">WhatsApp</span></button>
+  <button class="sh-btn sh-fb" onclick="shareFB()" title="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg><span class="sh-lbl">Facebook</span></button>
+  <button class="sh-btn sh-tw" onclick="shareTW()" title="X / Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span class="sh-lbl">Twitter / X</span></button>
+  <button class="sh-btn sh-tg" onclick="shareTG()" title="Telegram"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span class="sh-lbl">Telegram</span></button>
+  <button class="sh-btn sh-li" onclick="shareLI()" title="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span class="sh-lbl">LinkedIn</span></button>
+  <button class="sh-btn sh-cp" onclick="copyLink()" title="Copy Link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><span class="sh-lbl" id="copyLbl">Copy Link</span></button>
 </div>
 
-<!-- ══ MAIN CONTENT ══ -->
-<div class="ticker"><div class="ticker-inner" id="tickerText"></div></div>
+<!-- ══ TICKER ══ -->
+<div class="ticker"><div class="ticker-inner" id="tickerTxt"></div></div>
 
-<div class="statsbar">
-  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-    <div class="sbar-logo">🇮🇳 SecureVote TN</div>
-    <div class="view-badge">
-      <span style="font-size:15px">👁️</span>
-      <div><div class="view-label" id="viewsLabel">Page Views</div><div class="view-count" id="viewCount">—</div></div>
+<!-- ══ MAIN NAV ══ -->
+<nav id="mainNav">
+  <div class="nav-wrap">
+    <div class="nav-logo" id="navLogo">🇮🇳 SecureVote</div>
+    <button class="ham-btn" id="hamBtn" onclick="toggleMenu()" aria-label="Menu">☰</button>
+    <ul class="nav-menu-ul" id="navMenu"></ul>
+    <div class="nav-right">
+      <div class="view-pill">
+        <span class="view-lbl" id="viewsLbl">Views</span>
+        <span class="view-n" id="viewCount">—</span>
+        <span class="pulse"></span>
+      </div>
+      <div class="lang-sw">
+        <button class="lang-sw-btn" id="swEn" onclick="selectLang('en')">EN</button>
+        <button class="lang-sw-btn" id="swTa" onclick="selectLang('ta')">த</button>
+        <button class="lang-sw-btn" id="swHi" onclick="selectLang('hi')">हि</button>
+      </div>
+      <div class="nav-sal" id="navSal"></div>
     </div>
-    <div style="display:flex;align-items:center;gap:6px;"><div class="pulse"></div><div class="live-lbl" id="liveLabel">LIVE</div></div>
   </div>
-  <div style="font-size:10px;color:#555;letter-spacing:1px;">वन्दे मातरम् 🇮🇳</div>
-</div>
+</nav>
 
-<div class="hero">
+<!-- ══ HERO ══ -->
+<div id="hero" class="hero">
   <div class="hero-gs"></div><div class="hero-gg"></div>
-  <div class="chakra-wm">
-    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="100" cy="100" r="93" stroke="white" stroke-width="4"/>
-      <circle cx="100" cy="100" r="14" fill="white"/><circle cx="100" cy="100" r="6" fill="#000080"/>
-      <g stroke="white" stroke-width="2.2">
-        <line x1="100" y1="100" x2="100" y2="9" transform="rotate(0 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(15 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(30 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(45 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(60 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(75 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(90 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(105 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(120 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(135 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(150 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(165 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(180 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(195 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(210 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(225 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(240 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(255 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(270 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(285 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(300 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(315 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(330 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(345 100 100)"/>
-      </g>
-    </svg>
-  </div>
-  <div class="wrap"><div class="tribar" style="margin-bottom:28px;"><span></span><span></span><span></span></div><div id="heroContent"></div></div>
+  <div class="chakra-wm"><svg viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="93" stroke="white" stroke-width="4"/><circle cx="100" cy="100" r="13" fill="white"/><circle cx="100" cy="100" r="5" fill="#000080"/><g stroke="white" stroke-width="2"><line x1="100" y1="100" x2="100" y2="9" transform="rotate(0 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(15 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(30 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(45 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(60 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(75 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(90 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(105 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(120 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(135 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(150 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(165 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(180 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(195 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(210 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(225 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(240 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(255 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(270 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(285 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(300 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(315 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(330 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(345 100 100)"/></g></svg></div>
+  <div class="wrap"><div class="tribar" style="margin-bottom:24px"><span></span><span></span><span></span></div><div id="heroContent"></div></div>
 </div>
 
 <div class="tribar"><span></span><span></span><span></span></div>
 <div class="qband qband-s" id="quote1"></div>
 
-<!-- POLL -->
-<div class="poll-section">
-  <div class="poll-chakra-bg">
-    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="93" stroke="white" stroke-width="3"/><circle cx="100" cy="100" r="10" fill="white"/><g stroke="white" stroke-width="1.8"><line x1="100" y1="100" x2="100" y2="9" transform="rotate(0 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(15 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(30 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(45 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(60 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(75 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(90 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(105 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(120 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(135 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(150 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(165 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(180 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(195 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(210 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(225 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(240 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(255 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(270 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(285 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(300 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(315 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(330 100 100)"/><line x1="100" y1="100" x2="100" y2="9" transform="rotate(345 100 100)"/></g></svg>
-  </div>
+<!-- ══ POLL ══ -->
+<div id="poll" class="poll-section">
   <div class="poll-inner" id="pollInner"></div>
 </div>
 
@@ -397,648 +421,793 @@ footer p{color:#555;font-size:11px;max-width:560px;margin:0 auto 6px;line-height
 <footer id="footerEl"></footer>
 
 <script>
-// ═══════════════════════════════════════════════════════
-// TRANSLATIONS
-// ═══════════════════════════════════════════════════════
-var T = {
+// ╔══════════════════════════════════════════════════════╗
+// ║  TRANSLATIONS                                        ║
+// ╚══════════════════════════════════════════════════════╝
+var T={
 en:{
- ticker:"🇮🇳  Jai Hind  |  வாழ்க தமிழ்நாடு  |  Every Vote is Sacred  |  Democracy is India's Greatest Strength  |  SecureVote TN — Protecting Every Citizen's Voice  |  One Nation · One Vote · Zero Compromise  |  सत्यमेव जयते  |  🇮🇳",
- viewsLabel:"Page Views", liveLabel:"LIVE",
- eyebrow:"Tamil Nadu · State Election Modernisation Blueprint by Rajeshkumar Lakshmanan",
- h1:"<span class='acc-s'>Secure</span><span class='acc-g'>Vote</span> TN<br>Zero-Compromise<br>Hybrid Election System",
- tagline:'"Satyameva Jayate — Truth Alone Triumphs"',
- heroSub:"A sovereign, multi-channel election architecture that serves every citizen — whether online, offline, elderly, or digitally excluded — with military-grade security and absolute auditability. Built for Bharat. Built to last.",
- motto:"Vande Mataram · Satyameva Jayate · வாழ்க தமிழ்நாடு",
- kpi:["Voting Channels","Security Layers","Single Point<br>of Failure","Citizen Coverage"],
- q1:'"The strength of a democracy lies not in the power of the few, but in the voice of every single citizen — cast freely, counted honestly, protected absolutely."',
- q1c:"— SecureVote TN Manifesto · 2026",
- pollTag:"Citizens' Poll — Your Voice Matters",
- pollTitle:"Do You Support Election Modernisation?",
- pollSub:"Each visitor votes once · Votes counted cumulatively across all visits",
- pollQ:'"Do you support modernising Tamil Nadu\'s election process with secure digital technology?"',
- pollBtn:"I Support Election Modernisation 🇮🇳",
- pollBtnSub:"ஆம் · Haan · Yes",
- pollVotedPre:"🟠 You are one of",
- pollVotedPost:"citizens who support<br>election modernisation! <b>Jai Hind 🇮🇳</b>",
- pollCountLabel:"Supporters so far",
- pollChange:"↺ Change Vote",
- exitTitle:"Wait! Before You Leave",
- exitSub:"You haven't shared your opinion yet. Will you support election modernisation for Tamil Nadu?",
- exitBtn:"Yes, I Support! 🇮🇳",
- exitSkip:"Maybe later",
- copyMsg:"🔒 Content is copyright protected. Copying is not permitted.",
- copyLinkDone:"✓ Link Copied!",
- copyLinkLabel:"Copy Link",
- s01:{label:"01 — Problem Definition",title:"The Six Core Challenges",desc:"Any election modernisation solution must solve all six simultaneously — partial solutions create new vulnerabilities.",
-  cards:[
-   {icon:"📵",h:"Digital Exclusion",d:"20%+ of TN's ~80M population (~16M+ citizens) lack smartphones or internet — primarily elderly, rural, and low-income groups."},
-   {icon:"👴",h:"Elderly Accessibility",d:"Older voters distrust unfamiliar technology and require physical, familiar, guided processes to exercise their franchise."},
-   {icon:"🔐",h:"Cybersecurity Threats",d:"Nation-state attacks, DDoS, man-in-the-middle, SQL injection, and insider threats can compromise centralized digital voting."},
-   {icon:"👤",h:"Identity Fraud",d:"Impersonation, proxy voting, duplicate votes, and booth capturing are persistent threats that must be eliminated entirely."},
-   {icon:"🕵️",h:"Vote Secrecy",d:"The constitutional right to ballot secrecy must be mathematically guaranteed — no authority can link a vote to a voter."},
-   {icon:"✅",h:"Public Trust & Auditability",d:"Citizens, parties, and courts must independently verify every result without exposing any individual ballot."}
-  ]},
- s02:{label:"02 — Solution Architecture",title:"Three Voting Channels, One Blockchain",desc:"All channels feed into a single, permissioned, air-gapped blockchain ledger. No channel is superior — every vote is equal.",
-  pillars:[
-   {badge:"Channel A · Digital",title:"SecureVote Mobile App",target:"Target: Smartphone users (80%)",items:["Aadhaar OTP + Face Liveness + Fingerprint (3-factor auth)","End-to-end encrypted ballot with AES-256-GCM","Zero-Knowledge Proof — verified without revealing identity","Geo-fenced to registered constituency only","Certificate pinning + APK signing prevents fake apps","Available in Tamil, English, and 5 regional dialects","Voter receipt with anonymous cryptographic hash"]},
-   {badge:"Channel B · Kiosk",title:"Smart Booth Terminal (SBT)",target:"Target: Elderly & non-smartphone users",items:["Rugged 15\" touchscreen kiosk at every booth + panchayat","Extra-large fonts, high contrast, bilingual Tamil/English","Voice guide in Tamil reads each candidate name aloud","Fingerprint scanner + OTP via basic feature phone SMS","Physical confirmation button — familiar to older voters","Prints anonymous VVPAT slip for voter confirmation","Air-gapped hardware encrypted at rest (FIPS 140-3)"]},
-   {badge:"Channel C · Assisted",title:"Mobile Voting Unit (MVU)",target:"Target: Homebound, disabled, remote",items:["Government-certified officers carry tamper-proof tablet to voter","Two independent officers mandatory (no solo access)","Voter's biometric captured live — officer cannot override","Vote cast privately; officer sees only submission confirmation","GPS-logged and video-recorded for audit trail","Pre-scheduled via 1800-VOTE-TN toll-free helpline"]}
-  ]},
- s03:{label:"03 — Security Architecture",title:"7-Layer Defence-in-Depth",desc:"Each layer is independently certified and monitored. Breaching one layer does NOT compromise another.",
-  layers:[
-   {n:"L1",lt:"Identity",h:"Triple-Factor Biometric Authentication",d:"Fingerprint + iris/face liveness AI + OTP via SMS — all three checked against Aadhaar UIDAI simultaneously. Any failure rejects the session entirely.",tags:["Aadhaar UIDAI API","ISO/IEC 30107-3 Liveness","TOTP OTP"]},
-   {n:"L2",lt:"Encryption",h:"Homomorphic Encryption + Zero-Knowledge Proofs",d:"ElGamal homomorphic encryption tallies votes without decrypting individual ballots. zk-SNARKs let voters prove their vote was counted without revealing their choice.",tags:["ElGamal Homomorphic","zk-SNARKs","AES-256-GCM"]},
-   {n:"L3",lt:"Ledger",h:"Permissioned Blockchain — Hyperledger Fabric",d:"Immutable transactions distributed across nodes at TN ECI, NIC, three auditing parties, two international observers. 51% attacks are structurally impossible.",tags:["Hyperledger Fabric 2.x","BFT Consensus","Distributed Nodes"]},
-   {n:"L4",lt:"Network",h:"Sovereign Network Infrastructure",d:"NIC dedicated leased-line, completely separate from the public internet. Anycast DDoS mitigation (100Tbps), WAF, rate limiting, geo-IP blocking of all foreign IP ranges.",tags:["NIC Dedicated Line","Anycast DDoS Shield","Zero-Trust Network"]},
-   {n:"L5",lt:"Hardware",h:"Hardware Security Modules (HSM) + TPM 2.0",d:"All cryptographic keys in FIPS 140-3 Level 3 certified HSMs — physically tamper-evident, never exported in plaintext. TPM 2.0 attests boot integrity on every kiosk.",tags:["FIPS 140-3 Level 3 HSM","TPM 2.0","Secure Boot"]},
-   {n:"L6",lt:"Audit",h:"Multi-Party Threshold Decryption + Public Audit",d:"Tallying requires 5-of-7 threshold decryption. After polling, the full anonymised encrypted ledger is published publicly for independent verification by any citizen.",tags:["Shamir Secret Sharing","5-of-7 Threshold","Public Bulletin Board"]},
-   {n:"L7",lt:"Rollback",h:"Air-Gapped Physical Backup + VVPAT",d:"Every digital vote simultaneously generates a VVPAT slip — physically sealed in a tamper-evident box. Paper slips serve as the authoritative fallback if needed.",tags:["VVPAT Physical Backup","Air-Gapped Mirrors","ECI Fallback Protocol"]}
-  ]},
- s04:{label:"04 — Voter Journey",title:"How a Citizen Votes — Step by Step",desc:"Designed for a 70-year-old first-time digital voter in a Tamil Nadu village to complete independently.",
-  steps:[
-   {n:"01",h:"Pre-Registration Verification (48 hrs before)",d:"Voter receives an SMS in Tamil with their unique Voter Token. Verify name and booth via IVRS call (no smartphone needed) or app. Pre-checks eliminate day-of errors.",chips:["cu:SMS + IVRS","ct:Token Pre-Issuance","cs:Constituency Lock"]},
-   {n:"02",h:"Authentication (3-Factor — 90 Seconds)",d:"Fingerprint → face liveness → OTP. Cross-checked against Aadhaar UIDAI and Voter Roll simultaneously. Duplicate attempts blocked system-wide within milliseconds.",chips:["cs:Biometric","cs:Liveness AI","cs:UIDAI Check","ct:Dedup Lock"]},
-   {n:"03",h:"Ballot Display (Accessible, Private, Clear)",d:"Candidate list with photo, name (Tamil + English), party symbol, and serial number. Voice reads each option aloud. Large buttons, high contrast, privacy screen shield on kiosks.",chips:["cu:Voice in Tamil","cu:Large UI","cu:Party Symbols","cs:Privacy Shield"]},
-   {n:"04",h:"Vote Submission & Homomorphic Encryption",d:"Voter confirms twice. Vote encrypted client-side before transmission — server never sees plaintext ballot. Anonymous cryptographic receipt sent via SMS immediately.",chips:["cs:Client-Side Encryption","ct:ZK Proof Generated","cu:SMS Receipt"]},
-   {n:"05",h:"Blockchain Commit + VVPAT Print",d:"Encrypted vote written to Hyperledger Fabric (confirmed across nodes in 3 seconds). Kiosk prints VVPAT showing only party symbol. Voter reviews through glass — confirms or rejects.",chips:["ct:Blockchain Commit","cs:VVPAT Paper Trail","cu:Visual Confirmation"]},
-   {n:"06",h:"Voter Verification (Anytime After Voting)",d:"Verify your vote was counted using your anonymous receipt hash on the public bulletin board — without revealing identity or choice. Any discrepancy triggers automatic alert to ECI.",chips:["cs:ZK Proof Verify","ct:Public Bulletin Board","cu:Anonymous Receipt"]}
-  ]},
- s05:{label:"05 — Offline Citizens Solution",title:"The 20%+ Non-Digital Population",desc:"No citizen is left behind. Three dedicated mechanisms ensure full inclusion for ~16 million without smartphones.",
-  notice:"<strong>Core Principle:</strong> Every offline channel produces an identical encrypted vote in the same blockchain — there is no \"secondary class\" of vote. Offline votes carry equal weight, equal security, equal dignity.",
-  cards:[
-   {h:"🏪 Neighbourhood CSC Kiosks",d:"7,400+ Common Service Centres across TN as SecureVote Terminals. No smartphone needed — only Aadhaar number + fingerprint.",items:["1 CSC per 300 voter radius in rural areas","Bilingual Tamil/English voice-assisted interface","Elder-priority queue (60+ age fast-track)","Booth officer cannot see or influence vote"]},
-   {h:"☎️ IVRS Telephone Voting",d:"Secure Interactive Voice Response for voters with only a feature phone. Available for pre-registered elderly (70+) and certified disabled voters.",items:["Call toll-free 1800-VOTE-TN","Verify with Aadhaar + Date of Birth","Voice reads all candidates in Tamil","Keypad selection + PIN commit"]},
-   {h:"🚐 Mobile Voting Unit (MVU)",d:"State vehicles travel to remote villages and homes of bedridden voters. Equipped with secure tablet, biometric scanner, and satellite uplink.",items:["Pre-scheduled 48 hours before election","Two officers mandatory — one opposition-nominated","GPS tracked + video recorded (exterior only)","Same blockchain submission as any booth vote"]},
-   {h:"📋 Physical Ballot Fallback",d:"Court-mandated or infrastructure-failure backstop. Traditional paper ballots at emergency booths, scanned under multi-party supervision.",items:["Activated only by ECI emergency order","UV-invisible forensic ink serialisation","Multi-party seal + counter-signature required","Cross-verified against blockchain result"]}
-  ]},
- s06:{label:"06 — Public Trust Mechanisms",title:"How Citizens Know the Result is Honest",desc:"Trust must be mathematically provable — not based on promises from authorities.",
-  boxes:[
-   {dark:true,h:"🔑 Zero-Knowledge Proof",d:"Any voter can prove their vote was counted without revealing who they voted for. Any mathematician can verify the entire ledger — no government access needed."},
-   {dark:false,h:"🌐 Open-Source Code",d:"Full software stack published under open-source licence on GitHub 6 months before election. Any technologist can audit for backdoors, bugs, or biases."},
-   {dark:false,h:"🏛️ Multi-Party Observer Nodes",d:"Each major political party runs an independent blockchain node. No result announced unless all nodes agree. Any party can challenge a discrepancy in real-time."},
-   {dark:false,h:"🔢 Hash Publication",d:"Full blockchain hash published on TN ECI website, Doordarshan, and All India Radio at close of polling — before counting begins, preventing post-hoc tampering."},
-   {dark:false,h:"🎲 Random VVPAT Audit",d:"5% of constituencies randomly selected by publicly verifiable cryptographic lottery for full VVPAT paper recount. Must match digital tally within 0.01% margin."},
-   {dark:true,h:"⚖️ Supreme Court Oversight Node",d:"An independent, air-gapped node at the Supreme Court holds a read-only mirror of the blockchain — subpoena-ready for judicial review without altering the master ledger."}
-  ]},
- q2:'"In a democracy, the ballot is mightier than the bullet. Let us ensure every ballot is sacred, secure, and counted."',
- q2c:"— Inspired by the Spirit of the Indian Constitution",
- s07:{label:"07 — Benchmark",title:"How SecureVote TN Compares",desc:"Against existing election methods across critical dimensions.",
-  heads:["Criterion","Traditional EVM","Internet-Only Voting","SecureVote TN (Hybrid)"],
-  rows:[
-   ["Covers non-smartphone users","Yes (booth only)#yes","No#no","Yes (3 channels)#yes"],
-   ["Elderly-friendly","Partially#par","No#no","Yes (voice + large UI)#yes"],
-   ["Voter can verify own vote","No#no","Partially#par","Yes (ZK proof)#yes"],
-   ["Tamper-proof ledger","Partially#par","Partially#par","Yes (blockchain)#yes"],
-   ["DDoS/cyber resilient","Yes (air-gapped)#yes","No#no","Yes (multi-layer)#yes"],
-   ["Independent public audit","No#no","Limited#par","Yes (open ledger)#yes"],
-   ["Remote/homebound voting","No#no","Partially#par","Yes (MVU)#yes"],
-   ["Paper backup (VVPAT)","Yes#yes","No#no","Yes (all channels)#yes"],
-   ["Multi-party oversight","Partially#par","No#no","Yes (all nodes)#yes"],
-   ["Quantum-resistant (roadmap)","Partially#par","No#no","Yes (NIST PQC)#yes"]
-  ]},
- s08:{label:"08 — Rollout Plan",title:"36-Month Implementation Roadmap",desc:"Phased rollout with mandatory pilot before any state-level deployment.",
-  items:[
-   {ph:"Phase 0 · Months 1–6",h:"Legislation, Governance & Open-Source Audit",d:"Draft TN Electronic Elections Act. Appoint Technical Security Board (IIT-M, C-DAC, CERT-IN, ECI). Publish open-source codebase. International security audit begins. Public comment period open."},
-   {ph:"Phase 1 · Months 7–12",h:"Infrastructure Procurement & CSC Kiosk Deployment",d:"Procure HSMs, kiosks, MVU vehicles. Deploy at all 7,400+ CSCs. Fibre/satellite uplink verified everywhere. VVPAT printers installed. Penetration testing by independent red teams."},
-   {ph:"Phase 2 · Months 13–18",h:"Municipal Elections Pilot — 3 Districts",d:"Live SecureVote TN election in Coimbatore, Madurai, and Vellore for local body elections. Full post-election audit published. Voter feedback survey. Red team debrief. Fixes applied."},
-   {ph:"Phase 3 · Months 19–30",h:"State-Wide Scale & Voter Education Campaign",d:"Expand to all 234 constituencies. Mass awareness via Doordarshan, Sun TV, community radio, gram sabha meetings. Dedicated Tamil helpline. Training for all booth officers and CSC operators."},
-   {ph:"Phase 4 · Months 31–36",h:"State Assembly Election Full Deployment",d:"Full state election on SecureVote TN. Traditional EVM as parallel physical backstop per ECI mandate. Real-time monitoring dashboard for ECI, parties, and media. Independent audit report within 30 days."}
-  ]},
- fLogo:"🇮🇳 SecureVote TN",
- fTagline:'"Every vote counts. Every citizen votes. No vote can be stolen."',
- fDesc:"Democracy, guaranteed by mathematics. Designed for every citizen of Tamil Nadu — from the tech-savvy youth to the 80-year-old farmer in a remote village. Jai Hind. Jai Tamil Nadu.",
- fRef:"Blueprint prepared for Tamil Nadu State Election Modernisation Discussion · 2026",
- fCopy:"© 2026 Copyright Protected by Rajeshkumar Lakshmanan · Vellore, Tamil Nadu",
- fEmail:"janaraj.android@gmail.com",
- fSal:"🕉️ सत्यमेव जयते · வாழ்க தமிழ்நாடு · Jai Hind 🇮🇳"
+  ticker:"🇮🇳  Jai Hind  |  Every Vote is Sacred  |  Democracy is India's Greatest Strength  |  SecureVote India — Protecting Every Citizen's Voice  |  One Nation · One Vote · Zero Compromise  |  Satyameva Jayate  |  🇮🇳",
+  navSal:"Jai Hind 🇮🇳",
+  navLogo:"🇮🇳 SecureVote India",
+  viewsLbl:"Global Views",
+  navItems:[
+    {id:"hero",l:"Home"},{id:"poll",l:"Poll"},{id:"sec01",l:"Challenges"},{id:"sec02",l:"Solution"},
+    {id:"sec03",l:"Security"},{id:"sec04",l:"Journey"},{id:"sec05",l:"Offline"},
+    {id:"sec06",l:"Trust"},{id:"sec07",l:"Compare"},{id:"sec08",l:"Roadmap"}
+  ],
+  eyebrow:"Electoral Modernization Project by Rajeshkumar Lakshmanan",
+  h1:"<span class='acc-s'>Secure</span><span class='acc-g'>Vote</span> India<br>Zero-Compromise<br>Hybrid Election System",
+  tagline:'"Satyameva Jayate — Truth Alone Triumphs"',
+  heroSub:"A sovereign, multi-channel election architecture that serves every citizen of India — whether online, offline, elderly, or digitally excluded — with military-grade security and absolute auditability.",
+  motto:"Vande Mataram · Satyameva Jayate · Jai Hind",
+  kpi:["Voting<br>Channels","Security<br>Layers","Single Point<br>of Failure","Citizen<br>Coverage"],
+  q1:'"The strength of a democracy lies not in the power of the few, but in the voice of every single citizen — cast freely, counted honestly, protected absolutely."',
+  q1c:"— SecureVote India Manifesto · 2026",
+  pollTag:"Citizens' Poll — Your Voice Matters",
+  pollTitle:"Support Secure Election Modernisation?",
+  pollSub:"One vote per person · Verified by email · Global count updated live",
+  pollQ:'"Do you support modernising India\'s state election process with secure, transparent digital technology?"',
+  pollBtnTxt:"I Support Election Modernisation",
+  pollBtnSub:"Click to register your support",
+  votedBadge:"✅ Your vote is registered",
+  votedPre:"You are one of",
+  votedPost:"citizens who support<br>secure election modernisation for India.",
+  pollCountLbl:"Total Supporters",
+  pollChange:"↺ Change My Vote",
+  emTitle:"Register Your Support",
+  emSub:"Enter your email address to cast your vote. This prevents duplicate votes.",
+  emPlaceholder:"your@email.com",
+  emBtn:"Submit My Support 🇮🇳",
+  emCancel:"Cancel",
+  emPrivacy:"Your email is hashed and stored only on your device. It is never sent to any server.",
+  emErrInvalid:"Please enter a valid email address.",
+  emErrDuplicate:"This email has already been registered. Each person may vote once.",
+  emErrEmpty:"Please enter your email address.",
+  exitTitle:"Wait! Before You Leave",
+  exitSub:"You haven't registered your support yet. Will you support secure election modernisation for India?",
+  exitBtn:"Yes, I Support! 🇮🇳",
+  exitSkip:"Maybe later",
+  copyMsg:"🔒 Content is copyright protected. Copying is not permitted.",
+  copyDone:"✓ Link Copied!",
+  copyLbl:"Copy Link",
+  s01:{label:"01 — Problem Definition",title:"Six Core Challenges",desc:"Any election modernisation solution must address all six simultaneously — partial solutions create new vulnerabilities.",
+    cards:[
+      {i:"📵",h:"Digital Exclusion",d:"Over 20% of India's population lacks smartphones or internet access — primarily elderly, rural, and low-income citizens who must not be left behind."},
+      {i:"👴",h:"Elderly Accessibility",d:"Older voters distrust unfamiliar technology and require physical, voice-guided, familiar processes to exercise their franchise with dignity."},
+      {i:"🔐",h:"Cybersecurity Threats",d:"Nation-state attacks, DDoS, man-in-the-middle, and insider threats can compromise centralised digital voting systems without layered defences."},
+      {i:"👤",h:"Identity Fraud",d:"Impersonation, proxy voting, duplicate votes, and booth capturing are persistent threats that must be completely eliminated."},
+      {i:"🕵️",h:"Vote Secrecy",d:"The constitutional right to ballot secrecy must be mathematically guaranteed — no authority can ever link a vote to a voter."},
+      {i:"✅",h:"Public Trust & Auditability",d:"Citizens, parties, and courts must independently verify every result without exposing any individual ballot."}
+    ]},
+  s02:{label:"02 — Solution Architecture",title:"Three Voting Channels, One Blockchain",desc:"All channels feed into a single permissioned, air-gapped blockchain ledger. Every vote is equal regardless of channel.",
+    pillars:[
+      {b:"Channel A · Digital",t:"SecureVote Mobile App",target:"Target: Smartphone users (80%)",items:["Aadhaar OTP + Face Liveness + Fingerprint (3-factor)","End-to-end encrypted ballot — AES-256-GCM","Zero-Knowledge Proof: verified without revealing identity","Geo-fenced to registered constituency only","Certificate pinning prevents fake app installs","Available in multiple regional languages","Anonymous cryptographic receipt via SMS"]},
+      {b:"Channel B · Kiosk",t:"Smart Booth Terminal (SBT)",target:"Target: Elderly & non-smartphone voters",items:["Rugged 15\" touchscreen kiosk at every booth","Extra-large fonts, high contrast, bilingual interface","Voice guide reads each candidate name aloud","Fingerprint + OTP via basic feature phone SMS","Physical confirmation button — familiar to older voters","Prints anonymous VVPAT slip for confirmation","Air-gapped, FIPS 140-3 certified hardware"]},
+      {b:"Channel C · Assisted",t:"Mobile Voting Unit (MVU)",target:"Target: Homebound, disabled, remote voters",items:["Officers carry tamper-proof tablet to voter's home","Two independent officers mandatory — no solo access","Biometric captured live — officer cannot override","Vote cast privately; officer sees only confirmation","GPS-logged and video-recorded for audit trail","Pre-scheduled via toll-free helpline 1800-VOTE-IN"]}
+    ]},
+  s03:{label:"03 — Security Architecture",title:"7-Layer Defence-in-Depth",desc:"Each layer is independently certified. Breaching one layer does NOT compromise another.",
+    layers:[
+      {n:"L1",lt:"Identity",h:"Triple-Factor Biometric Authentication",d:"Fingerprint + face liveness detection (anti-spoofing AI) + OTP SMS — all three verified against Aadhaar UIDAI simultaneously. Any single failure rejects the entire session.",tags:["Aadhaar UIDAI API","ISO/IEC 30107-3","TOTP OTP"]},
+      {n:"L2",lt:"Encryption",h:"Homomorphic Encryption + Zero-Knowledge Proofs",d:"ElGamal homomorphic encryption tallies votes without decrypting individual ballots. zk-SNARKs let any voter prove their vote was counted without revealing their choice.",tags:["ElGamal Homomorphic","zk-SNARKs","AES-256-GCM"]},
+      {n:"L3",lt:"Ledger",h:"Permissioned Blockchain — Hyperledger Fabric",d:"Immutable transactions distributed across nodes at the State Election Commission, NIC, three auditing parties, and two international observers. 51% attacks are structurally impossible.",tags:["Hyperledger Fabric 2.x","BFT Consensus","Distributed Nodes"]},
+      {n:"L4",lt:"Network",h:"Sovereign Network Infrastructure",d:"NIC dedicated leased-line, completely separate from the public internet. Anycast DDoS mitigation (100Tbps capacity), WAF, rate limiting, geo-IP blocking of foreign IP ranges.",tags:["NIC Dedicated Line","Anycast DDoS Shield","Zero-Trust Network"]},
+      {n:"L5",lt:"Hardware",h:"Hardware Security Modules (HSM) + TPM 2.0",d:"All cryptographic keys in FIPS 140-3 Level 3 certified HSMs — physically tamper-evident, never exported in plaintext. TPM 2.0 attests boot integrity on every kiosk before each session.",tags:["FIPS 140-3 Level 3","TPM 2.0","Secure Boot"]},
+      {n:"L6",lt:"Audit",h:"Multi-Party Threshold Decryption + Public Audit",d:"Tallying requires 5-of-7 threshold decryption — minimum five key custodians must cooperate simultaneously. The full anonymised encrypted ledger is published publicly after polling.",tags:["Shamir Secret Sharing","5-of-7 Threshold","Public Bulletin Board"]},
+      {n:"L7",lt:"Rollback",h:"Air-Gapped Physical Backup + VVPAT",d:"Every digital vote simultaneously generates a VVPAT slip — physically sealed in a tamper-evident box. Paper slips serve as the authoritative fallback in any catastrophic scenario.",tags:["VVPAT Paper Trail","Air-Gapped Mirrors","ECI Fallback Protocol"]}
+    ]},
+  s04:{label:"04 — Voter Journey",title:"How a Citizen Votes — Step by Step",desc:"Designed for a 70-year-old first-time digital voter in a remote village to complete independently.",
+    steps:[
+      {n:"01",h:"Pre-Registration Verification (48 hrs before)",d:"Voter receives an SMS with their unique Voter Token. Verify name and booth via IVRS call (no smartphone needed). Pre-checks eliminate day-of errors.",chips:["cu:SMS + IVRS","ct:Token Issuance","cs:Constituency Lock"]},
+      {n:"02",h:"Authentication (3-Factor — 90 Seconds)",d:"Fingerprint → face liveness → OTP verified against Aadhaar UIDAI and Voter Roll simultaneously. Duplicate attempts blocked system-wide within milliseconds.",chips:["cs:Biometric","cs:Liveness AI","cs:UIDAI Check","ct:Dedup Lock"]},
+      {n:"03",h:"Ballot Display (Accessible, Private, Clear)",d:"Candidate list with photo, name, party symbol, serial number. Voice reads options aloud in local language. Large buttons, high contrast, kiosk privacy screen shield.",chips:["cu:Voice Guide","cu:Large UI","cu:Party Symbols","cs:Privacy Shield"]},
+      {n:"04",h:"Vote Submission & Encryption",d:"Voter confirms twice. Vote is encrypted client-side before any transmission — the server never sees the plaintext ballot. Anonymous receipt sent via SMS.",chips:["cs:Client Encryption","ct:ZK Proof","cu:SMS Receipt"]},
+      {n:"05",h:"Blockchain Commit + VVPAT Print",d:"Encrypted vote confirmed across distributed nodes in under 3 seconds. Kiosk prints VVPAT showing only party symbol. Voter reviews through glass window — confirms or rejects.",chips:["ct:Blockchain Commit","cs:VVPAT Print","cu:Visual Confirm"]},
+      {n:"06",h:"Voter Verification (Anytime After Voting)",d:"Any voter can verify their vote was counted using their anonymous receipt hash on the public bulletin board — without revealing identity or choice.",chips:["cs:ZK Proof Verify","ct:Public Bulletin Board","cu:Anonymous Receipt"]}
+    ]},
+  s05:{label:"05 — Offline Citizens Solution",title:"The Non-Digital Population",desc:"No citizen is left behind. Dedicated mechanisms ensure full inclusion for those without smartphones or internet.",
+    notice:"<strong>Core Principle:</strong> Every offline channel produces an identical encrypted vote entry in the same blockchain — there is no secondary-class vote. Offline votes carry equal weight, equal security, and equal dignity.",
+    cards:[
+      {h:"🏪 Common Service Centre Kiosks",d:"CSCs across the state function as SecureVote Terminals. Aadhaar number + fingerprint is all that is needed — no smartphone required.",items:["One CSC per 300-voter radius in rural areas","Bilingual voice-assisted interface","Elder-priority queue for 60+ age voters","Booth officer cannot see or influence the vote"]},
+      {h:"☎️ IVRS Telephone Voting",d:"A secure Interactive Voice Response System accepts votes via any telephone keypad. Available for pre-registered elderly (70+) and certified disabled voters.",items:["Call toll-free 1800-VOTE-IN","Verify with Aadhaar + Date of Birth","Voice reads all candidates in local language","Keypad selection + PIN confirmation"]},
+      {h:"🚐 Mobile Voting Unit (MVU)",d:"State-operated vehicles equipped with a secure tablet, biometric scanner, and satellite uplink travel to remote villages and bedridden voters.",items:["Pre-scheduled 48 hours before election day","Two officers mandatory — one opposition-nominated","GPS tracked + video recorded (exterior only)","Same blockchain submission as any booth vote"]},
+      {h:"📋 Physical Ballot Fallback",d:"In the event of a court order or complete infrastructure failure, paper ballots at designated emergency booths serve as the constitutional backstop.",items:["Activated only by Election Commission emergency order","Forensic UV ink serialisation on all ballots","Multi-party seal and counter-signature required","Digitised and cross-verified against blockchain result"]}
+    ]},
+  s06:{label:"06 — Public Trust Mechanisms",title:"How Citizens Know the Result is Honest",desc:"Trust must be mathematically provable — not based on promises from any authority.",
+    boxes:[
+      {dk:true,h:"🔑 Zero-Knowledge Proof",d:"Any voter can prove their vote was counted without revealing who they voted for. Any mathematician can verify the entire ledger publicly — no government access needed."},
+      {dk:false,h:"🌐 Open-Source Code",d:"The full software stack is published under an open-source licence 6 months before each election. Any technologist worldwide can audit it for backdoors, bugs, or biases."},
+      {dk:false,h:"🏛️ Multi-Party Observer Nodes",d:"Each major political party runs an independent blockchain node. No result can be announced unless all nodes agree. Any party can challenge a discrepancy in real-time."},
+      {dk:false,h:"🔢 Blockchain Hash Publication",d:"The full blockchain hash is published on the Election Commission website and broadcast on public media at the close of polling — before counting begins — preventing any post-hoc tampering."},
+      {dk:false,h:"🎲 Random VVPAT Audit",d:"5% of constituencies are randomly selected by publicly verifiable cryptographic lottery for full paper VVPAT recount. Results must match digital tally within a 0.01% margin."},
+      {dk:true,h:"⚖️ Supreme Court Oversight Node",d:"An independent, air-gapped node at the Supreme Court of India holds a read-only mirror of the blockchain — available for judicial review without altering the master ledger."}
+    ]},
+  q2:'"In a democracy, the ballot is mightier than the bullet. Let us ensure every ballot is sacred, secure, and counted."',
+  q2c:"— Inspired by the Spirit of the Indian Constitution",
+  s07:{label:"07 — Benchmark",title:"How SecureVote India Compares",desc:"Against existing election methods across critical dimensions.",
+    heads:["Criterion","Traditional EVM","Internet-Only Voting","SecureVote India (Hybrid)"],
+    rows:[
+      ["Covers non-smartphone voters","Yes (booth only)#yes","No#no","Yes (3 channels)#yes"],
+      ["Elderly-friendly","Partially#par","No#no","Yes (voice + large UI)#yes"],
+      ["Voter can verify own vote","No#no","Partially#par","Yes (ZK proof)#yes"],
+      ["Tamper-proof ledger","Partially#par","Partially#par","Yes (blockchain)#yes"],
+      ["DDoS / cyber resilient","Yes (air-gapped)#yes","No#no","Yes (multi-layer)#yes"],
+      ["Independent public audit","No#no","Limited#par","Yes (open ledger)#yes"],
+      ["Remote / homebound voting","No#no","Partially#par","Yes (MVU)#yes"],
+      ["Paper backup (VVPAT)","Yes#yes","No#no","Yes (all channels)#yes"],
+      ["Multi-party oversight","Partially#par","No#no","Yes (all nodes)#yes"],
+      ["Quantum-resistant (roadmap)","Partially#par","No#no","Yes (NIST PQC)#yes"]
+    ]},
+  s08:{label:"08 — Rollout Plan",title:"36-Month Implementation Roadmap",desc:"Phased rollout with a mandatory live pilot before state-level deployment.",
+    items:[
+      {ph:"Phase 0 · Months 1–6",h:"Legislation, Governance & Open-Source Audit",d:"Draft the State Electronic Elections Act. Appoint independent Technical Security Board (IIT, C-DAC, CERT-IN, ECI). Publish full open-source codebase. International security audit begins. Public comment period open."},
+      {ph:"Phase 1 · Months 7–12",h:"Infrastructure Procurement & Kiosk Deployment",d:"Procure HSMs, kiosks, MVU vehicles under government procurement. Deploy at all Common Service Centres. Fibre/satellite uplink verified at every location. VVPAT printers installed and tested. Independent penetration testing."},
+      {ph:"Phase 2 · Months 13–18",h:"Municipal Elections Pilot — 3 Districts",d:"Run a live SecureVote election in three selected districts for local body elections. Full post-election audit published. Voter feedback survey. Red team debrief. All fixes applied before next phase."},
+      {ph:"Phase 3 · Months 19–30",h:"State-Wide Scale & Voter Education Campaign",d:"Expand to all constituencies. Mass awareness via public broadcasters, community radio, and village meetings. Dedicated multilingual helpline. Training for all booth officers and kiosk operators."},
+      {ph:"Phase 4 · Months 31–36",h:"State Assembly Election Full Deployment",d:"Full state election on SecureVote. Traditional EVM maintained as parallel physical backstop per ECI mandate. Real-time monitoring for ECI, parties, and media. Independent audit report published within 30 days."}
+    ]},
+  fLogo:"🇮🇳 SecureVote India",
+  fTagline:'"Every vote counts. Every citizen votes. No vote can be stolen."',
+  fDesc:"Democracy, guaranteed by mathematics. Designed for every citizen of India — from the tech-savvy youth to the 80-year-old farmer in a remote village.",
+  fRef:"Blueprint prepared for State Election Modernisation Discussion · 2026<br>Architecture references: Helios Voting, Belenios, Estonian i-Voting, Swiss Post e-Voting, Hyperledger Fabric, UIDAI Aadhaar API",
+  fCopy:"© 2026 Copyright Protected by Rajeshkumar Lakshmanan · Vellore, Tamil Nadu, India",
+  fEmail:"janaraj.android@gmail.com",
+  fSal:"🕉️ Satyameva Jayate · Vande Mataram · Jai Hind 🇮🇳"
 },
 
 ta:{
- ticker:"🇮🇳  வாழ்க தமிழ்நாடு  |  ஜெய் ஹிந்த்  |  ஒவ்வொரு வாக்கும் புனிதமானது  |  ஜனநாயகம் இந்தியாவின் மிகப்பெரிய பலம்  |  செக்யூர்வோட் TN  |  ஒரே நாடு · ஒரே வாக்கு · சமரசமின்மை  |  சத்யமேவ ஜயதே  |  🇮🇳",
- viewsLabel:"பக்க பார்வைகள்", liveLabel:"நேரடி",
- eyebrow:"தமிழ்நாடு · ராஜேஷ்குமார் லட்சுமணன் அவர்களின் தேர்தல் நவீனமயமாக்கல் திட்டம்",
- h1:"<span class='acc-s'>பாதுகாப்பான</span><span class='acc-g'>வோட்</span> TN<br>சமரசமற்ற<br>கலப்பு தேர்தல் முறை",
- tagline:'"சத்யமேவ ஜயதே — உண்மை மட்டுமே வெல்லும்"',
- heroSub:"ஒவ்வொரு குடிமகனுக்கும் சேவை செய்யும் இறையாண்மை, பல-சேனல் தேர்தல் அமைப்பு — ஆன்லைன், ஆஃப்லைன், முதியோர், அல்லது டிஜிட்டல் விலக்கப்பட்டவர்கள் — இராணுவ தரத்திலான பாதுகாப்புடன். பாரதத்திற்காக கட்டப்பட்டது.",
- motto:"வந்தே மாதரம் · சத்யமேவ ஜயதே · வாழ்க தமிழ்நாடு",
- kpi:["வாக்களிப்பு<br>சேனல்கள்","பாதுகாப்பு<br>அடுக்குகள்","தோல்வி<br>புள்ளி இல்லை","குடிமகன்<br>கவரேஜ்"],
- q1:'"ஒரு ஜனநாயகத்தின் வலிமை சிலரின் அதிகாரத்தில் இல்லை, ஒவ்வொரு குடிமகனின் குரலிலும் உள்ளது — சுதந்திரமாக அளிக்கப்பட்டு, நேர்மையாக கணக்கிடப்பட்டு, முழுமையாக பாதுகாக்கப்படுகிறது."',
- q1c:"— செக்யூர்வோட் TN ஆவணம் · 2026",
- pollTag:"குடிமக்கள் வாக்கெடுப்பு — உங்கள் குரல் முக்கியம்",
- pollTitle:"தேர்தல் நவீனமயமாக்கலை நீங்கள் ஆதரிக்கிறீர்களா?",
- pollSub:"ஒவ்வொரு பார்வையாளரும் ஒரு முறை மட்டும் வாக்களிக்கலாம் · வாக்குகள் திரட்டப்படுகின்றன",
- pollQ:'"தமிழ்நாட்டின் தேர்தல் முறையை பாதுகாப்பான டிஜிட்டல் தொழில்நுட்பம் கொண்டு நவீனமயமாக்குவதை நீங்கள் ஆதரிக்கிறீர்களா?"',
- pollBtn:"தேர்தல் நவீனமயமாக்கலை நான் ஆதரிக்கிறேன் 🇮🇳",
- pollBtnSub:"ஆம் · Haan · Yes",
- pollVotedPre:"🟠 நீங்கள்",
- pollVotedPost:"குடிமக்களில் ஒருவர் — தேர்தல் நவீனமயமாக்கலை<br>ஆதரிக்கிறீர்கள்! <b>வாழ்க தமிழ்நாடு 🇮🇳</b>",
- pollCountLabel:"இதுவரை ஆதரிப்பவர்கள்",
- pollChange:"↺ மாற்றவும்",
- exitTitle:"சற்று நில்லுங்கள்!",
- exitSub:"நீங்கள் இன்னும் கருத்து தெரிவிக்கவில்லை. தமிழ்நாட்டிற்கான தேர்தல் நவீனமயமாக்கலை ஆதரிப்பீர்களா?",
- exitBtn:"ஆம், நான் ஆதரிக்கிறேன்! 🇮🇳",
- exitSkip:"பிறகு பார்க்கலாம்",
- copyMsg:"🔒 உள்ளடக்கம் பதிப்புரிமை பாதுகாக்கப்பட்டுள்ளது. நகலெடுக்க அனுமதி இல்லை.",
- copyLinkDone:"✓ இணைப்பு நகலெடுக்கப்பட்டது!",
- copyLinkLabel:"இணைப்பை நகலெடு",
- s01:{label:"01 — சவால் வரையறை",title:"ஆறு முக்கிய சவால்கள்",desc:"எந்த தேர்தல் நவீனமயமாக்கல் தீர்வும் ஆறையும் ஒரே நேரத்தில் தீர்க்க வேண்டும் — பகுதி தீர்வுகள் புதிய பாதிப்புகளை உருவாக்கும்.",
-  cards:[
-   {icon:"📵",h:"டிஜிட்டல் விலக்கு",d:"தமிழ்நாட்டின் ~8 கோடி மக்களில் 20%+ (~1.6 கோடி+) குடிமக்களுக்கு ஸ்மார்ட்போன் அல்லது இணையம் இல்லை — முதன்மையாக முதியோர், கிராமப்புற மற்றும் குறைந்த வருமான குழுக்கள்."},
-   {icon:"👴",h:"முதியோர் அணுகல்",d:"வயதானவர்கள் புதிய தொழில்நுட்பத்தை நம்பமாட்டார்கள். பழக்கமான, வழிகாட்டப்பட்ட செயல்முறைகள் அவர்களுக்கு தேவை."},
-   {icon:"🔐",h:"இணையவெளி அச்சுறுத்தல்கள்",d:"தேசிய-அரசு தாக்குதல்கள், DDoS, நடுவில்-நின்று கேட்கும் தாக்குதல்கள் மத்திய டிஜிட்டல் வாக்களிப்பை சமரசப்படுத்தலாம்."},
-   {icon:"👤",h:"அடையாள மோசடி",d:"ஆள்மாறாட்டம், ப்ராக்ஸி வாக்களிப்பு, நகல் வாக்குகள் மற்றும் பூத் கைப்பற்றல் ஆகியவை முற்றிலும் நீக்கப்பட வேண்டிய அச்சுறுத்தல்கள்."},
-   {icon:"🕵️",h:"வாக்கு இரகசியம்",d:"வாக்கு இரகசியத்திற்கான அரசியலமைப்பு உரிமை கணிதரீதியாக உறுதிப்படுத்தப்பட வேண்டும் — எந்த அதிகாரியும் வாக்கை வாக்காளருடன் இணைக்க முடியாது."},
-   {icon:"✅",h:"பொது நம்பிக்கை & தணிக்கை",d:"குடிமக்கள், கட்சிகள் மற்றும் நீதிமன்றங்கள் தனிப்பட்ட வாக்கை வெளிப்படுத்தாமல் ஒவ்வொரு முடிவையும் சரிபார்க்க வேண்டும்."}
-  ]},
- s02:{label:"02 — தீர்வு கட்டமைப்பு",title:"மூன்று வாக்களிப்பு சேனல்கள், ஒரே பிளாக்செயின்",desc:"அனைத்து சேனல்களும் ஒரே அனுமதிபெற்ற, காற்று-இடைவெளி பிளாக்செயின் பேரேட்டில் ஊட்டுகின்றன. எந்த சேனலும் மேலானது அல்ல — ஒவ்வொரு வாக்கும் சமம்.",
-  pillars:[
-   {badge:"சேனல் A · டிஜிட்டல்",title:"செக்யூர்வோட் மொபைல் ஆப்",target:"இலக்கு: ஸ்மார்ட்போன் பயனர்கள் (80%)",items:["ஆதார் OTP + முக உயிரோட்டம் + கைரேகை (3-காரணி அங்கீகரிப்பு)","AES-256-GCM கொண்டு முழுமையாக குறியாக்கப்பட்ட வாக்கு","பூஜிய-அறிவு சான்று — அடையாளம் வெளிப்படுத்தாமல் சரிபார்க்கப்படுகிறது","பதிவு செய்யப்பட்ட தொகுதிக்கு மட்டும் புவி-வேலி","போலி ஆப்களை தடுக்க சான்றிதழ் பின்னிணைப்பு","தமிழ், ஆங்கிலம் மற்றும் 5 மொழிகளில் கிடைக்கும்","அனாமிக கிரிப்டோகிராஃபிக் ஹாஷ் கொண்ட வாக்காளர் ரசீது"]},
-   {badge:"சேனல் B · கியோஸ்க்",title:"ஸ்மார்ட் பூத் டெர்மினல் (SBT)",target:"இலக்கு: முதியோர் & ஸ்மார்ட்போன் இல்லாதவர்கள்",items:["ஒவ்வொரு பூத் & பஞ்சாயத்திலும் 15\" டச்ஸ்க்ரீன் கியோஸ்க்","மிகவும் பெரிய எழுத்துக்கள், உயர் மாறுபாடு, இருமொழி தமிழ்/ஆங்கிலம்","ஒவ்வொரு வேட்பாளரின் பெயரையும் தமிழில் குரல் படிக்கும்","கைரேகை ஸ்கேனர் + அடிப்படை ஃபோன் SMS வழி OTP","உடல் உறுதிப்படுத்தல் பொத்தான் — வயதான வாக்காளர்களுக்கு பரிச்சயமான","அனாமிக VVPAT சீட்டு அச்சிடுகிறது","FIPS 140-3 மூலம் குறியாக்கப்பட்ட காற்று-இடைவெளி வன்பொருள்"]},
-   {badge:"சேனல் C · உதவி",title:"மொபைல் வாக்களிப்பு பிரிவு (MVU)",target:"இலக்கு: வீட்டில் இருப்பவர்கள், ஊனமுற்றோர், தொலைதூர",items:["அரசாங்க சான்றளிக்கப்பட்ட அதிகாரிகள் திருட்டு-ஆதாரமான டேப்லெட்டை வாக்காளரிடம் கொண்டு செல்கின்றனர்","இரண்டு சுதந்திர அதிகாரிகள் கட்டாயம் (தனி அணுகல் இல்லை)","வாக்காளரின் உயிரியல் அடையாளம் நேரடியாக பதிவு — அதிகாரி மாற்ற முடியாது","வாக்கு தனிப்பட்ட முறையில் அளிக்கப்படுகிறது","GPS பதிவு + வீடியோ பதிவு (வெளிப்புறம் மட்டும்)","1800-VOTE-TN இலவச உதவி எண் வழி முன்பதிவு"]}
-  ]},
- s03:{label:"03 — பாதுகாப்பு கட்டமைப்பு",title:"7 அடுக்கு ஆழமான பாதுகாப்பு",desc:"ஒவ்வொரு அடுக்கும் சுதந்திரமாக சான்றளிக்கப்பட்டு கண்காணிக்கப்படுகிறது. ஒரு அடுக்கை மீறுவது மற்றொன்றை சமரசப்படுத்தாது.",
-  layers:[
-   {n:"L1",lt:"அடையாளம்",h:"மூன்று-காரணி உயிரியல் அங்கீகரிப்பு",d:"கைரேகை + கண்/முக உயிரோட்ட AI + SMS OTP — மூன்றும் ஆதார் UIDAI க்கு எதிராக ஒரே நேரத்தில் சரிபார்க்கப்படும். எந்த தோல்வியும் கோப்பையே நிராகரிக்கும்.",tags:["Aadhaar UIDAI API","ISO/IEC 30107-3 Liveness","TOTP OTP"]},
-   {n:"L2",lt:"குறியாக்கம்",h:"ஹோமோமார்ஃபிக் குறியாக்கம் + பூஜிய-அறிவு சான்றுகள்",d:"ElGamal ஹோமோமார்ஃபிக் குறியாக்கம் தனிப்பட்ட வாக்குகளை மறைகுறியாக்காமல் கணக்கிடுகிறது. zk-SNARKs வாக்காளர்களை தங்கள் தேர்வை வெளிப்படுத்தாமல் வாக்கு எண்ணப்பட்டதை நிரூபிக்க அனுமதிக்கிறது.",tags:["ElGamal Homomorphic","zk-SNARKs","AES-256-GCM"]},
-   {n:"L3",lt:"பேரேடு",h:"அனுமதிபெற்ற பிளாக்செயின் — Hyperledger Fabric",d:"TN ECI, NIC, மூன்று தணிக்கை தரப்பினர், இரண்டு சர்வதேச கண்காணிப்பாளர்களிடம் விநியோகிக்கப்பட்ட மாற்ற இயலாத பரிவர்த்தனைகள். 51% தாக்குதல்கள் கட்டமைப்பரீதியாக சாத்தியமற்றவை.",tags:["Hyperledger Fabric 2.x","BFT Consensus","Distributed Nodes"]},
-   {n:"L4",lt:"வலையமைப்பு",h:"இறையாண்மை வலையமைப்பு உள்கட்டமைப்பு",d:"NIC பிரத்யேக குத்தகை-கோடு, பொது இணையத்திலிருந்து முற்றிலும் தனித்து. Anycast DDoS குறைப்பு (100Tbps), WAF, வேக வரம்பு, வெளிநாட்டு IP வடிகட்டல்.",tags:["NIC Dedicated Line","Anycast DDoS Shield","Zero-Trust Network"]},
-   {n:"L5",lt:"வன்பொருள்",h:"வன்பொருள் பாதுகாப்பு தொகுதிகள் (HSM) + TPM 2.0",d:"அனைத்து கிரிப்டோகிராஃபிக் திறவுகோல்களும் FIPS 140-3 Level 3 சான்றளிக்கப்பட்ட HSM-களில் — ஒருபோதும் வெளிப்படை உரையில் ஏற்றுமதி செய்யப்படாது.",tags:["FIPS 140-3 Level 3 HSM","TPM 2.0","Secure Boot"]},
-   {n:"L6",lt:"தணிக்கை",h:"பல-தரப்பு வரம்பு மறைகுறியாக்கம் + பொது தணிக்கை",d:"கணக்கீடு 5-இல்-7 வரம்பு மறைகுறியாக்கம் தேவை. வாக்களிப்புக்கு பிறகு, முழு அனாமிக மறையாக்கப்பட்ட பேரேடு பொதுவில் வெளியிடப்படுகிறது.",tags:["Shamir Secret Sharing","5-of-7 Threshold","Public Bulletin Board"]},
-   {n:"L7",lt:"திரும்புதல்",h:"காற்று-இடைவெளி இயற்பியல் காப்புப்பிரதி + VVPAT",d:"ஒவ்வொரு டிஜிட்டல் வாக்கும் ஒரே நேரத்தில் VVPAT சீட்டை உருவாக்குகிறது — திருட்டு-வெளிப்படை பெட்டியில் உடல்ரீதியாக மூடப்படுகிறது.",tags:["VVPAT Physical Backup","Air-Gapped Mirrors","ECI Fallback Protocol"]}
-  ]},
- s04:{label:"04 — வாக்காளர் பயணம்",title:"ஒரு குடிமகன் எவ்வாறு வாக்களிக்கிறார் — படிப்படியாக",desc:"தமிழ்நாட்டின் ஒரு கிராமத்தில் 70 வயதான முதல் முறை டிஜிட்டல் வாக்காளருக்கு தனியாக முடிக்க வடிவமைக்கப்பட்டது.",
-  steps:[
-   {n:"01",h:"முன்-பதிவு சரிபார்ப்பு (48 மணி நேரத்திற்கு முன்)",d:"வாக்காளர் தனிப்பட்ட வாக்காளர் டோக்கன் கொண்ட தமிழ் SMS பெறுகிறார். IVRS அழைப்பு வழியாக பெயர் மற்றும் பூத்தை சரிபார்க்கவும்.",chips:["cu:SMS + IVRS","ct:டோக்கன் வழங்கல்","cs:தொகுதி பூட்டு"]},
-   {n:"02",h:"அங்கீகரிப்பு (3-காரணி — 90 விநாடிகள்)",d:"கைரேகை → முக உயிரோட்டம் → OTP. ஆதார் UIDAI மற்றும் வாக்காளர் பட்டியலுக்கு எதிராக ஒரே நேரத்தில் சரிபார்க்கப்படும்.",chips:["cs:கைரேகை","cs:உயிரோட்ட AI","cs:UIDAI சரிபார்ப்பு","ct:நகல் தடுப்பு"]},
-   {n:"03",h:"வாக்குப்பட்டி காட்சி (அணுகல், தனியார், தெளிவான)",d:"புகைப்படம், பெயர் (தமிழ் + ஆங்கிலம்), கட்சி சின்னம் கொண்ட வேட்பாளர் பட்டியல். குரல் ஒவ்வொரு விருப்பத்தையும் படிக்கும். பெரிய பொத்தான்கள்.",chips:["cu:தமிழில் குரல்","cu:பெரிய UI","cu:கட்சி சின்னங்கள்","cs:தனியுரிமை திரை"]},
-   {n:"04",h:"வாக்கு சமர்ப்பிப்பு & ஹோமோமார்ஃபிக் குறியாக்கம்",d:"வாக்காளர் இரண்டு முறை உறுதிப்படுத்துகிறார். வாக்கு கிளையன்ட்-பக்கத்தில் மறையாக்கப்படுகிறது — சர்வர் ஒருபோதும் வெளிப்படை வாக்கை பார்க்காது.",chips:["cs:கிளையன்ட் குறியாக்கம்","ct:ZK சான்று","cu:SMS ரசீது"]},
-   {n:"05",h:"பிளாக்செயின் உறுதி + VVPAT அச்சு",d:"மறையாக்கப்பட்ட வாக்கு Hyperledger Fabric க்கு எழுதப்படுகிறது (3 விநாடிகளில் உறுதிப்படுத்தப்படும்). கட்சி சின்னம் மட்டும் காட்டும் VVPAT அச்சிடுகிறது.",chips:["ct:பிளாக்செயின் உறுதி","cs:VVPAT காகித சான்று","cu:காட்சி உறுதிப்படுத்தல்"]},
-   {n:"06",h:"வாக்காளர் சரிபார்ப்பு (வாக்களித்த பிறகு எப்போது வேண்டுமானாலும்)",d:"பொது அறிவிப்பு பலகையில் உங்கள் அனாமிக ரசீது ஹாஷ் பயன்படுத்தி உங்கள் வாக்கு எண்ணப்பட்டதை சரிபார்க்கவும்.",chips:["cs:ZK சரிபார்ப்பு","ct:பொது பலகை","cu:அனாமிக ரசீது"]}
-  ]},
- s05:{label:"05 — ஆஃப்லைன் குடிமக்கள் தீர்வு",title:"20%+ டிஜிட்டல் அல்லாத மக்கள்",desc:"எந்த குடிமகனும் விடுபட மாட்டார். ~1.6 கோடி ஸ்மார்ட்போன் இல்லாதவர்களுக்கு மூன்று பிரத்யேக வழிமுறைகள்.",
-  notice:"<strong>முக்கிய கொள்கை:</strong> ஒவ்வொரு ஆஃப்லைன் சேனலும் அதே பிளாக்செயினில் ஒரே மாதிரியான மறையாக்கப்பட்ட வாக்கு பதிவை உருவாக்குகிறது — வாக்குகளில் 'இரண்டாம் தர' வகுப்பு இல்லை. ஆஃப்லைன் வாக்குகள் சம உரிமை, சம பாதுகாப்பு, சம கண்ணியம் பெறுகின்றன.",
-  cards:[
-   {h:"🏪 அக்கம்பக்கம் CSC கியோஸ்க்கள்",d:"TN முழுவதும் 7,400+ பொது சேவை மையங்கள் SecureVote டெர்மினல்களாக. ஆதார் எண் + கைரேகை மட்டும் தேவை.",items:["கிராமப்புற பகுதிகளில் 300 வாக்காளர் ஆரையில் 1 CSC","இருமொழி தமிழ்/ஆங்கில குரல் உதவி இடைமுகம்","முதியோர் முன்னுரிமை வரிசை (60+ வயது விரைவு-பாதை)","பூத் அதிகாரி வாக்கை பார்க்க அல்லது பாதிக்க முடியாது"]},
-   {h:"☎️ IVRS தொலைபேசி வாக்களிப்பு",d:"அடிப்படை ஃபோன் மட்டும் உள்ள வாக்காளர்களுக்கு பாதுகாப்பான IVR வாக்களிப்பு. முன்பதிவு செய்யப்பட்ட முதியோர் (70+) மற்றும் ஊனமுற்றோருக்கு.",items:["இலவச 1800-VOTE-TN அழைக்கவும்","ஆதார் + பிறந்த தேதி மூலம் சரிபார்க்கவும்","தமிழில் அனைத்து வேட்பாளர்களையும் குரல் படிக்கும்","விசைப்பலகை தேர்வு + PIN உறுதிப்படுத்தல்"]},
-   {h:"🚐 மொபைல் வாக்களிப்பு பிரிவு (MVU)",d:"தொலைதூர கிராமங்களுக்கும் படுக்கையில் உள்ள வாக்காளர்களின் வீடுகளுக்கும் அரசு வாகனங்கள் செல்கின்றன.",items:["தேர்தலுக்கு 48 மணி நேரத்திற்கு முன் முன்பதிவு","இரண்டு அதிகாரிகள் கட்டாயம் — ஒருவர் எதிர்க்கட்சி நியமனம்","GPS கண்காணிப்பு + வீடியோ பதிவு (வெளிப்புறம் மட்டும்)","எந்த பூத் வாக்கைப் போலவே அதே பிளாக்செயின் சமர்ப்பிப்பு"]},
-   {h:"📋 இயற்பியல் வாக்கு இடைத்தங்கல்",d:"நீதிமன்ற ஆணை அல்லது உள்கட்டமைப்பு தோல்வி பின்னணி. பல-தரப்பு மேற்பார்வையில் கட்டாயநிலை பூத்களில் பாரம்பரிய தாள் வாக்குகள்.",items:["ECI அவசரகால ஆணை மூலம் மட்டுமே செயல்படுத்தப்படும்","UV-கண்ணுக்கு புலனாகா நீதி மை வரிசை எண்ணிடல்","பல-தரப்பு முத்திரை + எதிர்-கையொப்பம் தேவை","பிளாக்செயின் முடிவுக்கு எதிராக சரிபார்க்கப்படும்"]}
-  ]},
- s06:{label:"06 — பொது நம்பிக்கை வழிமுறைகள்",title:"முடிவு நேர்மையானது என்று குடிமக்கள் எவ்வாறு அறிவார்கள்",desc:"நம்பிக்கை கணிதரீதியாக நிரூபிக்கக்கூடியதாக இருக்க வேண்டும் — அதிகாரிகளின் வாக்குறுதிகளை அடிப்படையாக கொள்ளாமல்.",
-  boxes:[
-   {dark:true,h:"🔑 பூஜிய-அறிவு சான்று",d:"எந்த வாக்காளரும் யாருக்கு வாக்களித்தார் என்பதை வெளிப்படுத்தாமல் வாக்கு எண்ணப்பட்டதை நிரூபிக்க முடியும். எந்த கணிதவியலாளரும் முழு பேரேட்டை சரிபார்க்க முடியும்."},
-   {dark:false,h:"🌐 திறந்த-மூல குறியீடு",d:"தேர்தலுக்கு 6 மாதங்களுக்கு முன்பு GitHub-ல் திறந்த-மூல உரிமத்தின் கீழ் முழு மென்பொருள் அடுக்கு வெளியிடப்படுகிறது. எந்த தொழில்நுட்ப நிபுணரும் தணிக்கை செய்யலாம்."},
-   {dark:false,h:"🏛️ பல-தரப்பு கண்காணிப்பாளர் நோடுகள்",d:"ஒவ்வொரு முக்கிய அரசியல் கட்சியும் சுதந்திர பிளாக்செயின் நோடை இயக்குகிறது. அனைத்து நோடுகளும் ஒப்புக்கொள்ளாவிட்டால் எந்த முடிவும் அறிவிக்கப்படாது."},
-   {dark:false,h:"🔢 ஹாஷ் வெளியீடு",d:"வாக்களிப்பு முடிவில் TN ECI வலைத்தளம், தூர்தர்ஷன் மற்றும் ஆல் இந்தியா ரேடியோவில் முழு பிளாக்செயின் ஹாஷ் வெளியிடப்படுகிறது — கணக்கீடு தொடங்குவதற்கு முன்."},
-   {dark:false,h:"🎲 சீரற்ற VVPAT தணிக்கை",d:"5% தொகுதிகள் முழு VVPAT தாள் மறு கணக்கிற்காக பகிரங்கமாக சரிபார்க்கக்கூடிய கிரிப்டோகிராஃபிக் லாட்டரி மூலம் தேர்ந்தெடுக்கப்படும்."},
-   {dark:true,h:"⚖️ உச்ச நீதிமன்ற கண்காணிப்பு நோடு",d:"இந்தியா உச்ச நீதிமன்றத்தில் ஒரு சுதந்திர, காற்று-இடைவெளி நோடு பிளாக்செயினின் படிக்க-மட்டும் கண்ணாடி வைத்திருக்கிறது — சட்டரீதியான மறுஆய்வுக்கு ஆயத்தமாக."}
-  ]},
- q2:'"ஒரு ஜனநாயகத்தில், வாக்குச் சீட்டு தோட்டாவை விட வலிமையானது. ஒவ்வொரு வாக்குச் சீட்டும் புனிதமாகவும், பாதுகாப்பாகவும், எண்ணப்பட்டதாகவும் உறுதி செய்வோம்."',
- q2c:"— இந்திய அரசியலமைப்பின் உத்வேகத்தால் ஈர்க்கப்பட்டது",
- s07:{label:"07 — ஒப்பீடு",title:"செக்யூர்வோட் TN எவ்வாறு ஒப்பிடுகிறது",desc:"முக்கிய பரிமாணங்களில் ஏற்கனவே உள்ள தேர்தல் முறைகளுக்கு எதிராக.",
-  heads:["அளவுகோல்","பாரம்பரிய EVM","இணைய-மட்டும் வாக்களிப்பு","செக்யூர்வோட் TN (கலப்பு)"],
-  rows:[
-   ["ஸ்மார்ட்போன் இல்லாத பயனர்களை உள்ளடக்குகிறது","ஆம் (பூத் மட்டும்)#yes","இல்லை#no","ஆம் (3 சேனல்கள்)#yes"],
-   ["முதியோர் நட்பு","பகுதியளவு#par","இல்லை#no","ஆம் (குரல் + பெரிய UI)#yes"],
-   ["வாக்காளர் சொந்த வாக்கை சரிபார்க்கலாம்","இல்லை#no","பகுதியளவு#par","ஆம் (ZK சான்று)#yes"],
-   ["திருட்டு-ஆதாரமான பேரேடு","பகுதியளவு#par","பகுதியளவு#par","ஆம் (பிளாக்செயின்)#yes"],
-   ["DDoS/இணையவெளி மீள்தன்மை","ஆம் (காற்று-இடைவெளி)#yes","இல்லை#no","ஆம் (பல-அடுக்கு)#yes"],
-   ["சுதந்திர பொது தணிக்கை","இல்லை#no","குறைவான#par","ஆம் (திறந்த பேரேடு)#yes"],
-   ["தொலைதூர/வீட்டில் இருக்கும் வாக்களிப்பு","இல்லை#no","பகுதியளவு#par","ஆம் (MVU)#yes"],
-   ["தாள் காப்புப்பிரதி (VVPAT)","ஆம்#yes","இல்லை#no","ஆம் (அனைத்து சேனல்கள்)#yes"],
-   ["பல-தரப்பு மேற்பார்வை","பகுதியளவு#par","இல்லை#no","ஆம் (அனைத்து நோடுகள்)#yes"],
-   ["குவாண்டம் எதிர்ப்பு (வழிமேப்பு)","பகுதியளவு#par","இல்லை#no","ஆம் (NIST PQC)#yes"]
-  ]},
- s08:{label:"08 — செயல்படுத்தல் திட்டம்",title:"36-மாத செயல்படுத்தல் வழிமேப்பு",desc:"எந்த மாநில அளவு பயன்படுத்தலுக்கும் முன் கட்டாய சோதனை கொண்ட கட்ட திட்டம்.",
-  items:[
-   {ph:"கட்டம் 0 · மாதம் 1–6",h:"சட்டம், ஆட்சி & திறந்த-மூல தணிக்கை",d:"TN மின்னணு தேர்தல் சட்டம் வரைவு. தொழில்நுட்ப பாதுகாப்பு வாரியம் நியமிக்கவும் (IIT-M, C-DAC, CERT-IN, ECI). திறந்த-மூல குறியீடு வெளியிடவும். சர்வதேச தணிக்கை தொடங்குகிறது."},
-   {ph:"கட்டம் 1 · மாதம் 7–12",h:"உள்கட்டமைப்பு கொள்முதல் & CSC கியோஸ்க் பயன்படுத்தல்",d:"HSMs, கியோஸ்க்கள், MVU வாகனங்கள் கொள்முதல். 7,400+ CSC களில் பயன்படுத்தவும். VVPAT அச்சுப்பொறிகள் நிறுவி சோதிக்கவும். சுதந்திர ஊடுருவல் சோதனை."},
-   {ph:"கட்டம் 2 · மாதம் 13–18",h:"நகராட்சி தேர்தல் சோதனை — 3 மாவட்டங்கள்",d:"கோயம்புத்தூர், மதுரை, வேலூர் ஆகிய இடங்களில் நேரடி செக்யூர்வோட் TN தேர்தல். முழு தேர்தல்-பிந்தைய தணிக்கை வெளியிடவும். வாக்காளர் கருத்துக்களை சேகரிக்கவும்."},
-   {ph:"கட்டம் 3 · மாதம் 19–30",h:"மாநில அளவிலான விரிவாக்கம் & வாக்காளர் கல்வி பிரச்சாரம்",d:"அனைத்து 234 தொகுதிகளிலும் விரிவாக்கவும். தூர்தர்ஷன், சன் TV, சமூக வானொலி வழியாக வெகுஜன விழிப்புணர்வு. தமிழ் உதவி எண். பூத் அதிகாரிகள் பயிற்சி."},
-   {ph:"கட்டம் 4 · மாதம் 31–36",h:"மாநில சட்டமன்ற தேர்தல் முழு பயன்படுத்தல்",d:"செக்யூர்வோட் TN இல் முழு மாநில தேர்தல். ECI கட்டாயத்தின்படி இணை இயற்பியல் காப்புப்பிரதியாக பாரம்பரிய EVM. 30 நாட்களில் சுதந்திர தணிக்கை அறிக்கை."}
-  ]},
- fLogo:"🇮🇳 செக்யூர்வோட் TN",
- fTagline:'"ஒவ்வொரு வாக்கும் முக்கியம். ஒவ்வொரு குடிமகனும் வாக்களிக்கிறார். எந்த வாக்கும் திருட முடியாது."',
- fDesc:"கணிதத்தால் உறுதிப்படுத்தப்பட்ட ஜனநாயகம். தமிழ்நாட்டின் ஒவ்வொரு குடிமகனுக்கும் வடிவமைக்கப்பட்டது — தொழில்நுட்ப நிபுணர் இளைஞர் முதல் தொலைதூர கிராமத்தில் உள்ள 80 வயதான விவசாயி வரை.",
- fRef:"தமிழ்நாடு மாநில தேர்தல் நவீனமயமாக்கல் விவாதத்திற்காக திட்டம் தயாரிக்கப்பட்டது · 2026",
- fCopy:"© 2026 பதிப்புரிமை பாதுகாக்கப்பட்டது — ராஜேஷ்குமார் லட்சுமணன் · வேலூர், தமிழ்நாடு",
- fEmail:"janaraj.android@gmail.com",
- fSal:"🕉️ சத்யமேவ ஜயதே · வாழ்க தமிழ்நாடு · ஜெய் ஹிந்த் 🇮🇳"
+  ticker:"🇮🇳  வந்தே மாதரம்  |  ஒவ்வொரு வாக்கும் புனிதமானது  |  ஜனநாயகம் இந்தியாவின் பலம்  |  SecureVote India  |  ஒரே நாடு · ஒரே வாக்கு · சமரசமின்மை  |  சத்யமேவ ஜயதே  |  🇮🇳",
+  navSal:"வந்தே மாதரம் 🇮🇳",
+  navLogo:"🇮🇳 SecureVote India",
+  viewsLbl:"உலகளாவிய பார்வைகள்",
+  navItems:[
+    {id:"hero",l:"முகப்பு"},{id:"poll",l:"கருத்தெடுப்பு"},{id:"sec01",l:"சவால்கள்"},{id:"sec02",l:"தீர்வு"},
+    {id:"sec03",l:"பாதுகாப்பு"},{id:"sec04",l:"வாக்காளர் பயணம்"},{id:"sec05",l:"ஆஃப்லைன்"},
+    {id:"sec06",l:"நம்பிக்கை"},{id:"sec07",l:"ஒப்பீடு"},{id:"sec08",l:"வழிமேப்பு"}
+  ],
+  eyebrow:"ராஜேஷ்குமார் லட்சுமணன் அவர்களின் தேர்தல் நவீனமயமாக்கல் திட்டம்",
+  h1:"<span class='acc-s'>பாதுகாப்பான</span><span class='acc-g'>வாக்கு</span> இந்தியா<br>சமரசமற்ற<br>கலப்பு தேர்தல் முறை",
+  tagline:'"சத்யமேவ ஜயதே — உண்மை மட்டுமே வெல்லும்"',
+  heroSub:"இந்தியாவின் ஒவ்வொரு குடிமகனுக்கும் சேவை செய்யும் இறையாண்மை, பல-சேனல் தேர்தல் கட்டமைப்பு — இணையத்தில், ஆஃப்லைனில், முதியோர், டிஜிட்டல் வசதியற்றவர்கள் — இராணுவ தரத்திலான பாதுகாப்புடன்.",
+  motto:"வந்தே மாதரம் · சத்யமேவ ஜயதே · வாழ்க இந்தியா",
+  kpi:["வாக்களிப்பு<br>சேனல்கள்","பாதுகாப்பு<br>அடுக்குகள்","தோல்வி<br>புள்ளியில்லை","குடிமகன்<br>கவரேஜ்"],
+  q1:'"ஒரு ஜனநாயகத்தின் வலிமை சிலரின் அதிகாரத்தில் இல்லை, ஒவ்வொரு குடிமகனின் குரலில் உள்ளது — சுதந்திரமாக அளிக்கப்பட்டு, நேர்மையாக எண்ணப்பட்டு, முழுமையாக பாதுகாக்கப்படுகிறது."',
+  q1c:"— SecureVote India ஆவணம் · 2026",
+  pollTag:"குடிமக்கள் கருத்தெடுப்பு — உங்கள் குரல் முக்கியம்",
+  pollTitle:"பாதுகாப்பான தேர்தல் நவீனமயமாக்கலை ஆதரிக்கிறீர்களா?",
+  pollSub:"ஒருவர் ஒரு வாக்கு · மின்னஞ்சல் மூலம் சரிபார்க்கப்படுகிறது · உலகளாவிய எண்ணிக்கை நேரடியாக புதுப்பிக்கப்படுகிறது",
+  pollQ:'"இந்தியாவின் மாநில தேர்தல் முறையை பாதுகாப்பான, வெளிப்படையான டிஜிட்டல் தொழில்நுட்பம் மூலம் நவீனமயமாக்குவதை நீங்கள் ஆதரிக்கிறீர்களா?"',
+  pollBtnTxt:"தேர்தல் நவீனமயமாக்கலை நான் ஆதரிக்கிறேன்",
+  pollBtnSub:"உங்கள் ஆதரவை பதிவு செய்ய கிளிக் செய்யவும்",
+  votedBadge:"✅ உங்கள் வாக்கு பதிவாகியுள்ளது",
+  votedPre:"நீங்கள்",
+  votedPost:"குடிமக்களில் ஒருவர் — இந்தியாவிற்கான<br>பாதுகாப்பான தேர்தல் நவீனமயமாக்கலை ஆதரிக்கிறீர்கள்.",
+  pollCountLbl:"மொத்த ஆதரவாளர்கள்",
+  pollChange:"↺ வாக்கை மாற்றவும்",
+  emTitle:"உங்கள் ஆதரவை பதிவு செய்யவும்",
+  emSub:"உங்கள் வாக்கை பதிவு செய்ய மின்னஞ்சல் முகவரி உள்ளிடவும். மேலும் வாக்குகளை தடுக்க இது பயன்படுகிறது.",
+  emPlaceholder:"உங்கள்@மின்னஞ்சல்.com",
+  emBtn:"என் ஆதரவை சமர்ப்பிக்கிறேன் 🇮🇳",
+  emCancel:"ரத்து செய்யவும்",
+  emPrivacy:"உங்கள் மின்னஞ்சல் உங்கள் சாதனத்தில் மட்டுமே சேமிக்கப்படுகிறது. எந்த சேவையகத்திற்கும் அனுப்பப்படுவதில்லை.",
+  emErrInvalid:"சரியான மின்னஞ்சல் முகவரியை உள்ளிடவும்.",
+  emErrDuplicate:"இந்த மின்னஞ்சல் ஏற்கனவே பதிவு செய்யப்பட்டுள்ளது. ஒருவர் ஒரு வாக்கு மட்டுமே.",
+  emErrEmpty:"மின்னஞ்சல் முகவரியை உள்ளிடவும்.",
+  exitTitle:"சற்று நில்லுங்கள்!",
+  exitSub:"நீங்கள் இன்னும் வாக்களிக்கவில்லை. இந்தியாவிற்கான தேர்தல் நவீனமயமாக்கலை ஆதரிப்பீர்களா?",
+  exitBtn:"ஆம், நான் ஆதரிக்கிறேன்! 🇮🇳",
+  exitSkip:"பிறகு பார்க்கலாம்",
+  copyMsg:"🔒 உள்ளடக்கம் பதிப்புரிமை பாதுகாக்கப்பட்டுள்ளது. நகலெடுக்க அனுமதி இல்லை.",
+  copyDone:"✓ இணைப்பு நகலெடுக்கப்பட்டது!",
+  copyLbl:"இணைப்பை நகலெடு",
+  s01:{label:"01 — சிக்கல் வரையறை",title:"ஆறு முக்கிய சவால்கள்",desc:"தேர்தல் நவீனமயமாக்கல் தீர்வு ஆறையும் ஒரே நேரத்தில் தீர்க்க வேண்டும் — பகுதி தீர்வுகள் புதிய பாதிப்புகளை உருவாக்கும்.",
+    cards:[
+      {i:"📵",h:"டிஜிட்டல் பற்றாக்குறை",d:"இந்தியாவின் மக்கள்தொகையில் 20%க்கும் அதிகமானோருக்கு ஸ்மார்ட்போன் அல்லது இணையம் இல்லை — முதன்மையாக முதியோர், கிராமப்புற மற்றும் குறைந்த வருமான குழுக்கள்."},
+      {i:"👴",h:"முதியோர் அணுகல்",d:"வயதான வாக்காளர்கள் புதிய தொழில்நுட்பத்தை நம்பமாட்டார்கள். தங்கள் வாக்குரிமையை பயன்படுத்த பழக்கமான, வழிகாட்டப்பட்ட செயல்முறைகள் தேவை."},
+      {i:"🔐",h:"இணையவெளி அச்சுறுத்தல்கள்",d:"தேசிய-அரசு தாக்குதல்கள், DDoS மற்றும் உள்நோக்கு அச்சுறுத்தல்கள் மத்திய டிஜிட்டல் வாக்களிப்பை பாதிக்கலாம்."},
+      {i:"👤",h:"அடையாள மோசடி",d:"ஆள்மாறாட்டம், இடைத்தரகர் வாக்களிப்பு, மற்றும் பூத் கைப்பற்றல் ஆகியவை முற்றிலும் ஒழிக்கப்பட வேண்டும்."},
+      {i:"🕵️",h:"வாக்கு இரகசியம்",d:"வாக்கு இரகசியத்திற்கான அரசியலமைப்பு உரிமை கணிதரீதியாக உறுதிப்படுத்தப்பட வேண்டும் — எந்த அதிகாரியும் வாக்கை வாக்காளருடன் இணைக்க முடியாது."},
+      {i:"✅",h:"பொது நம்பிக்கை மற்றும் தணிக்கை",d:"குடிமக்கள், கட்சிகள், நீதிமன்றங்கள் — தனிப்பட்ட வாக்கை வெளிப்படுத்தாமல் ஒவ்வொரு முடிவையும் சரிபார்க்க வேண்டும்."}
+    ]},
+  s02:{label:"02 — தீர்வு கட்டமைப்பு",title:"மூன்று வாக்களிப்பு சேனல்கள், ஒரே பிளாக்செயின்",desc:"அனைத்து சேனல்களும் ஒரே அனுமதிபெற்ற பிளாக்செயின் பேரேட்டில் இணைகின்றன. ஒவ்வொரு வாக்கும் சமம்.",
+    pillars:[
+      {b:"சேனல் அ · டிஜிட்டல்",t:"SecureVote மொபைல் பயன்பாடு",target:"இலக்கு: ஸ்மார்ட்போன் பயன்பாட்டாளர்கள் (80%)",items:["ஆதார் OTP + முக உயிரோட்டம் + கைரேகை","AES-256-GCM கொண்டு முழுமையாக மறையாக்கப்பட்ட வாக்கு","பூஜிய-அறிவு சான்று — அடையாளம் வெளிப்படாமல் சரிபார்ப்பு","பதிவு செய்யப்பட்ட தொகுதிக்கு மட்டும் புவி-வேலி","பல மாநில மொழிகளில் கிடைக்கும்","அனாமிக கிரிப்டோ ரசீது SMS வழி"]},
+      {b:"சேனல் ஆ · கியோஸ்க்",t:"ஸ்மார்ட் பூத் முனையம் (SBT)",target:"இலக்கு: முதியோர் மற்றும் ஸ்மார்ட்போன் இல்லாதவர்கள்",items:["ஒவ்வொரு பூத்திலும் 15\" தொட்டுதிரை கியோஸ்க்","மிகவும் பெரிய எழுத்துகள், உயர் மாறுபாடு, இருமொழி இடைமுகம்","வேட்பாளர் பெயர்களை உரக்க படிக்கும் குரல் வழிகாட்டி","கைரேகை + அடிப்படை ஃபோன் SMS OTP","உடல் உறுதிப்படுத்தல் பொத்தான் — முதியோருக்கு பரிச்சயமான","FIPS 140-3 சான்றளிக்கப்பட்ட வன்பொருள்"]},
+      {b:"சேனல் இ · உதவி",t:"இடமாறும் வாக்களிப்பு பிரிவு (MVU)",target:"இலக்கு: வீட்டில் இருப்பவர்கள், ஊனமுற்றோர், தொலைதூரம்",items:["அரசு அதிகாரிகள் திருட்டு-ஆதாரமான கணினியை வீட்டிற்கு கொண்டு செல்கிறார்கள்","இரண்டு சுதந்திர அதிகாரிகள் கட்டாயம்","வாக்காளர் உயிரியல் அடையாளம் நேரடியாக பதிவு","GPS கண்காணிப்பு + வீடியோ பதிவு","1800-VOTE-IN இலவச உதவி எண் மூலம் முன்பதிவு"]}
+    ]},
+  s03:{label:"03 — பாதுகாப்பு கட்டமைப்பு",title:"7 அடுக்கு ஆழமான பாதுகாப்பு",desc:"ஒவ்வொரு அடுக்கும் சுதந்திரமாக சான்றளிக்கப்பட்டுள்ளது. ஒரு அடுக்கை மீறுவது மற்றொன்றை பாதிக்காது.",
+    layers:[
+      {n:"L1",lt:"அடையாளம்",h:"மூன்று-காரணி உயிரியல் அங்கீகரிப்பு",d:"கைரேகை + முக உயிரோட்ட AI + SMS OTP — மூன்றும் ஆதார் UIDAI க்கு எதிராக சரிபார்க்கப்படும். எந்த தோல்வியும் முழு கோப்பையே நிராகரிக்கும்.",tags:["Aadhaar UIDAI API","ISO/IEC 30107-3","TOTP OTP"]},
+      {n:"L2",lt:"மறையாக்கம்",h:"ஹோமோமார்ஃபிக் மறையாக்கம் + பூஜிய-அறிவு சான்றுகள்",d:"ElGamal ஹோமோமார்ஃபிக் மறையாக்கம் தனிப்பட்ட வாக்குகளை மறைகுறியாக்காமல் கணக்கிடுகிறது. zk-SNARKs வாக்காளர்கள் தங்கள் தேர்வை வெளிப்படுத்தாமல் வாக்கு எண்ணப்பட்டதை நிரூபிக்க அனுமதிக்கிறது.",tags:["ElGamal Homomorphic","zk-SNARKs","AES-256-GCM"]},
+      {n:"L3",lt:"பேரேடு",h:"அனுமதிபெற்ற பிளாக்செயின் — Hyperledger Fabric",d:"மாநில தேர்தல் ஆணையம், NIC, மூன்று தணிக்கை தரப்பினர் மற்றும் இரண்டு சர்வதேச கண்காணிப்பாளர்களிடம் விநியோகிக்கப்பட்ட மாற்ற இயலாத பரிவர்த்தனைகள்.",tags:["Hyperledger Fabric 2.x","BFT Consensus","Distributed Nodes"]},
+      {n:"L4",lt:"வலையமைப்பு",h:"இறையாண்மை வலையமைப்பு உள்கட்டமைப்பு",d:"NIC பிரத்யேக குத்தகை-கோடு, பொது இணையத்திலிருந்து முற்றிலும் தனித்து. Anycast DDoS குறைப்பு (100Tbps), WAF, வேக வரம்பு.",tags:["NIC Dedicated Line","Anycast DDoS Shield","Zero-Trust Network"]},
+      {n:"L5",lt:"வன்பொருள்",h:"வன்பொருள் பாதுகாப்பு தொகுதிகள் (HSM) + TPM 2.0",d:"அனைத்து கிரிப்டோகிராஃபிக் திறவுகோல்களும் FIPS 140-3 நிலை 3 சான்றளிக்கப்பட்ட HSM-களில் — ஒருபோதும் வெளிப்படை உரையில் ஏற்றுமதி செய்யப்படாது.",tags:["FIPS 140-3 Level 3","TPM 2.0","Secure Boot"]},
+      {n:"L6",lt:"தணிக்கை",h:"பல-தரப்பு வரம்பு மறைகுறியாக்கம் + பொது தணிக்கை",d:"கணக்கீடு 5-இல்-7 வரம்பு மறைகுறியாக்கம் தேவை — குறைந்தது 5 திறவுகோல் பாதுகாவலர்கள் ஒரே நேரத்தில் ஒத்துழைக்க வேண்டும்.",tags:["Shamir Secret Sharing","5-of-7 Threshold","Public Bulletin Board"]},
+      {n:"L7",lt:"திரும்புதல்",h:"காற்று-இடைவெளி இயற்பியல் காப்புப்பிரதி + VVPAT",d:"ஒவ்வொரு டிஜிட்டல் வாக்கும் VVPAT சீட்டை உருவாக்குகிறது — திருட்டு-வெளிப்படை பெட்டியில் சேமிக்கப்படுகிறது. எந்த அவசரகாலத்திலும் காகித சீட்டுகளே அதிகாரபூர்வ ஆதாரம்.",tags:["VVPAT Paper Trail","Air-Gapped Mirrors","ECI Fallback Protocol"]}
+    ]},
+  s04:{label:"04 — வாக்காளர் பயணம்",title:"ஒரு குடிமகன் எவ்வாறு வாக்களிக்கிறார்",desc:"ஒரு தொலைதூர கிராமத்தில் 70 வயதான முதல் முறை டிஜிட்டல் வாக்காளருக்கு தனியாக முடிக்க வடிவமைக்கப்பட்டது.",
+    steps:[
+      {n:"01",h:"முன்-பதிவு சரிபார்ப்பு (48 மணி நேரத்திற்கு முன்)",d:"வாக்காளர் SMS வழி தனிப்பட்ட வாக்காளர் அடையாள குறியீடு பெறுகிறார். IVRS அழைப்பு வழியாக (ஸ்மார்ட்போன் இல்லாமல்) பெயர் மற்றும் பூத்தை சரிபார்க்கலாம்.",chips:["cu:SMS + IVRS","ct:குறியீடு வழங்கல்","cs:தொகுதி பூட்டு"]},
+      {n:"02",h:"அங்கீகரிப்பு (3-காரணி — 90 விநாடிகள்)",d:"கைரேகை → முக உயிரோட்டம் → OTP. ஆதார் UIDAI மற்றும் வாக்காளர் பட்டியலுடன் ஒரே நேரத்தில் சரிபார்க்கப்படும்.",chips:["cs:கைரேகை","cs:உயிரோட்ட AI","cs:UIDAI சரிபார்ப்பு","ct:நகல் தடுப்பு"]},
+      {n:"03",h:"வாக்குச்சீட்டு காட்சி (அணுகக்கூடிய, தனியார், தெளிவான)",d:"புகைப்படம், பெயர், கட்சி சின்னம் கொண்ட வேட்பாளர் பட்டியல். குரல் ஒவ்வொரு விருப்பத்தையும் உள்ளூர் மொழியில் படிக்கும்.",chips:["cu:குரல் வழிகாட்டி","cu:பெரிய இடைமுகம்","cu:கட்சி சின்னங்கள்","cs:தனியுரிமை திரை"]},
+      {n:"04",h:"வாக்கு சமர்ப்பிப்பு மற்றும் மறையாக்கம்",d:"வாக்காளர் இரண்டு முறை உறுதிப்படுத்துகிறார். வாக்கு கிளையன்ட்-பக்கத்தில் மறையாக்கப்படுகிறது — சேவையகம் ஒருபோதும் வெளிப்படை வாக்கை பார்க்காது.",chips:["cs:மறையாக்கம்","ct:ZK சான்று","cu:SMS ரசீது"]},
+      {n:"05",h:"பிளாக்செயின் உறுதிப்படுத்தல் + VVPAT அச்சு",d:"மறையாக்கப்பட்ட வாக்கு 3 விநாடிகளில் விநியோகிக்கப்பட்ட நோடுகளில் உறுதிப்படுத்தப்படுகிறது. கட்சி சின்னம் மட்டும் காட்டும் VVPAT சீட்டு அச்சிடப்படுகிறது.",chips:["ct:பிளாக்செயின்","cs:VVPAT சீட்டு","cu:காட்சி உறுதிப்படுத்தல்"]},
+      {n:"06",h:"வாக்காளர் சரிபார்ப்பு (வாக்களித்த பிறகு எப்போது வேண்டுமானாலும்)",d:"பொது அறிவிப்பு பலகையில் அனாமிக ரசீது ஹாஷ் பயன்படுத்தி வாக்கு எண்ணப்பட்டதை சரிபார்க்கலாம்.",chips:["cs:ZK சரிபார்ப்பு","ct:பொது பலகை","cu:அனாமிக ரசீது"]}
+    ]},
+  s05:{label:"05 — ஆஃப்லைன் குடிமக்கள் தீர்வு",title:"டிஜிட்டல் வசதியற்ற மக்கள்",desc:"எந்த குடிமகனும் விடுபட மாட்டார். ஸ்மார்ட்போன் இல்லாத கோடிக்கணக்கானவர்களுக்கு பிரத்யேக ஏற்பாடுகள்.",
+    notice:"<strong>முக்கிய கொள்கை:</strong> ஒவ்வொரு ஆஃப்லைன் சேனலும் அதே பிளாக்செயினில் ஒரே மாதிரியான மறையாக்கப்பட்ட வாக்கு பதிவை உருவாக்குகிறது — இரண்டாம் தர வாக்கு என்று எதுவும் இல்லை. சம உரிமை, சம பாதுகாப்பு, சம கண்ணியம்.",
+    cards:[
+      {h:"🏪 பொது சேவை மைய கியோஸ்க்கள்",d:"மாநிலம் முழுவதும் உள்ள பொது சேவை மையங்கள் SecureVote முனையங்களாக செயல்படுகின்றன. ஆதார் எண் + கைரேகை மட்டுமே தேவை.",items:["கிராமப்புற பகுதிகளில் 300 வாக்காளர் ஆரையில் ஒரு மையம்","இருமொழி குரல் உதவி இடைமுகம்","60+ வயதினருக்கு முன்னுரிமை வரிசை","பூத் அதிகாரி வாக்கை பார்க்க அல்லது பாதிக்க முடியாது"]},
+      {h:"☎️ IVRS தொலைபேசி வாக்களிப்பு",d:"ஸ்மார்ட்போன் இல்லாத அடிப்படை தொலைபேசி உரிமையாளர்களுக்கு. முன்பதிவு செய்யப்பட்ட முதியோர் (70+) மற்றும் சான்றளிக்கப்பட்ட ஊனமுற்றோருக்கு.",items:["இலவச 1800-VOTE-IN அழைக்கவும்","ஆதார் + பிறந்த தேதி மூலம் சரிபார்க்கவும்","உள்ளூர் மொழியில் வேட்பாளர் பெயர்களை குரல் படிக்கும்","விசைப்பலகை தேர்வு + PIN உறுதிப்படுத்தல்"]},
+      {h:"🚐 இடமாறும் வாக்களிப்பு பிரிவு",d:"மாநில வாகனங்கள் தொலைதூர கிராமங்களுக்கும் படுக்கையில் உள்ள வாக்காளர்களின் வீடுகளுக்கும் செல்கின்றன.",items:["தேர்தலுக்கு 48 மணி நேரத்திற்கு முன் முன்பதிவு","இரண்டு அதிகாரிகள் கட்டாயம் — ஒருவர் எதிர்க்கட்சி நியமனம்","GPS கண்காணிப்பு + வீடியோ பதிவு","எந்த பூத் வாக்கைப் போலவே அதே பிளாக்செயின் சமர்ப்பிப்பு"]},
+      {h:"📋 இயற்பியல் வாக்குச்சீட்டு இடைத்தங்கல்",d:"நீதிமன்ற ஆணை அல்லது முழு உள்கட்டமைப்பு தோல்வி ஏற்பட்டால் பாரம்பரிய காகித வாக்குகள் அவசரகால பூத்களில் நடைபெறும்.",items:["தேர்தல் ஆணையம் ஆணை மூலம் மட்டுமே செயல்படுத்தப்படும்","UV-கண்ணுக்கு புலனாகா நீதி மை வரிசை எண்ணிடல்","பல-தரப்பு முத்திரை + எதிர்-கையொப்பம்","பிளாக்செயின் முடிவுடன் சரிபார்க்கப்படும்"]}
+    ]},
+  s06:{label:"06 — பொது நம்பிக்கை வழிமுறைகள்",title:"முடிவு நேர்மையானது என்று குடிமக்கள் எவ்வாறு அறிவார்கள்",desc:"நம்பிக்கை கணிதரீதியாக நிரூபிக்கக்கூடியதாக இருக்க வேண்டும் — எந்த அதிகாரியின் வாக்குறுதியையும் நம்பி அல்ல.",
+    boxes:[
+      {dk:true,h:"🔑 பூஜிய-அறிவு சான்று",d:"எந்த வாக்காளரும் யாருக்கு வாக்களித்தார் என்பதை வெளிப்படுத்தாமல் வாக்கு எண்ணப்பட்டதை நிரூபிக்க முடியும். எந்த கணிதவியலாளரும் முழு பேரேட்டை பகிரங்கமாக சரிபார்க்கலாம்."},
+      {dk:false,h:"🌐 திறந்த-மூல குறியீடு",d:"தேர்தலுக்கு 6 மாதங்களுக்கு முன்பு திறந்த-மூல உரிமத்தின் கீழ் முழு மென்பொருள் அடுக்கும் வெளியிடப்படுகிறது. எந்த தொழில்நுட்ப நிபுணரும் சோதிக்கலாம்."},
+      {dk:false,h:"🏛️ பல-தரப்பு கண்காணிப்பு நோடுகள்",d:"ஒவ்வொரு முக்கிய அரசியல் கட்சியும் சுதந்திர பிளாக்செயின் நோடை இயக்குகிறது. அனைத்து நோடுகளும் ஒப்புக்கொள்ளாவிட்டால் எந்த முடிவும் அறிவிக்கப்படாது."},
+      {dk:false,h:"🔢 பிளாக்செயின் ஹாஷ் வெளியீடு",d:"வாக்களிப்பு முடிவில் மாநில தேர்தல் ஆணைய இணையதளம் மற்றும் பொது ஒளிபரப்புகளில் முழு பிளாக்செயின் ஹாஷ் வெளியிடப்படுகிறது — கணக்கீடு தொடங்குவதற்கு முன்."},
+      {dk:false,h:"🎲 சீரற்ற VVPAT தணிக்கை",d:"5% தொகுதிகள் பகிரங்கமாக சரிபார்க்கக்கூடிய கிரிப்டோகிராஃபிக் சீட்டு மூலம் தேர்ந்தெடுக்கப்பட்டு முழு காகித மறு கணக்கிற்கு உட்படுத்தப்படும்."},
+      {dk:true,h:"⚖️ உச்ச நீதிமன்ற கண்காணிப்பு நோடு",d:"இந்திய உச்ச நீதிமன்றத்தில் ஒரு சுதந்திர, காற்று-இடைவெளி நோடு பிளாக்செயினின் படிக்க-மட்டும் நகலை வைத்திருக்கிறது — நீதி மறுஆய்வுக்கு ஆயத்தமாக."}
+    ]},
+  q2:'"ஜனநாயகத்தில், வாக்குச்சீட்டு ஆயுதத்தை விட வலிமையானது. ஒவ்வொரு வாக்கும் புனிதமாகவும், பாதுகாப்பாகவும், எண்ணப்பட்டதாகவும் உறுதி செய்வோம்."',
+  q2c:"— இந்திய அரசியலமைப்பின் உத்வேகத்தால் ஈர்க்கப்பட்டது",
+  s07:{label:"07 — ஒப்பீட்டு பகுப்பாய்வு",title:"SecureVote India எவ்வாறு ஒப்பிடுகிறது",desc:"முக்கிய பரிமாணங்களில் தற்போதுள்ள தேர்தல் முறைகளுக்கு எதிராக.",
+    heads:["அளவுகோல்","பாரம்பரிய EVM","இணைய-மட்டும் வாக்களிப்பு","SecureVote India (கலப்பு)"],
+    rows:[
+      ["ஸ்மார்ட்போன் இல்லாத வாக்காளர்களை உள்ளடக்குகிறது","ஆம் (பூத் மட்டும்)#yes","இல்லை#no","ஆம் (3 சேனல்கள்)#yes"],
+      ["முதியோருக்கு ஏற்றது","பகுதியளவு#par","இல்லை#no","ஆம் (குரல் + பெரிய இடைமுகம்)#yes"],
+      ["வாக்காளர் வாக்கை சரிபார்க்கலாம்","இல்லை#no","பகுதியளவு#par","ஆம் (ZK சான்று)#yes"],
+      ["திருட்டு-ஆதாரமான பேரேடு","பகுதியளவு#par","பகுதியளவு#par","ஆம் (பிளாக்செயின்)#yes"],
+      ["DDoS/இணையவெளி மீள்தன்மை","ஆம் (காற்று-இடைவெளி)#yes","இல்லை#no","ஆம் (பல-அடுக்கு)#yes"],
+      ["சுதந்திர பொது தணிக்கை","இல்லை#no","குறைவான#par","ஆம் (திறந்த பேரேடு)#yes"],
+      ["தொலைதூர வாக்களிப்பு","இல்லை#no","பகுதியளவு#par","ஆம் (MVU)#yes"],
+      ["காகித காப்புப்பிரதி (VVPAT)","ஆம்#yes","இல்லை#no","ஆம் (அனைத்து சேனல்கள்)#yes"],
+      ["பல-தரப்பு மேற்பார்வை","பகுதியளவு#par","இல்லை#no","ஆம் (அனைத்து நோடுகள்)#yes"],
+      ["குவாண்டம் எதிர்ப்பு (வழிமேப்பு)","பகுதியளவு#par","இல்லை#no","ஆம் (NIST PQC)#yes"]
+    ]},
+  s08:{label:"08 — செயல்படுத்தல் திட்டம்",title:"36-மாத செயல்படுத்தல் வழிமேப்பு",desc:"மாநில அளவு பயன்படுத்தலுக்கு முன் கட்டாய சோதனை கொண்ட கட்ட திட்டம்.",
+    items:[
+      {ph:"கட்டம் 0 · மாதம் 1–6",h:"சட்டம், ஆட்சி மற்றும் திறந்த-மூல தணிக்கை",d:"மின்னணு தேர்தல் சட்டம் வரையவும். சுதந்திர தொழில்நுட்ப பாதுகாப்பு வாரியம் நியமிக்கவும் (IIT, C-DAC, CERT-IN, ECI). திறந்த-மூல குறியீடு வெளியிடவும். சர்வதேச தணிக்கை தொடங்குகிறது."},
+      {ph:"கட்டம் 1 · மாதம் 7–12",h:"உள்கட்டமைப்பு கொள்முதல் மற்றும் கியோஸ்க் நிறுவல்",d:"HSM, கியோஸ்க், MVU வாகனங்கள் கொள்முதல். மாநிலம் முழுவதும் உள்ள பொது சேவை மையங்களில் நிறுவல். VVPAT அச்சுப்பொறிகள் நிறுவி சோதிக்கவும். ஊடுருவல் சோதனை."},
+      {ph:"கட்டம் 2 · மாதம் 13–18",h:"நகராட்சி தேர்தல் சோதனை — 3 மாவட்டங்கள்",d:"தேர்ந்தெடுக்கப்பட்ட மூன்று மாவட்டங்களில் நேரடி SecureVote தேர்தல். முழு தேர்தல்-பிந்தைய தணிக்கை வெளியிடவும். வாக்காளர் கருத்துக்களை சேகரிக்கவும்."},
+      {ph:"கட்டம் 3 · மாதம் 19–30",h:"மாநில அளவிலான விரிவாக்கம் மற்றும் வாக்காளர் விழிப்புணர்வு",d:"அனைத்து தொகுதிகளிலும் விரிவாக்கவும். பொது ஒளிபரப்பு, சமூக வானொலி மற்றும் கிராம கூட்டங்கள் வழியாக வெகுஜன விழிப்புணர்வு. பல மொழி உதவி எண். அனைத்து அதிகாரிகளுக்கும் பயிற்சி."},
+      {ph:"கட்டம் 4 · மாதம் 31–36",h:"மாநில சட்டமன்ற தேர்தல் முழு நிறுவல்",d:"SecureVote மூலம் முழு மாநில தேர்தல். ECI கட்டாயத்தின்படி இணை இயற்பியல் காப்புப்பிரதியாக பாரம்பரிய EVM. நேரடி கண்காணிப்பு. 30 நாட்களில் சுதந்திர தணிக்கை அறிக்கை."}
+    ]},
+  fLogo:"🇮🇳 SecureVote India",
+  fTagline:'"ஒவ்வொரு வாக்கும் முக்கியம். ஒவ்வொரு குடிமகனும் வாக்களிக்கிறார்."',
+  fDesc:"கணிதத்தால் உறுதிப்படுத்தப்பட்ட ஜனநாயகம். இந்தியாவின் ஒவ்வொரு குடிமகனுக்கும் — தொழில்நுட்ப நிபுணர் இளைஞர் முதல் தொலைதூர கிராமத்தில் உள்ள முதியவர் வரை.",
+  fRef:"இந்திய மாநில தேர்தல் நவீனமயமாக்கல் விவாதத்திற்காக திட்டம் தயாரிக்கப்பட்டது · 2026<br>கட்டமைப்பு குறிப்புகள்: Helios Voting, Estonian i-Voting, Swiss Post e-Voting, Hyperledger Fabric, UIDAI Aadhaar API",
+  fCopy:"© 2026 பதிப்புரிமை பாதுகாக்கப்பட்டது — ராஜேஷ்குமார் லட்சுமணன் · வேலூர், தமிழ்நாடு, இந்தியா",
+  fEmail:"janaraj.android@gmail.com",
+  fSal:"🕉️ சத்யமேவ ஜயதே · வந்தே மாதரம் · வாழ்க இந்தியா 🇮🇳"
 },
 
 hi:{
- ticker:"🇮🇳  जय हिन्द  |  वाझ्क तमिलनाडु  |  हर वोट पवित्र है  |  लोकतंत्र भारत की सबसे बड़ी शक्ति  |  SecureVote TN  |  एक राष्ट्र · एक वोट · शून्य समझौता  |  सत्यमेव जयते  |  🇮🇳",
- viewsLabel:"पेज व्यू", liveLabel:"लाइव",
- eyebrow:"तमिलनाडु · राजेशकुमार लक्ष्मणन द्वारा चुनाव आधुनिकीकरण ब्लूप्रिंट",
- h1:"<span class='acc-s'>सुरक्षित</span><span class='acc-g'>वोट</span> TN<br>शून्य-समझौता<br>हाइब्रिड चुनाव प्रणाली",
- tagline:'"सत्यमेव जयते — सत्य की सदा जीत होती है"',
- heroSub:"एक संप्रभु, बहु-चैनल चुनाव वास्तुकला जो हर नागरिक की सेवा करती है — ऑनलाइन, ऑफलाइन, बुजुर्ग, या डिजिटल से वंचित — सैन्य-ग्रेड सुरक्षा और पूर्ण ऑडिटेबिलिटी के साथ। भारत के लिए बना।",
- motto:"वन्दे मातरम् · सत्यमेव जयते · वाझ्क तमिलनाडु",
- kpi:["मतदान<br>चैनल","सुरक्षा<br>परतें","विफलता का<br>कोई बिंदु नहीं","नागरिक<br>कवरेज"],
- q1:'"लोकतंत्र की शक्ति कुछ लोगों की शक्ति में नहीं, बल्कि हर एक नागरिक की आवाज में निहित है — स्वतंत्र रूप से डाली गई, ईमानदारी से गिनी गई, पूरी तरह से संरक्षित।"',
- q1c:"— SecureVote TN घोषणापत्र · 2026",
- pollTag:"नागरिक जनमत सर्वेक्षण — आपकी आवाज महत्वपूर्ण है",
- pollTitle:"क्या आप चुनाव आधुनिकीकरण का समर्थन करते हैं?",
- pollSub:"प्रत्येक विज़िटर एक बार मतदान करता है · वोट संचयी रूप से गिने जाते हैं",
- pollQ:'"क्या आप तमिलनाडु की चुनाव प्रक्रिया को सुरक्षित डिजिटल तकनीक से आधुनिक बनाने का समर्थन करते हैं?"',
- pollBtn:"मैं चुनाव आधुनिकीकरण का समर्थन करता/करती हूँ 🇮🇳",
- pollBtnSub:"हाँ · Haan · Yes",
- pollVotedPre:"🟠 आप उन",
- pollVotedPost:"नागरिकों में से एक हैं जो<br>चुनाव आधुनिकीकरण का समर्थन करते हैं! <b>जय हिन्द 🇮🇳</b>",
- pollCountLabel:"अब तक समर्थक",
- pollChange:"↺ वोट बदलें",
- exitTitle:"रुकिए! जाने से पहले",
- exitSub:"आपने अभी तक अपनी राय नहीं दी। क्या आप तमिलनाडु के लिए चुनाव आधुनिकीकरण का समर्थन करेंगे?",
- exitBtn:"हाँ, मैं समर्थन करता/करती हूँ! 🇮🇳",
- exitSkip:"बाद में",
- copyMsg:"🔒 सामग्री कॉपीराइट संरक्षित है। प्रतिलिपि अनुमति नहीं है।",
- copyLinkDone:"✓ लिंक कॉपी हो गया!",
- copyLinkLabel:"लिंक कॉपी करें",
- s01:{label:"01 — समस्या की परिभाषा",title:"छह मुख्य चुनौतियाँ",desc:"किसी भी चुनाव आधुनिकीकरण समाधान को एक साथ सभी छह को हल करना होगा — आंशिक समाधान नई कमजोरियाँ पैदा करते हैं।",
-  cards:[
-   {icon:"📵",h:"डिजिटल बहिष्करण",d:"TN की ~8 करोड़ आबादी में 20%+ (~1.6 करोड़+) नागरिकों के पास स्मार्टफोन या इंटरनेट नहीं है — मुख्यतः बुजुर्ग, ग्रामीण और कम आय वाले समूह।"},
-   {icon:"👴",h:"बुजुर्गों की पहुँच",d:"वृद्ध मतदाता अपरिचित तकनीक पर भरोसा नहीं करते और अपना मताधिकार प्रयोग करने के लिए परिचित, निर्देशित प्रक्रियाओं की आवश्यकता है।"},
-   {icon:"🔐",h:"साइबर सुरक्षा खतरे",d:"राष्ट्र-राज्य हमले, DDoS, मैन-इन-द-मिडल, SQL इंजेक्शन केंद्रीकृत डिजिटल मतदान को खतरे में डाल सकते हैं।"},
-   {icon:"👤",h:"पहचान धोखाधड़ी",d:"प्रतिरूपण, प्रॉक्सी मतदान, डुप्लिकेट वोट और बूथ कैप्चरिंग जिन्हें पूरी तरह खत्म किया जाना चाहिए।"},
-   {icon:"🕵️",h:"मत की गोपनीयता",d:"मतपत्र की गोपनीयता का संवैधानिक अधिकार गणितीय रूप से गारंटीकृत होना चाहिए — कोई भी प्राधिकरण वोट को मतदाता से नहीं जोड़ सकता।"},
-   {icon:"✅",h:"सार्वजनिक विश्वास और ऑडिट",d:"नागरिक, दल और न्यायालय बिना किसी व्यक्तिगत मतपत्र को उजागर किए हर परिणाम को स्वतंत्र रूप से सत्यापित कर सकें।"}
-  ]},
- s02:{label:"02 — समाधान वास्तुकला",title:"तीन मतदान चैनल, एक ब्लॉकचेन",desc:"सभी चैनल एक ही अनुमति प्राप्त, एयर-गैप्ड ब्लॉकचेन लेजर में फीड होते हैं। कोई भी चैनल श्रेष्ठ नहीं — हर वोट बराबर है।",
-  pillars:[
-   {badge:"चैनल A · डिजिटल",title:"SecureVote मोबाइल ऐप",target:"लक्ष्य: स्मार्टफोन उपयोगकर्ता (80%)",items:["आधार OTP + चेहरा जीवितता जाँच + फिंगरप्रिंट (3-कारक प्रमाणीकरण)","AES-256-GCM के साथ एंड-टू-एंड एन्क्रिप्टेड मतपत्र","ज़ीरो-नॉलेज प्रूफ — पहचान बताए बिना सत्यापित","केवल पंजीकृत निर्वाचन क्षेत्र के लिए जियो-फेंस्ड","नकली ऐप को रोकने के लिए सर्टिफिकेट पिनिंग","तमिल, अंग्रेजी और 5 क्षेत्रीय बोलियों में उपलब्ध","अनाम क्रिप्टोग्राफिक हैश के साथ मतदाता रसीद"]},
-   {badge:"चैनल B · कियोस्क",title:"स्मार्ट बूथ टर्मिनल (SBT)",target:"लक्ष्य: बुजुर्ग और स्मार्टफोन-रहित मतदाता",items:["हर बूथ पर मजबूत 15\" टचस्क्रीन कियोस्क","बड़े अक्षर, उच्च कंट्रास्ट, द्विभाषी तमिल/अंग्रेजी","तमिल में हर उम्मीदवार का नाम जोर से पढ़ने वाली आवाज","फिंगरप्रिंट स्कैनर + बेसिक फोन SMS के जरिए OTP","भौतिक पुष्टि बटन — बुजुर्ग मतदाताओं के लिए परिचित","मतदाता की पुष्टि के लिए अनाम VVPAT पर्ची प्रिंट","FIPS 140-3 द्वारा एन्क्रिप्टेड एयर-गैप्ड हार्डवेयर"]},
-   {badge:"चैनल C · सहायता",title:"मोबाइल मतदान इकाई (MVU)",target:"लक्ष्य: घर में बंद, विकलांग, दूरस्थ",items:["सरकारी प्रमाणित अधिकारी छेड़छाड़-रोधी टैबलेट मतदाता तक ले जाते हैं","दो स्वतंत्र अधिकारी अनिवार्य (अकेली पहुँच नहीं)","मतदाता का बायोमेट्रिक सीधे कैप्चर — अधिकारी ओवरराइड नहीं कर सकता","वोट निजी तौर पर डाला जाता है; अधिकारी केवल सबमिशन देखता है","GPS-लॉग्ड + वीडियो रिकॉर्डेड (बाहरी भाग)","1800-VOTE-TN टोल-फ्री हेल्पलाइन के जरिए पूर्व-अनुसूचित"]}
-  ]},
- s03:{label:"03 — सुरक्षा वास्तुकला",title:"7-परत गहन सुरक्षा",desc:"हर परत स्वतंत्र रूप से प्रमाणित और निगरानी की जाती है। एक परत का उल्लंघन दूसरे से समझौता नहीं करता।",
-  layers:[
-   {n:"L1",lt:"पहचान",h:"ट्रिपल-फैक्टर बायोमेट्रिक प्रमाणीकरण",d:"फिंगरप्रिंट + आईरिस/चेहरा जीवितता AI + OTP SMS — तीनों आधार UIDAI के विरुद्ध एक साथ जाँचे जाते हैं। किसी भी विफलता से सत्र अस्वीकृत।",tags:["Aadhaar UIDAI API","ISO/IEC 30107-3 Liveness","TOTP OTP"]},
-   {n:"L2",lt:"एन्क्रिप्शन",h:"होमोमॉर्फिक एन्क्रिप्शन + ज़ीरो-नॉलेज प्रूफ",d:"ElGamal होमोमॉर्फिक एन्क्रिप्शन व्यक्तिगत मतपत्रों को डिक्रिप्ट किए बिना वोट गिनता है। zk-SNARKs मतदाताओं को अपना विकल्प बताए बिना वोट गिने जाने का प्रमाण देते हैं।",tags:["ElGamal Homomorphic","zk-SNARKs","AES-256-GCM"]},
-   {n:"L3",lt:"लेजर",h:"अनुमति प्राप्त ब्लॉकचेन — Hyperledger Fabric",d:"TN ECI, NIC, तीन ऑडिटिंग पार्टियों, दो अंतर्राष्ट्रीय पर्यवेक्षकों में वितरित अपरिवर्तनीय लेनदेन। 51% हमले संरचनात्मक रूप से असंभव।",tags:["Hyperledger Fabric 2.x","BFT Consensus","Distributed Nodes"]},
-   {n:"L4",lt:"नेटवर्क",h:"संप्रभु नेटवर्क बुनियादी ढाँचा",d:"NIC समर्पित लीज्ड-लाइन, पूरी तरह से सार्वजनिक इंटरनेट से अलग। Anycast DDoS शमन (100Tbps), WAF, दर सीमित करना, विदेशी IP अवरोधन।",tags:["NIC Dedicated Line","Anycast DDoS Shield","Zero-Trust Network"]},
-   {n:"L5",lt:"हार्डवेयर",h:"हार्डवेयर सुरक्षा मॉड्यूल (HSM) + TPM 2.0",d:"सभी क्रिप्टोग्राफिक कुंजियाँ FIPS 140-3 स्तर 3 प्रमाणित HSMs में — कभी भी प्लेनटेक्स्ट में निर्यात नहीं की जातीं। TPM 2.0 हर कियोस्क पर बूट अखंडता प्रमाणित करता है।",tags:["FIPS 140-3 Level 3 HSM","TPM 2.0","Secure Boot"]},
-   {n:"L6",lt:"ऑडिट",h:"बहु-पक्षीय सीमा डिक्रिप्शन + सार्वजनिक ऑडिट",d:"गिनती के लिए 5-में-7 सीमा डिक्रिप्शन आवश्यक। मतदान के बाद, पूरा अनाम एन्क्रिप्टेड लेजर सार्वजनिक रूप से प्रकाशित होता है।",tags:["Shamir Secret Sharing","5-of-7 Threshold","Public Bulletin Board"]},
-   {n:"L7",lt:"रोलबैक",h:"एयर-गैप्ड भौतिक बैकअप + VVPAT",d:"हर डिजिटल वोट एक साथ VVPAT पर्ची बनाता है — एक छेड़छाड़-रोधी बक्से में भौतिक रूप से सील। किसी भी आपात स्थिति में कागज पर्चियाँ प्रामाणिक फॉलबैक हैं।",tags:["VVPAT Physical Backup","Air-Gapped Mirrors","ECI Fallback Protocol"]}
-  ]},
- s04:{label:"04 — मतदाता यात्रा",title:"एक नागरिक कैसे वोट करता है — कदम-दर-कदम",desc:"तमिलनाडु के एक गाँव में 70 वर्षीय पहली बार डिजिटल मतदाता के लिए स्वतंत्र रूप से पूरा करने के लिए डिज़ाइन किया गया।",
-  steps:[
-   {n:"01",h:"पूर्व-पंजीकरण सत्यापन (48 घंटे पहले)",d:"मतदाता को तमिल में SMS मिलता है। IVRS कॉल के जरिए नाम और बूथ सत्यापित करें। पूर्व-जाँच दिन की त्रुटियाँ समाप्त करती है।",chips:["cu:SMS + IVRS","ct:टोकन जारी करना","cs:क्षेत्र लॉक"]},
-   {n:"02",h:"प्रमाणीकरण (3-कारक — 90 सेकंड)",d:"फिंगरप्रिंट → चेहरा जीवितता → OTP। आधार UIDAI और मतदाता सूची के विरुद्ध एक साथ जाँचा जाता है। डुप्लिकेट प्रयास मिलीसेकंड में अवरुद्ध।",chips:["cs:बायोमेट्रिक","cs:लाइवनेस AI","cs:UIDAI जाँच","ct:डुप्लिकेट लॉक"]},
-   {n:"03",h:"मतपत्र प्रदर्शन (सुलभ, निजी, स्पष्ट)",d:"फोटो, नाम (तमिल + अंग्रेजी), पार्टी प्रतीक के साथ उम्मीदवार सूची। आवाज हर विकल्प जोर से पढ़ती है। बड़े बटन, उच्च कंट्रास्ट।",chips:["cu:तमिल में आवाज","cu:बड़ा UI","cu:पार्टी प्रतीक","cs:गोपनीयता स्क्रीन"]},
-   {n:"04",h:"वोट सबमिशन और होमोमॉर्फिक एन्क्रिप्शन",d:"मतदाता दो बार पुष्टि करता है। वोट ट्रांसमिशन से पहले क्लाइंट-साइड एन्क्रिप्ट होता है — सर्वर कभी प्लेनटेक्स्ट वोट नहीं देखता। SMS रसीद तुरंत मिलती है।",chips:["cs:क्लाइंट एन्क्रिप्शन","ct:ZK प्रूफ","cu:SMS रसीद"]},
-   {n:"05",h:"ब्लॉकचेन कमिट + VVPAT प्रिंट",d:"एन्क्रिप्टेड वोट Hyperledger Fabric पर लिखा जाता है (3 सेकंड में नोड्स में पुष्टि)। कियोस्क VVPAT पर्ची प्रिंट करता है। मतदाता काँच से देखकर पुष्टि करता है।",chips:["ct:ब्लॉकचेन कमिट","cs:VVPAT पेपर ट्रेल","cu:दृश्य पुष्टि"]},
-   {n:"06",h:"मतदाता सत्यापन (मतदान के बाद कभी भी)",d:"सार्वजनिक बुलेटिन बोर्ड पर अनाम रसीद हैश से अपना वोट सत्यापित करें — बिना पहचान बताए। कोई विसंगति ECI को स्वचालित अलर्ट भेजती है।",chips:["cs:ZK प्रूफ जाँच","ct:सार्वजनिक बोर्ड","cu:अनाम रसीद"]}
-  ]},
- s05:{label:"05 — ऑफलाइन नागरिक समाधान",title:"20%+ गैर-डिजिटल आबादी",desc:"कोई भी नागरिक पीछे नहीं छूटेगा। स्मार्टफोन के बिना ~1.6 करोड़ लोगों के लिए तीन समर्पित तंत्र।",
-  notice:"<strong>मूल सिद्धांत:</strong> हर ऑफलाइन चैनल उसी ब्लॉकचेन में एक समान एन्क्रिप्टेड वोट बनाता है — वोट में कोई 'द्वितीय श्रेणी' नहीं। ऑफलाइन वोट समान वजन, समान सुरक्षा, समान सम्मान पाते हैं।",
-  cards:[
-   {h:"🏪 पड़ोस CSC कियोस्क",d:"TN भर में 7,400+ सामान्य सेवा केंद्र SecureVote टर्मिनल के रूप में। केवल आधार नंबर + फिंगरप्रिंट आवश्यक।",items:["ग्रामीण क्षेत्रों में 300 मतदाता त्रिज्या में 1 CSC","द्विभाषी तमिल/अंग्रेजी आवाज-सहायता इंटरफेस","बुजुर्ग प्राथमिकता कतार (60+ आयु फास्ट-ट्रैक)","बूथ अधिकारी वोट नहीं देख या प्रभावित कर सकता"]},
-   {h:"☎️ IVRS टेलीफोन मतदान",d:"केवल फीचर फोन वाले मतदाताओं के लिए सुरक्षित IVR मतदान। पूर्व-पंजीकृत बुजुर्ग (70+) और विकलांग मतदाताओं के लिए।",items:["टोल-फ्री 1800-VOTE-TN पर कॉल करें","आधार + जन्म तिथि से सत्यापन","तमिल में सभी उम्मीदवार पढ़े जाते हैं","कीपैड चयन + PIN पुष्टि"]},
-   {h:"🚐 मोबाइल मतदान इकाई (MVU)",d:"राज्य वाहन दूरस्थ गाँवों और बिस्तर पर पड़े मतदाताओं के घर जाते हैं।",items:["चुनाव से 48 घंटे पहले पूर्व-अनुसूचित","दो अधिकारी अनिवार्य — एक विपक्ष-नामित","GPS ट्रैक्ड + वीडियो रिकॉर्डेड (बाहरी)","किसी भी बूथ वोट जैसा ब्लॉकचेन सबमिशन"]},
-   {h:"📋 भौतिक मतपत्र फॉलबैक",d:"न्यायालय-आदेशित या बुनियादी ढाँचा विफलता बैकस्टॉप। बहु-पक्षीय पर्यवेक्षण के तहत आपातकालीन बूथों पर पारंपरिक कागजी मतपत्र।",items:["केवल ECI आपातकालीन आदेश से सक्रिय","UV-अदृश्य फोरेंसिक स्याही क्रमांकन","बहु-पक्षीय सील + काउंटर-हस्ताक्षर","ब्लॉकचेन परिणाम के विरुद्ध सत्यापित"]}
-  ]},
- s06:{label:"06 — सार्वजनिक विश्वास तंत्र",title:"नागरिक कैसे जानते हैं कि परिणाम ईमानदार है",desc:"विश्वास गणितीय रूप से साबित होना चाहिए — अधिकारियों के वादों पर नहीं।",
-  boxes:[
-   {dark:true,h:"🔑 ज़ीरो-नॉलेज प्रूफ",d:"कोई भी मतदाता बताए बिना साबित कर सकता है कि उसका वोट गिना गया। कोई भी गणितज्ञ पूरे लेजर को सत्यापित कर सकता है — सरकारी पहुँच की आवश्यकता नहीं।"},
-   {dark:false,h:"🌐 ओपन-सोर्स कोड",d:"चुनाव से 6 महीने पहले GitHub पर ओपन-सोर्स लाइसेंस के तहत पूरा सॉफ्टवेयर स्टैक प्रकाशित। कोई भी तकनीशियन बैकडोर, बग या पूर्वाग्रह के लिए जाँच कर सकता है।"},
-   {dark:false,h:"🏛️ बहु-पक्षीय पर्यवेक्षक नोड्स",d:"हर प्रमुख राजनीतिक दल एक स्वतंत्र ब्लॉकचेन नोड चलाता है। जब तक सभी नोड सहमत न हों, कोई परिणाम घोषित नहीं। कोई भी दल वास्तविक समय में विसंगति को चुनौती दे सकता है।"},
-   {dark:false,h:"🔢 हैश प्रकाशन",d:"मतदान बंद होने पर TN ECI वेबसाइट, दूरदर्शन और ऑल इंडिया रेडियो पर पूरा ब्लॉकचेन हैश प्रकाशित — गिनती शुरू होने से पहले, पोस्ट-हॉक छेड़छाड़ रोकता है।"},
-   {dark:false,h:"🎲 यादृच्छिक VVPAT ऑडिट",d:"5% निर्वाचन क्षेत्र पूर्ण VVPAT पेपर पुनर्गणना के लिए सार्वजनिक रूप से सत्यापन योग्य क्रिप्टोग्राफिक लॉटरी से चुने जाते हैं। डिजिटल टैली से 0.01% के भीतर मेल खाना चाहिए।"},
-   {dark:true,h:"⚖️ सर्वोच्च न्यायालय निगरानी नोड",d:"भारत के सर्वोच्च न्यायालय में एक स्वतंत्र, एयर-गैप्ड नोड ब्लॉकचेन का रीड-ओनली मिरर रखता है — मास्टर लेजर को बदले बिना न्यायिक समीक्षा के लिए तैयार।"}
-  ]},
- q2:'"लोकतंत्र में, मतपत्र गोली से अधिक शक्तिशाली है। आइए सुनिश्चित करें कि हर मतपत्र पवित्र, सुरक्षित और गिना हुआ हो।"',
- q2c:"— भारतीय संविधान की भावना से प्रेरित",
- s07:{label:"07 — तुलना",title:"SecureVote TN की तुलना कैसे होती है",desc:"महत्वपूर्ण आयामों में मौजूदा चुनाव तरीकों के विरुद्ध।",
-  heads:["मानदंड","पारंपरिक EVM","केवल-इंटरनेट मतदान","SecureVote TN (हाइब्रिड)"],
-  rows:[
-   ["स्मार्टफोन-रहित उपयोगकर्ताओं को कवर करता है","हाँ (बूथ मात्र)#yes","नहीं#no","हाँ (3 चैनल)#yes"],
-   ["बुजुर्ग-अनुकूल","आंशिक#par","नहीं#no","हाँ (आवाज + बड़ा UI)#yes"],
-   ["मतदाता अपना वोट सत्यापित कर सकता है","नहीं#no","आंशिक#par","हाँ (ZK प्रूफ)#yes"],
-   ["छेड़छाड़-रोधी लेजर","आंशिक#par","आंशिक#par","हाँ (ब्लॉकचेन)#yes"],
-   ["DDoS/साइबर लचीलापन","हाँ (एयर-गैप्ड)#yes","नहीं#no","हाँ (बहु-परत)#yes"],
-   ["स्वतंत्र सार्वजनिक ऑडिट","नहीं#no","सीमित#par","हाँ (खुला लेजर)#yes"],
-   ["दूरस्थ/घर-बंद मतदान","नहीं#no","आंशिक#par","हाँ (MVU)#yes"],
-   ["पेपर बैकअप (VVPAT)","हाँ#yes","नहीं#no","हाँ (सभी चैनल)#yes"],
-   ["बहु-पक्षीय निगरानी","आंशिक#par","नहीं#no","हाँ (सभी नोड्स)#yes"],
-   ["क्वांटम-प्रतिरोधी (रोडमैप)","आंशिक#par","नहीं#no","हाँ (NIST PQC)#yes"]
-  ]},
- s08:{label:"08 — रोलआउट योजना",title:"36-महीने कार्यान्वयन रोडमैप",desc:"किसी भी राज्य-स्तर तैनाती से पहले अनिवार्य पायलट के साथ चरणबद्ध रोलआउट।",
-  items:[
-   {ph:"चरण 0 · महीना 1–6",h:"कानून, शासन और ओपन-सोर्स ऑडिट",d:"TN इलेक्ट्रॉनिक चुनाव अधिनियम का मसौदा। तकनीकी सुरक्षा बोर्ड नियुक्त करें (IIT-M, C-DAC, CERT-IN, ECI)। ओपन-सोर्स कोड प्रकाशित करें। अंतर्राष्ट्रीय सुरक्षा ऑडिट शुरू।"},
-   {ph:"चरण 1 · महीना 7–12",h:"बुनियादी ढाँचा खरीद और CSC कियोस्क तैनाती",d:"HSMs, कियोस्क, MVU वाहन खरीदें। सभी 7,400+ CSC में तैनात करें। फाइबर/सैटेलाइट अपलिंक हर जगह सत्यापित। VVPAT प्रिंटर स्थापित और परीक्षण।"},
-   {ph:"चरण 2 · महीना 13–18",h:"नगर निगम चुनाव पायलट — 3 जिले",d:"कोयंबटूर, मदुरई और वेल्लोर में SecureVote TN चुनाव। पूरा चुनाव-पश्चात ऑडिट प्रकाशित। मतदाता फीडबैक सर्वेक्षण। रेड टीम डीब्रीफ। सुधार लागू।"},
-   {ph:"चरण 3 · महीना 19–30",h:"राज्य-व्यापी विस्तार और मतदाता शिक्षा अभियान",d:"सभी 234 निर्वाचन क्षेत्रों में विस्तार। दूरदर्शन, Sun TV, सामुदायिक रेडियो से जन जागरूकता। समर्पित तमिल हेल्पलाइन। सभी बूथ अधिकारियों और CSC ऑपरेटरों का प्रशिक्षण।"},
-   {ph:"चरण 4 · महीना 31–36",h:"राज्य विधानसभा चुनाव पूर्ण तैनाती",d:"SecureVote TN पर पूर्ण राज्य चुनाव। ECI आदेश के तहत पारंपरिक EVM समानांतर बैकस्टॉप। ECI, दलों और मीडिया के लिए रियल-टाइम मॉनिटरिंग। 30 दिनों में स्वतंत्र ऑडिट रिपोर्ट।"}
-  ]},
- fLogo:"🇮🇳 SecureVote TN",
- fTagline:'"हर वोट मायने रखता है। हर नागरिक वोट करता है। कोई वोट चुराया नहीं जा सकता।"',
- fDesc:"गणित द्वारा गारंटीकृत लोकतंत्र। तमिलनाडु के हर नागरिक के लिए डिज़ाइन किया गया — तकनीक-प्रेमी युवा से लेकर दूरस्थ गाँव के 80 वर्षीय किसान तक।",
- fRef:"तमिलनाडु राज्य चुनाव आधुनिकीकरण चर्चा के लिए ब्लूप्रिंट तैयार · 2026",
- fCopy:"© 2026 कॉपीराइट संरक्षित — राजेशकुमार लक्ष्मणन · वेल्लोर, तमिलनाडु",
- fEmail:"janaraj.android@gmail.com",
- fSal:"🕉️ सत्यमेव जयते · वाझ्क तमिलनाडु · जय हिन्द 🇮🇳"
+  ticker:"🇮🇳  जय हिन्द  |  हर वोट पवित्र है  |  लोकतंत्र भारत की सबसे बड़ी शक्ति  |  SecureVote India  |  एक राष्ट्र · एक मत · शून्य समझौता  |  सत्यमेव जयते  |  🇮🇳",
+  navSal:"वन्दे मातरम् 🇮🇳",
+  navLogo:"🇮🇳 SecureVote India",
+  viewsLbl:"वैश्विक दर्शन",
+  navItems:[
+    {id:"hero",l:"मुख्य"},{id:"poll",l:"मतसर्वेक्षण"},{id:"sec01",l:"चुनौतियाँ"},{id:"sec02",l:"समाधान"},
+    {id:"sec03",l:"सुरक्षा"},{id:"sec04",l:"मतदाता यात्रा"},{id:"sec05",l:"ऑफलाइन"},
+    {id:"sec06",l:"विश्वास"},{id:"sec07",l:"तुलना"},{id:"sec08",l:"रोडमैप"}
+  ],
+  eyebrow:"राजेशकुमार लक्ष्मणन द्वारा चुनाव आधुनिकीकरण परियोजना",
+  h1:"<span class='acc-s'>सुरक्षित</span><span class='acc-g'>मत</span> India<br>शून्य-समझौता<br>हाइब्रिड चुनाव प्रणाली",
+  tagline:'"सत्यमेव जयते — सत्य की सदा विजय होती है"',
+  heroSub:"भारत के हर नागरिक की सेवा करने वाली संप्रभु, बहु-चैनल चुनाव वास्तुकला — ऑनलाइन, ऑफलाइन, बुजुर्ग, या डिजिटल से वंचित — सैन्य-स्तरीय सुरक्षा और पूर्ण पारदर्शिता के साथ।",
+  motto:"वन्दे मातरम् · सत्यमेव जयते · जय हिन्द",
+  kpi:["मतदान<br>चैनल","सुरक्षा<br>परतें","विफलता<br>का कोई बिंदु नहीं","नागरिक<br>कवरेज"],
+  q1:'"लोकतंत्र की शक्ति कुछ लोगों की ताकत में नहीं, बल्कि हर एक नागरिक की आवाज़ में है — स्वतंत्र रूप से डाली गई, ईमानदारी से गिनी गई, पूरी तरह संरक्षित।"',
+  q1c:"— SecureVote India घोषणापत्र · 2026",
+  pollTag:"नागरिक मतसर्वेक्षण — आपकी आवाज़ महत्वपूर्ण है",
+  pollTitle:"सुरक्षित चुनाव आधुनिकीकरण का समर्थन करें?",
+  pollSub:"एक व्यक्ति एक मत · ईमेल द्वारा सत्यापित · वैश्विक गणना लाइव अपडेट",
+  pollQ:'"क्या आप भारत की राज्य चुनाव प्रक्रिया को सुरक्षित, पारदर्शी डिजिटल तकनीक से आधुनिक बनाने का समर्थन करते हैं?"',
+  pollBtnTxt:"मैं चुनाव आधुनिकीकरण का समर्थन करता/करती हूँ",
+  pollBtnSub:"अपना समर्थन दर्ज करने के लिए क्लिक करें",
+  votedBadge:"✅ आपका मत दर्ज हो गया",
+  votedPre:"आप उन",
+  votedPost:"नागरिकों में से एक हैं जो<br>भारत के लिए सुरक्षित चुनाव आधुनिकीकरण का समर्थन करते हैं।",
+  pollCountLbl:"कुल समर्थक",
+  pollChange:"↺ मत बदलें",
+  emTitle:"अपना समर्थन दर्ज करें",
+  emSub:"अपना मत डालने के लिए ईमेल पता दर्ज करें। यह डुप्लिकेट मतों को रोकता है।",
+  emPlaceholder:"आपका@ईमेल.com",
+  emBtn:"मेरा समर्थन दर्ज करें 🇮🇳",
+  emCancel:"रद्द करें",
+  emPrivacy:"आपका ईमेल केवल आपके डिवाइस पर संग्रहीत है। यह किसी सर्वर पर नहीं भेजा जाता।",
+  emErrInvalid:"कृपया एक वैध ईमेल पता दर्ज करें।",
+  emErrDuplicate:"यह ईमेल पहले ही दर्ज किया जा चुका है। प्रत्येक व्यक्ति केवल एक बार मत दे सकता है।",
+  emErrEmpty:"कृपया अपना ईमेल पता दर्ज करें।",
+  exitTitle:"रुकिए! जाने से पहले",
+  exitSub:"आपने अभी तक अपना मत नहीं दिया। क्या आप भारत के लिए सुरक्षित चुनाव आधुनिकीकरण का समर्थन करेंगे?",
+  exitBtn:"हाँ, मैं समर्थन करता/करती हूँ! 🇮🇳",
+  exitSkip:"बाद में",
+  copyMsg:"🔒 सामग्री कॉपीराइट संरक्षित है। प्रतिलिपि की अनुमति नहीं है।",
+  copyDone:"✓ लिंक कॉपी हो गया!",
+  copyLbl:"लिंक कॉपी करें",
+  s01:{label:"01 — समस्या की परिभाषा",title:"छह मुख्य चुनौतियाँ",desc:"किसी भी चुनाव आधुनिकीकरण समाधान को एक साथ सभी छह को हल करना होगा।",
+    cards:[
+      {i:"📵",h:"डिजिटल बहिष्करण",d:"भारत की 20% से अधिक आबादी के पास स्मार्टफोन या इंटरनेट नहीं है — मुख्यतः बुजुर्ग, ग्रामीण और कम आय वाले नागरिक।"},
+      {i:"👴",h:"बुजुर्गों की पहुँच",d:"वृद्ध मतदाता अपरिचित तकनीक पर भरोसा नहीं करते और अपना मताधिकार प्रयोग करने के लिए परिचित, निर्देशित प्रक्रियाओं की आवश्यकता होती है।"},
+      {i:"🔐",h:"साइबर सुरक्षा खतरे",d:"राष्ट्र-राज्य हमले, DDoS, मैन-इन-द-मिडल और आंतरिक खतरे केंद्रीकृत डिजिटल मतदान को खतरे में डाल सकते हैं।"},
+      {i:"👤",h:"पहचान धोखाधड़ी",d:"प्रतिरूपण, प्रॉक्सी मतदान, डुप्लिकेट मत और बूथ कैप्चरिंग — इन सभी को पूरी तरह समाप्त किया जाना चाहिए।"},
+      {i:"🕵️",h:"मत की गोपनीयता",d:"मतपत्र की गोपनीयता का संवैधानिक अधिकार गणितीय रूप से गारंटीकृत होना चाहिए — कोई भी प्राधिकरण मत को मतदाता से नहीं जोड़ सकता।"},
+      {i:"✅",h:"सार्वजनिक विश्वास और ऑडिट",d:"नागरिक, दल और न्यायालय बिना किसी व्यक्तिगत मतपत्र को उजागर किए हर परिणाम को स्वतंत्र रूप से सत्यापित कर सकें।"}
+    ]},
+  s02:{label:"02 — समाधान वास्तुकला",title:"तीन मतदान चैनल, एक ब्लॉकचेन",desc:"सभी चैनल एक ही अनुमति प्राप्त ब्लॉकचेन लेजर में फीड होते हैं। हर मत बराबर है।",
+    pillars:[
+      {b:"चैनल अ · डिजिटल",t:"SecureVote मोबाइल ऐप",target:"लक्ष्य: स्मार्टफोन उपयोगकर्ता (80%)",items:["आधार OTP + चेहरा जीवितता + फिंगरप्रिंट (3-कारक)","AES-256-GCM एंड-टू-एंड एन्क्रिप्शन","ज़ीरो-नॉलेज प्रूफ — पहचान बताए बिना सत्यापित","पंजीकृत क्षेत्र के लिए जियो-फेंस्ड","कई क्षेत्रीय भाषाओं में उपलब्ध","SMS द्वारा अनाम क्रिप्टोग्राफिक रसीद"]},
+      {b:"चैनल ब · कियोस्क",t:"स्मार्ट बूथ टर्मिनल (SBT)",target:"लक्ष्य: बुजुर्ग और गैर-स्मार्टफोन मतदाता",items:["हर बूथ पर मजबूत 15\" टचस्क्रीन कियोस्क","बड़े अक्षर, उच्च कंट्रास्ट, द्विभाषी इंटरफेस","हर उम्मीदवार का नाम स्थानीय भाषा में जोर से पढ़ता है","फिंगरप्रिंट + बेसिक फोन SMS OTP","भौतिक पुष्टि बटन — बुजुर्गों के लिए परिचित","FIPS 140-3 एन्क्रिप्टेड हार्डवेयर"]},
+      {b:"चैनल स · सहायता",t:"मोबाइल मतदान इकाई (MVU)",target:"लक्ष्य: घर में बंद, विकलांग, दूरस्थ मतदाता",items:["अधिकारी टैबलेट मतदाता के घर तक ले जाते हैं","दो स्वतंत्र अधिकारी अनिवार्य","बायोमेट्रिक सीधे कैप्चर — अधिकारी ओवरराइड नहीं कर सकता","GPS ट्रैक्ड + वीडियो रिकॉर्डेड","1800-VOTE-IN टोल-फ्री पर पूर्व-अनुसूचित"]}
+    ]},
+  s03:{label:"03 — सुरक्षा वास्तुकला",title:"7-परत गहन सुरक्षा",desc:"हर परत स्वतंत्र रूप से प्रमाणित। एक परत का उल्लंघन दूसरे को प्रभावित नहीं करता।",
+    layers:[
+      {n:"L1",lt:"पहचान",h:"ट्रिपल-फैक्टर बायोमेट्रिक प्रमाणीकरण",d:"फिंगरप्रिंट + चेहरा जीवितता AI + OTP SMS — तीनों आधार UIDAI के विरुद्ध एक साथ जाँचे जाते हैं। कोई भी विफलता पूरे सत्र को अस्वीकार करती है।",tags:["Aadhaar UIDAI API","ISO/IEC 30107-3","TOTP OTP"]},
+      {n:"L2",lt:"एन्क्रिप्शन",h:"होमोमॉर्फिक एन्क्रिप्शन + ज़ीरो-नॉलेज प्रूफ",d:"ElGamal होमोमॉर्फिक एन्क्रिप्शन व्यक्तिगत मतपत्रों को डिक्रिप्ट किए बिना मत गिनता है। zk-SNARKs मतदाताओं को अपना विकल्प बताए बिना प्रमाण देने देते हैं।",tags:["ElGamal Homomorphic","zk-SNARKs","AES-256-GCM"]},
+      {n:"L3",lt:"लेजर",h:"अनुमति प्राप्त ब्लॉकचेन — Hyperledger Fabric",d:"राज्य चुनाव आयोग, NIC, तीन ऑडिटिंग पार्टियों और दो अंतर्राष्ट्रीय पर्यवेक्षकों में वितरित अपरिवर्तनीय लेनदेन। 51% हमले संरचनात्मक रूप से असंभव।",tags:["Hyperledger Fabric 2.x","BFT Consensus","Distributed Nodes"]},
+      {n:"L4",lt:"नेटवर्क",h:"संप्रभु नेटवर्क बुनियादी ढाँचा",d:"NIC समर्पित लीज्ड-लाइन, सार्वजनिक इंटरनेट से पूरी तरह अलग। Anycast DDoS शमन (100Tbps), WAF, विदेशी IP अवरोधन।",tags:["NIC Dedicated Line","Anycast DDoS Shield","Zero-Trust Network"]},
+      {n:"L5",lt:"हार्डवेयर",h:"हार्डवेयर सुरक्षा मॉड्यूल + TPM 2.0",d:"सभी क्रिप्टोग्राफिक कुंजियाँ FIPS 140-3 स्तर 3 HSMs में — कभी प्लेनटेक्स्ट में निर्यात नहीं। TPM 2.0 हर कियोस्क पर बूट अखंडता प्रमाणित करता है।",tags:["FIPS 140-3 Level 3","TPM 2.0","Secure Boot"]},
+      {n:"L6",lt:"ऑडिट",h:"बहु-पक्षीय सीमा डिक्रिप्शन + सार्वजनिक ऑडिट",d:"गिनती के लिए 5-में-7 सीमा डिक्रिप्शन आवश्यक। मतदान के बाद पूरा अनाम एन्क्रिप्टेड लेजर सार्वजनिक रूप से प्रकाशित होता है।",tags:["Shamir Secret Sharing","5-of-7 Threshold","Public Bulletin Board"]},
+      {n:"L7",lt:"रोलबैक",h:"एयर-गैप्ड भौतिक बैकअप + VVPAT",d:"हर डिजिटल मत एक साथ VVPAT पर्ची बनाता है — छेड़छाड़-रोधी बक्से में सील। किसी भी आपात स्थिति में कागज पर्चियाँ प्रामाणिक आधार हैं।",tags:["VVPAT Paper Trail","Air-Gapped Mirrors","ECI Fallback Protocol"]}
+    ]},
+  s04:{label:"04 — मतदाता यात्रा",title:"एक नागरिक कैसे मत देता है — कदम-दर-कदम",desc:"किसी दूरस्थ गाँव में 70 वर्षीय पहली बार डिजिटल मतदाता के लिए स्वतंत्र रूप से पूरा करने हेतु डिज़ाइन किया गया।",
+    steps:[
+      {n:"01",h:"पूर्व-पंजीकरण सत्यापन (48 घंटे पहले)",d:"मतदाता को SMS से Voter Token मिलता है। IVRS कॉल से नाम और बूथ सत्यापित करें — स्मार्टफोन आवश्यक नहीं।",chips:["cu:SMS + IVRS","ct:टोकन जारी","cs:क्षेत्र लॉक"]},
+      {n:"02",h:"प्रमाणीकरण (3-कारक — 90 सेकंड)",d:"फिंगरप्रिंट → चेहरा जीवितता → OTP — आधार UIDAI और मतदाता सूची से एक साथ जाँचा जाता है।",chips:["cs:बायोमेट्रिक","cs:लाइवनेस AI","cs:UIDAI जाँच","ct:डुप्लिकेट लॉक"]},
+      {n:"03",h:"मतपत्र प्रदर्शन (सुलभ, निजी, स्पष्ट)",d:"फोटो, नाम, पार्टी प्रतीक के साथ उम्मीदवार सूची। आवाज़ हर विकल्प स्थानीय भाषा में जोर से पढ़ती है।",chips:["cu:आवाज़ गाइड","cu:बड़ा UI","cu:पार्टी प्रतीक","cs:गोपनीयता स्क्रीन"]},
+      {n:"04",h:"मत सबमिशन और एन्क्रिप्शन",d:"मतदाता दो बार पुष्टि करता है। मत क्लाइंट-साइड एन्क्रिप्ट होता है — सर्वर कभी प्लेनटेक्स्ट मत नहीं देखता। SMS रसीद तुरंत मिलती है।",chips:["cs:क्लाइंट एन्क्रिप्शन","ct:ZK प्रूफ","cu:SMS रसीद"]},
+      {n:"05",h:"ब्लॉकचेन कमिट + VVPAT प्रिंट",d:"एन्क्रिप्टेड मत 3 सेकंड में नोड्स में पुष्टि। कियोस्क VVPAT पर्ची प्रिंट करता है। मतदाता काँच से देखकर पुष्टि करता है।",chips:["ct:ब्लॉकचेन कमिट","cs:VVPAT प्रिंट","cu:दृश्य पुष्टि"]},
+      {n:"06",h:"मतदाता सत्यापन (मतदान के बाद कभी भी)",d:"सार्वजनिक बुलेटिन बोर्ड पर अनाम रसीद हैश से अपना मत सत्यापित करें — बिना पहचान बताए।",chips:["cs:ZK प्रूफ जाँच","ct:सार्वजनिक बोर्ड","cu:अनाम रसीद"]}
+    ]},
+  s05:{label:"05 — ऑफलाइन नागरिक समाधान",title:"गैर-डिजिटल आबादी",desc:"कोई भी नागरिक पीछे नहीं छूटेगा। स्मार्टफोन के बिना करोड़ों लोगों के लिए समर्पित तंत्र।",
+    notice:"<strong>मूल सिद्धांत:</strong> हर ऑफलाइन चैनल उसी ब्लॉकचेन में समान एन्क्रिप्टेड मत बनाता है — कोई 'द्वितीय श्रेणी' का मत नहीं। ऑफलाइन मत समान भार, समान सुरक्षा और समान सम्मान पाते हैं।",
+    cards:[
+      {h:"🏪 सामान्य सेवा केंद्र कियोस्क",d:"राज्यभर में CSC SecureVote टर्मिनल के रूप में। केवल आधार नंबर + फिंगरप्रिंट आवश्यक।",items:["ग्रामीण क्षेत्रों में 300 मतदाता त्रिज्या में एक CSC","द्विभाषी आवाज़-सहायता इंटरफेस","60+ आयु के लिए प्राथमिकता कतार","बूथ अधिकारी मत नहीं देख या प्रभावित कर सकता"]},
+      {h:"☎️ IVRS टेलीफोन मतदान",d:"केवल फीचर फोन वाले मतदाताओं के लिए। पूर्व-पंजीकृत बुजुर्ग (70+) और विकलांग के लिए उपलब्ध।",items:["टोल-फ्री 1800-VOTE-IN पर कॉल करें","आधार + जन्म तिथि से सत्यापन","स्थानीय भाषा में उम्मीदवार पढ़े जाते हैं","कीपैड चयन + PIN पुष्टि"]},
+      {h:"🚐 मोबाइल मतदान इकाई (MVU)",d:"राज्य वाहन दूरस्थ गाँवों और बिस्तर पर पड़े मतदाताओं के घर जाते हैं।",items:["चुनाव से 48 घंटे पहले पूर्व-अनुसूचित","दो अधिकारी अनिवार्य — एक विपक्ष-नामित","GPS ट्रैक्ड + बाहरी वीडियो","किसी भी बूथ मत जैसा ब्लॉकचेन सबमिशन"]},
+      {h:"📋 भौतिक मतपत्र फॉलबैक",d:"न्यायालय आदेश या बुनियादी ढाँचा विफलता पर आपातकालीन बूथों पर कागजी मत।",items:["केवल चुनाव आयोग के आपातकालीन आदेश से","UV-अदृश्य फोरेंसिक स्याही क्रमांकन","बहु-पक्षीय सील और काउंटर-हस्ताक्षर","ब्लॉकचेन परिणाम के विरुद्ध सत्यापित"]}
+    ]},
+  s06:{label:"06 — सार्वजनिक विश्वास तंत्र",title:"नागरिक कैसे जानते हैं कि परिणाम ईमानदार है",desc:"विश्वास गणितीय रूप से साबित होना चाहिए — किसी भी प्राधिकरण के वादों पर नहीं।",
+    boxes:[
+      {dk:true,h:"🔑 ज़ीरो-नॉलेज प्रूफ",d:"कोई भी मतदाता बताए बिना साबित कर सकता है कि उसका मत गिना गया। कोई भी गणितज्ञ पूरे लेजर को सार्वजनिक रूप से सत्यापित कर सकता है।"},
+      {dk:false,h:"🌐 ओपन-सोर्स कोड",d:"चुनाव से 6 महीने पहले ओपन-सोर्स लाइसेंस पर पूरा सॉफ्टवेयर स्टैक प्रकाशित। कोई भी तकनीशियन बैकडोर या बग के लिए जाँच सकता है।"},
+      {dk:false,h:"🏛️ बहु-पक्षीय पर्यवेक्षक नोड्स",d:"हर प्रमुख राजनीतिक दल एक स्वतंत्र ब्लॉकचेन नोड चलाता है। जब तक सभी नोड सहमत न हों, कोई परिणाम घोषित नहीं।"},
+      {dk:false,h:"🔢 हैश प्रकाशन",d:"मतदान बंद होने पर चुनाव आयोग की वेबसाइट और सार्वजनिक प्रसारण पर पूरा ब्लॉकचेन हैश प्रकाशित — गिनती शुरू होने से पहले।"},
+      {dk:false,h:"🎲 यादृच्छिक VVPAT ऑडिट",d:"5% निर्वाचन क्षेत्र सार्वजनिक रूप से सत्यापन योग्य लॉटरी से पूर्ण VVPAT पुनर्गणना के लिए चुने जाते हैं।"},
+      {dk:true,h:"⚖️ सर्वोच्च न्यायालय निगरानी नोड",d:"सर्वोच्च न्यायालय में एक एयर-गैप्ड नोड ब्लॉकचेन का रीड-ओनली मिरर रखता है — न्यायिक समीक्षा के लिए तैयार।"}
+    ]},
+  q2:'"लोकतंत्र में, मतपत्र बंदूक से अधिक शक्तिशाली है। आइए सुनिश्चित करें कि हर मतपत्र पवित्र, सुरक्षित और गिना हुआ हो।"',
+  q2c:"— भारतीय संविधान की भावना से प्रेरित",
+  s07:{label:"07 — तुलनात्मक विश्लेषण",title:"SecureVote India की तुलना",desc:"मुख्य आयामों में मौजूदा चुनाव तरीकों के विरुद्ध।",
+    heads:["मानदंड","पारंपरिक EVM","केवल-इंटरनेट मतदान","SecureVote India (हाइब्रिड)"],
+    rows:[
+      ["स्मार्टफोन-रहित मतदाताओं को कवर करता है","हाँ (बूथ मात्र)#yes","नहीं#no","हाँ (3 चैनल)#yes"],
+      ["बुजुर्ग-अनुकूल","आंशिक#par","नहीं#no","हाँ (आवाज़ + बड़ा UI)#yes"],
+      ["मतदाता अपना मत सत्यापित कर सकता है","नहीं#no","आंशिक#par","हाँ (ZK प्रूफ)#yes"],
+      ["छेड़छाड़-रोधी लेजर","आंशिक#par","आंशिक#par","हाँ (ब्लॉकचेन)#yes"],
+      ["DDoS/साइबर लचीलापन","हाँ (एयर-गैप्ड)#yes","नहीं#no","हाँ (बहु-परत)#yes"],
+      ["स्वतंत्र सार्वजनिक ऑडिट","नहीं#no","सीमित#par","हाँ (खुला लेजर)#yes"],
+      ["दूरस्थ/घर-बंद मतदान","नहीं#no","आंशिक#par","हाँ (MVU)#yes"],
+      ["कागज बैकअप (VVPAT)","हाँ#yes","नहीं#no","हाँ (सभी चैनल)#yes"],
+      ["बहु-पक्षीय निगरानी","आंशिक#par","नहीं#no","हाँ (सभी नोड्स)#yes"],
+      ["क्वांटम-प्रतिरोधी (रोडमैप)","आंशिक#par","नहीं#no","हाँ (NIST PQC)#yes"]
+    ]},
+  s08:{label:"08 — रोलआउट योजना",title:"36-महीने कार्यान्वयन रोडमैप",desc:"राज्य-स्तरीय तैनाती से पहले अनिवार्य पायलट के साथ चरणबद्ध रोलआउट।",
+    items:[
+      {ph:"चरण 0 · महीना 1–6",h:"कानून, शासन और ओपन-सोर्स ऑडिट",d:"राज्य इलेक्ट्रॉनिक चुनाव अधिनियम का मसौदा। स्वतंत्र तकनीकी सुरक्षा बोर्ड नियुक्त करें (IIT, C-DAC, CERT-IN, ECI)। ओपन-सोर्स कोड प्रकाशित। अंतर्राष्ट्रीय ऑडिट शुरू।"},
+      {ph:"चरण 1 · महीना 7–12",h:"बुनियादी ढाँचा खरीद और कियोस्क तैनाती",d:"HSMs, कियोस्क, MVU वाहन खरीदें। राज्य के सभी CSC में तैनात करें। VVPAT प्रिंटर स्थापित और परीक्षण। स्वतंत्र पेनिट्रेशन टेस्टिंग।"},
+      {ph:"चरण 2 · महीना 13–18",h:"नगरपालिका चुनाव पायलट — 3 जिले",d:"तीन चुने हुए जिलों में SecureVote लाइव चुनाव। पूरा पोस्ट-चुनाव ऑडिट प्रकाशित। मतदाता फीडबैक। सभी सुधार लागू।"},
+      {ph:"चरण 3 · महीना 19–30",h:"राज्य-व्यापी विस्तार और मतदाता शिक्षा अभियान",d:"सभी निर्वाचन क्षेत्रों में विस्तार। सार्वजनिक प्रसारण, सामुदायिक रेडियो और ग्राम सभाओं के माध्यम से जन जागरूकता। बहुभाषी हेल्पलाइन।"},
+      {ph:"चरण 4 · महीना 31–36",h:"राज्य विधानसभा चुनाव पूर्ण तैनाती",d:"SecureVote पर पूर्ण राज्य चुनाव। ECI आदेश के अनुसार पारंपरिक EVM समानांतर बैकस्टॉप। रियल-टाइम मॉनिटरिंग। 30 दिनों में स्वतंत्र ऑडिट रिपोर्ट।"}
+    ]},
+  fLogo:"🇮🇳 SecureVote India",
+  fTagline:'"हर मत मायने रखता है। हर नागरिक मत देता है। कोई मत चुराया नहीं जा सकता।"',
+  fDesc:"गणित द्वारा गारंटीकृत लोकतंत्र। भारत के हर नागरिक के लिए — तकनीक-प्रेमी युवा से लेकर दूरस्थ गाँव के बुजुर्ग किसान तक।",
+  fRef:"भारतीय राज्य चुनाव आधुनिकीकरण चर्चा के लिए ब्लूप्रिंट · 2026<br>वास्तुकला संदर्भ: Helios Voting, Estonian i-Voting, Swiss Post e-Voting, Hyperledger Fabric, UIDAI Aadhaar API",
+  fCopy:"© 2026 कॉपीराइट संरक्षित — राजेशकुमार लक्ष्मणन · वेल्लोर, तमिलनाडु, भारत",
+  fEmail:"janaraj.android@gmail.com",
+  fSal:"🕉️ सत्यमेव जयते · वन्दे मातरम् · जय हिन्द 🇮🇳"
 }
 };
 
-// ═══════════════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════════════
-var lang='en', hasVoted=false, exitShown=false;
-var VKEY='svtn_views', PKEY='svtn_poll_yes', LKEY='svtn_lang', VOTEDKEY='svtn_voted';
-var pageURL=window.location.href;
-
+// ╔══════════════════════════════════════════════════════╗
+// ║  STATE                                               ║
+// ╚══════════════════════════════════════════════════════╝
+var lang='en', exitShown=false;
+var NS='securevote-rl-2026';
+var LS={
+  get:function(k){try{return localStorage.getItem(k);}catch(e){return null;}},
+  set:function(k,v){try{localStorage.setItem(k,v);}catch(e){}},
+  rem:function(k){try{localStorage.removeItem(k);}catch(e){}},
+  getArr:function(k){try{return JSON.parse(localStorage.getItem(k)||'[]');}catch(e){return[];}}
+};
+function hasVoted(){return LS.get('svtn_voted')==='1';}
 function g(id){return document.getElementById(id);}
-function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
 
-// ═══════════════════════════════════════════════════════
-// LANGUAGE SELECTION
-// ═══════════════════════════════════════════════════════
-function selectLang(l){
- lang=l;
- ls(LKEY,l);
- document.documentElement.lang=l;
- renderAll();
- var ov=g('langOverlay');
- ov.style.transition='opacity .5s';
- ov.style.opacity='0';
- setTimeout(function(){ov.style.display='none';},500);
+// ╔══════════════════════════════════════════════════════╗
+// ║  GLOBAL COUNTERS (CountAPI)                          ║
+// ╚══════════════════════════════════════════════════════╝
+function hitAPI(key,cb){
+  fetch('https://api.countapi.xyz/hit/'+NS+'/'+key)
+    .then(function(r){return r.json();})
+    .then(function(d){if(cb)cb(d.value||0);})
+    .catch(function(){if(cb)cb(null);});
+}
+function getAPI(key,cb){
+  fetch('https://api.countapi.xyz/get/'+NS+'/'+key)
+    .then(function(r){return r.json();})
+    .then(function(d){if(cb)cb(d.value||0);})
+    .catch(function(){if(cb)cb(null);});
+}
+function animCount(elId,from,to,dur){
+  var el=g(elId);if(!el)return;
+  var t0=performance.now();
+  (function loop(ts){
+    var p=Math.min((ts-t0)/dur,1),e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(from+(to-from)*e).toLocaleString('en-IN');
+    if(p<1)requestAnimationFrame(loop);
+  })(performance.now());
 }
 
-// ═══════════════════════════════════════════════════════
-// RENDER ALL
-// ═══════════════════════════════════════════════════════
+// ── Init Views ──
+function initViews(){
+  hitAPI('pageviews',function(v){
+    if(v!==null){
+      animCount('viewCount',0,v,1400);
+    } else {
+      var fb=parseInt(LS.get('svtn_views')||'0',10)+1;
+      LS.set('svtn_views',fb);
+      animCount('viewCount',0,fb,1000);
+    }
+  });
+}
+
+// ── Load poll count ──
+function loadPollCount(cb){
+  getAPI('supportvotes',function(v){
+    if(v!==null){cb(v);}
+    else{cb(parseInt(LS.get('svtn_pvotes')||'0',10));}
+  });
+}
+
+// ╔══════════════════════════════════════════════════════╗
+// ║  LANGUAGE                                            ║
+// ╚══════════════════════════════════════════════════════╝
+function selectLang(l){
+  lang=l;
+  LS.set('svtn_lang',l);
+  document.documentElement.lang=l;
+  ['swEn','swTa','swHi'].forEach(function(id){g(id)&&g(id).classList.remove('active');});
+  var map={en:'swEn',ta:'swTa',hi:'swHi'};
+  if(g(map[l]))g(map[l]).classList.add('active');
+  renderAll();
+  var ov=g('langOverlay');
+  if(ov&&ov.style.display!=='none'){
+    ov.style.transition='opacity .4s';ov.style.opacity='0';
+    setTimeout(function(){ov.style.display='none';},400);
+  }
+}
+function toggleMenu(){
+  var m=g('navMenu');if(m)m.classList.toggle('open');
+}
+document.addEventListener('click',function(e){
+  var m=g('navMenu'),h=g('hamBtn');
+  if(m&&m.classList.contains('open')&&!m.contains(e.target)&&e.target!==h)m.classList.remove('open');
+});
+
+// ╔══════════════════════════════════════════════════════╗
+// ║  RENDER ALL                                          ║
+// ╚══════════════════════════════════════════════════════╝
 function renderAll(){
- var t=T[lang];
- g('tickerText').textContent=t.ticker;
- g('viewsLabel').textContent=t.viewsLabel;
- g('liveLabel').textContent=t.liveLabel;
- renderHero(t);
- g('quote1').innerHTML='<blockquote>'+t.q1+'</blockquote><cite>'+t.q1c+'</cite>';
- renderPoll(t);
- renderSection01(t);
- renderSection02(t);
- renderSection03(t);
- renderSection04(t);
- renderSection05(t);
- renderSection06(t);
- g('quote2').innerHTML='<blockquote>'+t.q2+'</blockquote><cite>'+t.q2c+'</cite>';
- renderSection07(t);
- renderSection08(t);
- renderFooter(t);
- g('copyToast').textContent=t.copyMsg;
- g('exitTitle').textContent=t.exitTitle;
- g('exitSub').textContent=t.exitSub;
- g('exitVoteBtn').textContent=t.exitBtn;
- g('exitSkipBtn').textContent=t.exitSkip;
- g('copyLinkLabel').textContent=t.copyLinkLabel;
- updatePollDisplay(t);
+  var t=T[lang];
+  // Ticker
+  g('tickerTxt').textContent=t.ticker;
+  // Nav
+  g('navLogo').textContent=t.navLogo;
+  g('viewsLbl').textContent=t.viewsLbl;
+  g('navSal').textContent=t.navSal;
+  var ul=g('navMenu'),curPath=window.location.href;
+  ul.innerHTML=t.navItems.map(function(n){
+    return '<li><a href="#'+n.id+'" onclick="g(\'navMenu\').classList.remove(\'open\')">'+n.l+'</a></li>';
+  }).join('');
+  // Modals text
+  if(g('em-title'))g('em-title').textContent=t.emTitle;
+  if(g('em-sub'))g('em-sub').textContent=t.emSub;
+  if(g('emailInput'))g('emailInput').placeholder=t.emPlaceholder;
+  if(g('em-btn'))g('em-btn').textContent=t.emBtn.replace('🇮🇳','').trim();
+  if(g('emailSubmit'))g('emailSubmit').innerHTML='🟠 <span id="em-btn">'+t.emBtn+'</span>';
+  if(g('emailCancel'))g('emailCancel').textContent=t.emCancel;
+  if(g('em-privacy'))g('em-privacy').textContent=t.emPrivacy;
+  if(g('ex-title'))g('ex-title').textContent=t.exitTitle;
+  if(g('ex-sub'))g('ex-sub').textContent=t.exitSub;
+  if(g('ex-btn'))g('ex-btn').textContent=t.exitBtn;
+  if(g('ex-skip'))g('ex-skip').textContent=t.exitSkip;
+  if(g('copyToast'))g('copyToast').textContent=t.copyMsg;
+  if(g('copyLbl'))g('copyLbl').textContent=t.copyLbl;
+  // Hero
+  renderHero(t);
+  // Quotes
+  g('quote1').innerHTML='<blockquote>'+t.q1+'</blockquote><cite>'+t.q1c+'</cite>';
+  g('quote2').innerHTML='<blockquote>'+t.q2+'</blockquote><cite>'+t.q2c+'</cite>';
+  // Sections
+  renderPoll(t);
+  buildSection('sec01',t.s01.label,t.s01.title,t.s01.desc,buildProblemCards(t.s01.cards));
+  g('sec02').innerHTML='<div class="wrap"><div class="sec-label">'+t.s02.label+'</div><h2 class="sec-title">'+t.s02.title+'</h2><p class="sec-desc">'+t.s02.desc+'</p></div>'+buildPillars(t.s02.pillars);
+  buildSection('sec03',t.s03.label,t.s03.title,t.s03.desc,buildLayers(t.s03.layers));
+  buildSection('sec04',t.s04.label,t.s04.title,t.s04.desc,buildFlow(t.s04.steps));
+  buildSection('sec05',t.s05.label,t.s05.title,t.s05.desc,'<div class="notice"><p>'+t.s05.notice+'</p></div>'+buildOffline(t.s05.cards));
+  buildSection('sec06',t.s06.label,t.s06.title,t.s06.desc,buildTrust(t.s06.boxes));
+  buildSection('sec07',t.s07.label,t.s07.title,t.s07.desc,buildTable(t.s07));
+  buildSection('sec08',t.s08.label,t.s08.title,t.s08.desc,buildTimeline(t.s08.items));
+  renderFooter(t);
+}
+
+function buildSection(id,label,title,desc,inner){
+  g(id).innerHTML='<div class="wrap"><div class="sec-label">'+label+'</div><h2 class="sec-title">'+title+'</h2><p class="sec-desc">'+desc+'</p>'+inner+'</div>';
 }
 
 function renderHero(t){
- var kpis=['3','7','0','100%'];
- var khtml=kpis.map(function(n,i){
-  return '<div class="kpi"><div class="kpi-n">'+n+'</div><div class="kpi-l">'+t.kpi[i]+'</div></div>'+(i<3?'<div class="kpi-div"></div>':'');
- }).join('');
- g('heroContent').innerHTML=
-  '<div class="hero-eyebrow"><span>🇮🇳</span><span>'+t.eyebrow+'</span></div>'+
-  '<h1>'+t.h1+'</h1>'+
-  '<p class="hero-tagline">'+t.tagline+'</p>'+
-  '<p class="hero-sub">'+t.heroSub+'</p>'+
-  '<div class="hero-motto">'+t.motto+'</div>'+
-  '<div class="hero-kpis">'+khtml+'</div>';
-}
-
-function renderPoll(t){
- var voted=ls(VOTEDKEY)==='1';
- hasVoted=voted;
- var count=parseInt(ls(PKEY)||'0',10);
- var btnHTML=voted?''
-  :'<div class="poll-btn-wrap"><button class="poll-vote-btn" onclick="castVote(false)"><span class="poll-vote-emoji">🟠</span><span>'+t.pollBtn+'</span><span class="poll-vote-sub">'+t.pollBtnSub+'</span></button></div>';
- var resHTML='<div class="poll-result-box'+(voted?' show':'')+'">'+
-  '<p class="poll-result-msg">'+t.pollVotedPre+' <b style="font-family:Cinzel,serif;font-size:1.3em;color:#FF9933">'+count+'</b> '+t.pollVotedPost+'</p>'+
-  '<div class="poll-count-display"><div class="poll-count-n" id="pollCountN">'+count.toLocaleString()+'</div><div class="poll-count-l">'+t.pollCountLabel+'</div></div><br>'+
-  '<button class="poll-change-btn" onclick="resetPoll()">'+t.pollChange+'</button></div>';
- g('pollInner').innerHTML=
-  '<div class="poll-tag"><span>🗳️</span><span>'+t.pollTag+'</span></div>'+
-  '<h2 class="poll-title">'+t.pollTitle+'</h2>'+
-  '<p class="poll-sub">'+t.pollSub+'</p>'+
-  '<p class="poll-q">'+t.pollQ+'</p>'+
-  btnHTML+resHTML;
-}
-
-function updatePollDisplay(t){
- var voted=ls(VOTEDKEY)==='1';
- var count=parseInt(ls(PKEY)||'0',10);
- if(voted&&g('pollCountN'))g('pollCountN').textContent=count.toLocaleString();
-}
-
-function castVote(fromExit){
- var prev=parseInt(ls(PKEY)||'0',10);
- var next=prev+1;
- ls(PKEY,next);
- ls(VOTEDKEY,'1');
- hasVoted=true;
- if(fromExit){closeExitModal();}
- renderPoll(T[lang]);
- // Animate count
- var el=g('pollCountN');
- if(el){
-  var start=prev,end=next,dur=800,t0=performance.now();
-  (function anim(ts){
-   var p=Math.min((ts-t0)/dur,1);
-   el.textContent=Math.round(start+(end-start)*(1-Math.pow(1-p,3))).toLocaleString();
-   if(p<1)requestAnimationFrame(anim);
-  })(performance.now());
- }
-}
-
-function resetPoll(){
- var prev=parseInt(ls(PKEY)||'0',10);
- if(prev>0)ls(PKEY,prev-1);
- localStorage.removeItem(VOTEDKEY);
- hasVoted=false;
- renderPoll(T[lang]);
-}
-
-// ═══════════════════════════════════════════════════════
-// SECTION BUILDERS
-// ═══════════════════════════════════════════════════════
-function renderSection01(t){
- var s=t.s01;
- var cards=s.cards.map(function(c,i){
-  return '<div class="pcard" data-n="'+(i+1)+'"><div class="picon">'+c.icon+'</div><h3>'+c.h+'</h3><p>'+c.d+'</p></div>';
- }).join('');
- g('sec01').innerHTML='<div class="wrap"><div class="sec-label">'+s.label+'</div><h2 class="sec-title">'+s.title+'</h2><p class="sec-desc">'+s.desc+'</p><div class="pgrid">'+cards+'</div></div>';
-}
-
-function renderSection02(t){
- var s=t.s02;
- var pcls=['p1','p2','p3'];
- var pillars=s.pillars.map(function(p,i){
-  var items=p.items.map(function(it){return '<li>'+it+'</li>';}).join('');
-  return '<div class="pillar '+pcls[i]+'"><div class="pbadge">'+p.badge+'</div><h2>'+p.title+'</h2><p class="ptarget">'+p.target+'</p><ul>'+items+'</ul></div>';
- }).join('');
- g('sec02').innerHTML='<div class="wrap"><div class="sec-label">'+s.label+'</div><h2 class="sec-title">'+s.title+'</h2><p class="sec-desc">'+s.desc+'</p></div><div class="pillars">'+pillars+'</div>';
-}
-
-function renderSection03(t){
- var s=t.s03;
- var layers=s.layers.map(function(l){
-  var tags=l.tags.map(function(tg){return '<span class="ltag">'+tg+'</span>';}).join('');
-  return '<div class="layer"><div class="layer-id"><div class="ln">'+l.n+'</div><div class="lt">'+l.lt+'</div></div><div class="lbody"><h3>'+l.h+'</h3><p>'+l.d+'</p><div class="ltags">'+tags+'</div></div></div>';
- }).join('');
- g('sec03').innerHTML='<div class="wrap"><div class="sec-label">'+s.label+'</div><h2 class="sec-title">'+s.title+'</h2><p class="sec-desc">'+s.desc+'</p>'+layers+'</div>';
-}
-
-function renderSection04(t){
- var s=t.s04;
- var steps=s.steps.map(function(st){
-  var chips=st.chips.map(function(c){var p=c.split(':');return '<span class="chip '+p[0]+'">'+p[1]+'</span>';}).join('');
-  return '<div class="flow-step"><div class="fnum">'+st.n+'</div><div class="fcontent"><h4>'+st.h+'</h4><p>'+st.d+'</p><div class="chips">'+chips+'</div></div></div>';
- }).join('');
- g('sec04').innerHTML='<div class="wrap"><div class="sec-label">'+s.label+'</div><h2 class="sec-title">'+s.title+'</h2><p class="sec-desc">'+s.desc+'</p>'+steps+'</div>';
-}
-
-function renderSection05(t){
- var s=t.s05;
- var cards=s.cards.map(function(c){
-  var items=c.items.map(function(it){return '<li>'+it+'</li>';}).join('');
-  return '<div class="ocard"><h3>'+c.h+'</h3><p>'+c.d+'</p><ul>'+items+'</ul></div>';
- }).join('');
- g('sec05').innerHTML='<div class="wrap"><div class="sec-label">'+s.label+'</div><h2 class="sec-title">'+s.title+'</h2><p class="sec-desc">'+s.desc+'</p><div class="notice"><p>'+s.notice+'</p></div><div class="ogrid">'+cards+'</div></div>';
-}
-
-function renderSection06(t){
- var s=t.s06;
- var half1=s.boxes.slice(0,3).map(function(b){return '<div class="tbox'+(b.dark?' dk':'')+'"><h4>'+b.h+'</h4><p>'+b.d+'</p></div>';}).join('');
- var half2=s.boxes.slice(3).map(function(b){return '<div class="tbox'+(b.dark?' dk':'')+'"><h4>'+b.h+'</h4><p>'+b.d+'</p></div>';}).join('');
- g('sec06').innerHTML='<div class="wrap"><div class="sec-label">'+s.label+'</div><h2 class="sec-title">'+s.title+'</h2><p class="sec-desc">'+s.desc+'</p><div class="trow">'+half1+'</div><div class="trow">'+half2+'</div></div>';
-}
-
-function renderSection07(t){
- var s=t.s07;
- var heads=s.heads.map(function(h){return '<th>'+h+'</th>';}).join('');
- var rows=s.rows.map(function(r){
-  var cells=r.map(function(c,i){
-   if(i===0)return '<td><strong>'+c+'</strong></td>';
-   var p=c.split('#');return '<td class="'+(p[1]||'')+'">'+p[0]+'</td>';
+  var kn=['3','7','0','100%'];
+  var kpis=kn.map(function(n,i){
+    return '<div class="kpi"><div class="kpi-n">'+n+'</div><div class="kpi-l">'+t.kpi[i]+'</div></div>'+(i<3?'<div class="kpi-div"></div>':'');
   }).join('');
-  return '<tr>'+cells+'</tr>';
- }).join('');
- g('sec07').innerHTML='<div class="wrap"><div class="sec-label">'+s.label+'</div><h2 class="sec-title">'+s.title+'</h2><p class="sec-desc">'+s.desc+'</p><div style="overflow-x:auto;"><table class="ctable"><thead><tr>'+heads+'</tr></thead><tbody>'+rows+'</tbody></table></div></div>';
+  g('heroContent').innerHTML=
+    '<div class="hero-eyebrow"><span>🇮🇳</span><span>'+t.eyebrow+'</span></div>'+
+    '<h1>'+t.h1+'</h1><p class="hero-tagline">'+t.tagline+'</p>'+
+    '<p class="hero-sub">'+t.heroSub+'</p>'+
+    '<div class="hero-motto">'+t.motto+'</div>'+
+    '<div class="hero-kpis">'+kpis+'</div>';
 }
 
-function renderSection08(t){
- var s=t.s08;
- var items=s.items.map(function(it){
-  return '<div class="tli"><div class="tldot"></div><div class="tlph">'+it.ph+'</div><h3>'+it.h+'</h3><p>'+it.d+'</p></div>';
- }).join('');
- g('sec08').innerHTML='<div class="wrap"><div class="sec-label">'+s.label+'</div><h2 class="sec-title">'+s.title+'</h2><p class="sec-desc">'+s.desc+'</p><div class="tl">'+items+'</div></div>';
+function buildProblemCards(cards){
+  return '<div class="pgrid">'+cards.map(function(c,i){
+    return '<div class="pcard" data-n="'+(i+1)+'"><div class="picon">'+c.i+'</div><h3>'+c.h+'</h3><p>'+c.d+'</p></div>';
+  }).join('')+'</div>';
 }
-
+function buildPillars(arr){
+  return '<div class="pillars">'+arr.map(function(p,i){
+    var cls=['p1','p2','p3'][i];
+    return '<div class="pillar '+cls+'"><div class="pbadge">'+p.b+'</div><h2>'+p.t+'</h2><p class="ptarget">'+p.target+'</p><ul>'+p.items.map(function(it){return '<li>'+it+'</li>';}).join('')+'</ul></div>';
+  }).join('')+'</div>';
+}
+function buildLayers(layers){
+  return layers.map(function(l){
+    return '<div class="layer"><div class="layer-id"><div class="ln">'+l.n+'</div><div class="lt">'+l.lt+'</div></div><div class="lbody"><h3>'+l.h+'</h3><p>'+l.d+'</p><div class="ltags">'+l.tags.map(function(t){return '<span class="ltag">'+t+'</span>';}).join('')+'</div></div></div>';
+  }).join('');
+}
+function buildFlow(steps){
+  return steps.map(function(s){
+    return '<div class="fstep"><div class="fnum">'+s.n+'</div><div class="fcontent"><h4>'+s.h+'</h4><p>'+s.d+'</p><div class="chips">'+s.chips.map(function(c){var p=c.split(':');return '<span class="chip '+p[0]+'">'+p[1]+'</span>';}).join('')+'</div></div></div>';
+  }).join('');
+}
+function buildOffline(cards){
+  return '<div class="ogrid">'+cards.map(function(c){
+    return '<div class="ocard"><h3>'+c.h+'</h3><p>'+c.d+'</p><ul>'+c.items.map(function(it){return '<li>'+it+'</li>';}).join('')+'</ul></div>';
+  }).join('')+'</div>';
+}
+function buildTrust(boxes){
+  var h1=boxes.slice(0,3).map(function(b){return '<div class="tbox'+(b.dk?' dk':'')+'"><h4>'+b.h+'</h4><p>'+b.d+'</p></div>';}).join('');
+  var h2=boxes.slice(3).map(function(b){return '<div class="tbox'+(b.dk?' dk':'')+'"><h4>'+b.h+'</h4><p>'+b.d+'</p></div>';}).join('');
+  return '<div class="trow">'+h1+'</div><div class="trow">'+h2+'</div>';
+}
+function buildTable(s){
+  var heads=s.heads.map(function(h){return '<th>'+h+'</th>';}).join('');
+  var rows=s.rows.map(function(r){
+    return '<tr>'+r.map(function(c,i){
+      if(i===0)return '<td><strong>'+c+'</strong></td>';
+      var p=c.split('#');return '<td class="'+(p[1]||'')+'">'+p[0]+'</td>';
+    }).join('')+'</tr>';
+  }).join('');
+  return '<div style="overflow-x:auto"><table class="ctable"><thead><tr>'+heads+'</tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+function buildTimeline(items){
+  return '<div class="tl">'+items.map(function(it){
+    return '<div class="tli"><div class="tldot"></div><div class="tlph">'+it.ph+'</div><h3>'+it.h+'</h3><p>'+it.d+'</p></div>';
+  }).join('')+'</div>';
+}
 function renderFooter(t){
- g('footerEl').innerHTML=
-  '<div class="wrap"><div class="flogo">'+t.fLogo+'</div><div class="ftagline">'+t.fTagline+'</div>'+
-  '<p>'+t.fDesc+'</p><p style="margin-top:6px">'+t.fRef+'</p>'+
-  '<div class="ftribar"><span></span><span></span><span></span></div>'+
-  '<p class="fcopy">'+t.fCopy+'<br><a href="mailto:'+t.fEmail+'" class="femail" style="text-decoration:none">'+t.fEmail+'</a></p>'+
-  '<p style="margin-top:16px;font-size:15px;color:#666">'+t.fSal+'</p></div>';
+  g('footerEl').innerHTML=
+    '<div class="wrap"><div class="f-logo">'+t.fLogo+'</div><div class="f-tagline">'+t.fTagline+'</div>'+
+    '<p>'+t.fDesc+'</p><p style="margin-top:6px">'+t.fRef+'</p>'+
+    '<div class="f-tribar"><span></span><span></span><span></span></div>'+
+    '<p class="f-copy">'+t.fCopy+'<br><a href="mailto:'+t.fEmail+'" class="f-email" style="text-decoration:none">'+t.fEmail+'</a></p>'+
+    '<p style="margin-top:14px;font-size:14px;color:#555">'+t.fSal+'</p></div>';
 }
 
-// ═══════════════════════════════════════════════════════
-// VIEW COUNTER
-// ═══════════════════════════════════════════════════════
-function initViews(){
- var prev=parseInt(ls(VKEY)||'0',10)+1;
- ls(VKEY,prev);
- var el=g('viewCount'),t0=performance.now();
- (function anim(ts){
-  var p=Math.min((ts-t0)/1200,1),e=1-Math.pow(1-p,3);
-  el.textContent=Math.round(prev*e).toLocaleString('en-IN');
-  if(p<1)requestAnimationFrame(anim);
- })(performance.now());
+// ╔══════════════════════════════════════════════════════╗
+// ║  POLL                                                ║
+// ╚══════════════════════════════════════════════════════╝
+function renderPoll(t){
+  var voted=hasVoted();
+  var btn=voted?''
+    :'<div style="margin-bottom:20px"><button class="poll-support-btn" id="pollVoteBtn" onclick="openEmailModal(false)"><span class="poll-btn-emoji">🟠</span><span>'+t.pollBtnTxt+'</span><span class="poll-btn-sub">'+t.pollBtnSub+'</span></button></div>';
+  var res='<div class="poll-result'+(voted?' show':'')+'" id="pollResult"></div>';
+  g('pollInner').innerHTML=
+    '<div class="poll-tag"><span>🗳️</span><span>'+t.pollTag+'</span></div>'+
+    '<h2 class="poll-title">'+t.pollTitle+'</h2>'+
+    '<p class="poll-sub">'+t.pollSub+'</p>'+
+    '<p class="poll-q">'+t.pollQ+'</p>'+
+    btn+res;
+  if(voted){
+    loadPollCount(function(v){showPollResult(t,v);});
+  } else {
+    loadPollCount(function(v){
+      // Show count below question for non-voted users too
+      var ctr=g('pollCountPreview');
+      if(ctr)ctr.textContent=v;
+    });
+  }
 }
 
-// ═══════════════════════════════════════════════════════
-// EXIT POPUP
-// ═══════════════════════════════════════════════════════
+function showPollResult(t,count){
+  var n=count||parseInt(LS.get('svtn_pvotes')||'0',10);
+  var el=g('pollResult');
+  if(!el)return;
+  el.classList.add('show');
+  el.innerHTML=
+    '<div class="poll-voted-badge">'+t.votedBadge+'</div><br>'+
+    '<p class="poll-result-msg">'+t.votedPre+' <strong style="font-family:Cinzel,serif;font-size:1.2em;color:#FF9933" id="pollCountN">'+n.toLocaleString()+'</strong> '+t.votedPost+'</p>'+
+    '<div class="poll-count-box"><div class="poll-count-n" id="pollBigN">'+n.toLocaleString()+'</div><div class="poll-count-lbl">'+t.pollCountLbl+'</div></div><br>'+
+    '<button class="poll-change" onclick="changePollVote()">'+t.pollChange+'</button>';
+  // Animate big number
+  setTimeout(function(){
+    var el=g('pollBigN');
+    if(el){var s=0,e=n,d=1200,t0=performance.now();(function loop(ts){var p=Math.min((ts-t0)/d,1),ease=1-Math.pow(1-p,3);el.textContent=Math.round(s+(e-s)*ease).toLocaleString('en-IN');if(p<1)requestAnimationFrame(loop);})(performance.now());}
+  },100);
+}
+
+function changePollVote(){
+  LS.rem('svtn_voted');
+  LS.rem('svtn_voter_email');
+  renderPoll(T[lang]);
+}
+
+// ╔══════════════════════════════════════════════════════╗
+// ║  EMAIL MODAL                                         ║
+// ╚══════════════════════════════════════════════════════╝
+var fromExit=false;
+function openEmailModal(isFromExit){
+  if(hasVoted())return;
+  fromExit=isFromExit||false;
+  if(isFromExit)closeExitModal();
+  g('emailError').textContent='';
+  g('emailInput').value='';
+  g('emailModal').classList.add('show');
+  setTimeout(function(){if(g('emailInput'))g('emailInput').focus();},200);
+}
+function closeEmailModal(){
+  g('emailModal').classList.remove('show');
+}
+g('emailModal').addEventListener('click',function(e){if(e.target===this)closeEmailModal();});
+g('emailInput').addEventListener('keydown',function(e){if(e.key==='Enter')submitVote();});
+
+function hashEmail(e){
+  // Simple deterministic hash for dedup (not cryptographic)
+  var s=e.toLowerCase().trim(),h=0;
+  for(var i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}
+  return 'em_'+Math.abs(h).toString(36);
+}
+
+function submitVote(){
+  var t=T[lang];
+  var email=(g('emailInput').value||'').trim().toLowerCase();
+  var errEl=g('emailError');
+  // Validate
+  if(!email){errEl.textContent=t.emErrEmpty;return;}
+  var emailRx=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!emailRx.test(email)){errEl.textContent=t.emErrInvalid;return;}
+  // Check dedup
+  var hash=hashEmail(email);
+  var votes=LS.getArr('svtn_email_hashes');
+  if(votes.indexOf(hash)!==-1){errEl.textContent=t.emErrDuplicate;return;}
+  // Disable button
+  var btn=g('emailSubmit');
+  if(btn)btn.disabled=true;
+  // Increment global counter
+  hitAPI('supportvotes',function(v){
+    var count=v||(parseInt(LS.get('svtn_pvotes')||'0',10)+1);
+    LS.set('svtn_pvotes',count);
+    // Store vote
+    votes.push(hash);
+    LS.set('svtn_email_hashes',JSON.stringify(votes));
+    LS.set('svtn_voted','1');
+    LS.set('svtn_voter_email',hash);
+    closeEmailModal();
+    if(btn)btn.disabled=false;
+    // Update poll UI
+    renderPoll(T[lang]);
+    showPollResult(T[lang],count);
+  });
+}
+
+// ╔══════════════════════════════════════════════════════╗
+// ║  EXIT MODAL                                          ║
+// ╚══════════════════════════════════════════════════════╝
 function showExitModal(){
- if(hasVoted||exitShown)return;
- exitShown=true;
- g('exitModal').classList.add('show');
+  if(hasVoted()||exitShown)return;
+  exitShown=true;
+  g('exitModal').classList.add('show');
 }
 function closeExitModal(){g('exitModal').classList.remove('show');}
-
-document.addEventListener('mouseleave',function(e){
- if(e.clientY<=0)showExitModal();
-});
-document.addEventListener('visibilitychange',function(){
- if(document.visibilityState==='hidden'&&!hasVoted&&!exitShown)exitShown=true;
-});
+g('exitModal').addEventListener('click',function(e){if(e.target===this)closeExitModal();});
+document.addEventListener('mouseleave',function(e){if(e.clientY<=0)showExitModal();});
 var lastScroll=0;
 window.addEventListener('scroll',function(){
- var delta=lastScroll-window.scrollY;
- if(delta>120&&window.scrollY<100)showExitModal();
- lastScroll=window.scrollY;
+  var d=lastScroll-window.scrollY;
+  if(d>100&&window.scrollY<80)showExitModal();
+  lastScroll=window.scrollY;
 },{passive:true});
-g('exitModal').addEventListener('click',function(e){if(e.target===this)closeExitModal();});
 
-// ═══════════════════════════════════════════════════════
-// SOCIAL SHARING
-// ═══════════════════════════════════════════════════════
-var shareText='🇮🇳 TN SecureVote — Zero-Compromise Hybrid Election System for Tamil Nadu by Rajeshkumar Lakshmanan. Democracy guaranteed by mathematics!';
-function shareWA(){window.open('https://wa.me/?text='+encodeURIComponent(shareText+' '+pageURL),'_blank');}
-function shareFB(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(pageURL)+'&quote='+encodeURIComponent(shareText),'_blank');}
-function shareTW(){window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(shareText)+'&url='+encodeURIComponent(pageURL),'_blank');}
-function shareTG(){window.open('https://t.me/share/url?url='+encodeURIComponent(pageURL)+'&text='+encodeURIComponent(shareText),'_blank');}
-function shareLI(){window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(pageURL),'_blank');}
-function copyLink(){
- var t=T[lang];
- if(navigator.share){navigator.share({title:'TN SecureVote',text:shareText,url:pageURL}).catch(function(){});}
- else{
-  var inp=document.createElement('input');inp.value=pageURL;document.body.appendChild(inp);
-  inp.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(inp);
-  var lbl=g('copyLinkLabel');lbl.textContent=t.copyLinkDone;
-  setTimeout(function(){lbl.textContent=t.copyLinkLabel;},2000);
- }
-}
+// ╔══════════════════════════════════════════════════════╗
+// ║  ACTIVE NAV HIGHLIGHT                                ║
+// ╚══════════════════════════════════════════════════════╝
+var navObserver=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      var id=e.target.id;
+      document.querySelectorAll('.nav-menu-ul a').forEach(function(a){
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+['hero','poll','sec01','sec02','sec03','sec04','sec05','sec06','sec07','sec08'].forEach(function(id){
+  var el=document.getElementById(id);if(el)navObserver.observe(el);
+});
 
-// ═══════════════════════════════════════════════════════
-// COPY PROTECTION
-// ═══════════════════════════════════════════════════════
+// ╔══════════════════════════════════════════════════════╗
+// ║  COPY / RIGHT-CLICK PROTECTION                       ║
+// ╚══════════════════════════════════════════════════════╝
 function showCopyToast(){
- var el=g('copyToast');
- el.classList.add('show');
- setTimeout(function(){el.classList.remove('show');},3000);
+  var el=g('copyToast');el.classList.add('show');
+  setTimeout(function(){el.classList.remove('show');},3000);
 }
 document.addEventListener('contextmenu',function(e){e.preventDefault();showCopyToast();});
 document.addEventListener('copy',function(e){e.preventDefault();showCopyToast();});
 document.addEventListener('cut',function(e){e.preventDefault();showCopyToast();});
 document.addEventListener('keydown',function(e){
- var k=e.key.toLowerCase();
- var blocked=(e.ctrlKey||e.metaKey)&&(k==='u'||k==='s'||k==='a'||k==='c'||k==='x'||k==='p');
- var devtools=k==='f12'||(e.ctrlKey&&e.shiftKey&&(k==='i'||k==='j'||k==='c'));
- if(blocked||devtools){e.preventDefault();e.stopPropagation();showCopyToast();return false;}
+  var k=(e.key||'').toLowerCase();
+  var blocked=(e.ctrlKey||e.metaKey)&&(k==='u'||k==='s'||k==='a'||k==='c'||k==='x'||k==='p');
+  var dev=k==='f12'||(e.ctrlKey&&e.shiftKey&&(k==='i'||k==='j'||k==='c'||k==='k'));
+  if(blocked||dev){e.preventDefault();e.stopPropagation();showCopyToast();}
 });
 document.addEventListener('dragstart',function(e){e.preventDefault();});
 document.addEventListener('selectstart',function(e){e.preventDefault();});
-// Detect DevTools by size difference
-setInterval(function(){
- if(window.outerWidth-window.innerWidth>200||window.outerHeight-window.innerHeight>200){
-  var w=window.open('','_self');if(w)w.document.write('<html><body style="background:#0a0a14;color:#FF9933;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center"><div><div style="font-size:4rem">🔒</div><h2>Access Restricted</h2><p style="color:#888">Developer tools are disabled on this page.<br>© 2026 Rajeshkumar Lakshmanan — All Rights Reserved</p></div></body></html>');
- }
-},1000);
 
-// ═══════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════
-window.addEventListener('DOMContentLoaded',function(){
- initViews();
- hasVoted=ls(VOTEDKEY)==='1';
- var savedLang=ls(LKEY);
- if(savedLang&&T[savedLang]){
-  selectLang(savedLang);
- } else {
-  renderAll(); // default english while overlay shows
- }
+// ╔══════════════════════════════════════════════════════╗
+// ║  SOCIAL SHARING                                      ║
+// ╚══════════════════════════════════════════════════════╝
+var pageURL=window.location.href;
+var shareText='🇮🇳 SecureVote India — Zero-Compromise Hybrid Election System for India by Rajeshkumar Lakshmanan, Vellore. Democracy guaranteed by mathematics!';
+function shareWA(){window.open('https://wa.me/?text='+encodeURIComponent(shareText+' '+pageURL),'_blank');}
+function shareFB(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(pageURL),'_blank');}
+function shareTW(){window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(shareText)+'&url='+encodeURIComponent(pageURL),'_blank');}
+function shareTG(){window.open('https://t.me/share/url?url='+encodeURIComponent(pageURL)+'&text='+encodeURIComponent(shareText),'_blank');}
+function shareLI(){window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(pageURL),'_blank');}
+function copyLink(){
+  var t=T[lang];
+  var done=function(){
+    var l=g('copyLbl');if(l){l.textContent=t.copyDone;setTimeout(function(){l.textContent=t.copyLbl;},2500);}
+  };
+  if(navigator.share){navigator.share({title:'SecureVote India',text:shareText,url:pageURL}).then(done).catch(function(){});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(pageURL).then(done).catch(function(){});}
+  else{var inp=document.createElement('input');inp.value=pageURL;document.body.appendChild(inp);inp.select();try{document.execCommand('copy');done();}catch(e){}document.body.removeChild(inp);}
+}
+
+// ╔══════════════════════════════════════════════════════╗
+// ║  BOOT                                                ║
+// ╚══════════════════════════════════════════════════════╝
+document.addEventListener('DOMContentLoaded',function(){
+  initViews();
+  var saved=LS.get('svtn_lang');
+  if(saved&&T[saved]){
+    selectLang(saved);
+  } else {
+    renderAll();
+  }
 });
 </script>
 </body>
